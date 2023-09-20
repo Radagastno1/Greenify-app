@@ -1,0 +1,8 @@
+### EXPO-KOMPONENTER
+
+-Location
+
+### REACT-NATIVE KOMPONENTER
+
+-MapView
+-View

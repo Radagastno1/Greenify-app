@@ -1,14 +1,39 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import CustomButton from "./CustomButton";
 import LocationScreen from "./Location";
 
 export default function Gather() {
   return (
     <View style={styles.container}>
       <LocationScreen />
+
       <TouchableOpacity style={styles.cameraButton}>
         <FontAwesome name="camera" size={30} color="white" />
       </TouchableOpacity>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={{
+            height: 60,
+            borderColor: "gray",
+            borderWidth: 1,
+            paddingHorizontal: 10,
+            borderRadius: 8,
+            backgroundColor: "#f5f5f5",
+            color: "#333",
+            marginBottom: 20,
+          }}
+          placeholder="Select material (e.g., plastic, paper)"
+        />
+        <CustomButton
+          title="Done"
+          onPress={() => {
+            console.log("Knappen klickades!");
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -20,10 +45,13 @@ const styles = StyleSheet.create({
   },
   cameraButton: {
     position: "absolute",
-    bottom: 150,
+    top: 275,
     alignSelf: "center",
     backgroundColor: "blue",
     borderRadius: 50,
     padding: 10,
+  },
+  inputContainer: {
+    flex: 1,
   },
 });

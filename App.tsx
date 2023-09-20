@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import InitialScreen from "./InitialScreen";
+import LocationScreen from "./Location";
 import RootLayout from "./Rootlayout";
 
 const Stack = createStackNavigator();
@@ -18,6 +19,15 @@ export default function App() {
             </RootLayout>
           )}
           options={{ title: "Initial" }}
+        />
+        <Stack.Screen
+          name="Location"
+          component={() => (
+            <RootLayout>
+              <LocationScreen />
+            </RootLayout>
+          )}
+          options={{ title: "Location" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -29,6 +29,10 @@ export default function LocationScreen() {
     requestLocation();
   }, []);
 
+  useEffect(() => {
+    //tvingar omrendering när location ändras
+  }, [location]);
+
   return (
     <View style={styles.container}>
       {location ? (

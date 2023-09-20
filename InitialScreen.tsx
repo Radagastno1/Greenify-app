@@ -7,9 +7,9 @@ export default function InitialScreen() {
     <View>
       <Text>första sidan</Text>
       <Button
-        title="Gå till Location"
+        title="Make green"
         onPress={() => {
-          navigation.navigate("Location" as never);
+          navigation.navigate("Gather" as never);
         }}
       />
     </View>

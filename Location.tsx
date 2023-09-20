@@ -1,6 +1,7 @@
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import MapViewScreen from "./MapView";
 
 export default function LocationScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -30,11 +31,16 @@ export default function LocationScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.paragraph}>
-        {location
-          ? `Latitude: ${location.coords.latitude}, Longitude: ${location.coords.longitude}`
-          : "Platsinformation ej tillgänglig"}
-      </Text>
+      {location ? (
+        <MapViewScreen
+          latitude={location.coords.latitude}
+          longitude={location.coords.longitude}
+        />
+      ) : (
+        <Text style={styles.paragraph}>
+          Platsinformation är ej tillgänglig.
+        </Text>
+      )}
     </View>
   );
 }

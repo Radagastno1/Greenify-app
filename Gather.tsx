@@ -1,47 +1,65 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import CustomButton from "./CustomButton";
 import LocationScreen from "./Location";
 
 export default function Gather() {
   return (
-    <View style={styles.container}>
-      <LocationScreen />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <LocationScreen />
 
-      <TouchableOpacity style={styles.cameraButton}>
-        <FontAwesome name="camera" size={30} color="white" />
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.cameraButton}>
+          <FontAwesome name="camera" size={30} color="white" />
+        </TouchableOpacity>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={{
-            height: 60,
-            borderColor: "gray",
-            borderWidth: 1,
-            paddingHorizontal: 10,
-            borderRadius: 8,
-            backgroundColor: "#f5f5f5",
-            color: "#333",
-            marginBottom: 20,
-          }}
-          placeholder="Select material (e.g., plastic, paper)"
-        />
-        <CustomButton
-          title="Done"
-          onPress={() => {
-            console.log("Knappen klickades!");
-          }}
-        />
-      </View>
-    </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={{
+              height: 60,
+              borderColor: "gray",
+              borderWidth: 1,
+              paddingHorizontal: 10,
+              borderRadius: 8,
+              backgroundColor: "#f5f5f5",
+              color: "#333",
+              marginBottom: 20,
+            }}
+            placeholder="Select material (e.g., plastic, paper)"
+          />
+          <CustomButton
+            title="Done"
+            onPress={() => {
+              console.log("Knappen klickades!");
+            }}
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 20,
   },
   cameraButton: {
     position: "absolute",
@@ -53,5 +71,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
+    justifyContent: "flex-end",
+    marginBottom: 16,
   },
 });

@@ -10,13 +10,17 @@ type LocationContextType = {
   setLocation: (location: Location | null) => void;
 };
 
-const LocationContext = createContext<LocationContextType | undefined>(undefined);
+const LocationContext = createContext<LocationContextType | undefined>(
+  undefined
+);
 
 export function LocationProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<Location | null>(null);
 
   return (
-    <LocationContext.Provider value={{ location: location, setLocation: setLocation }}>
+    <LocationContext.Provider
+      value={{ location: location, setLocation: setLocation }}
+    >
       {children}
     </LocationContext.Provider>
   );

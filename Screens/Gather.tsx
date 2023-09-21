@@ -13,11 +13,11 @@ import {
 } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import { useCameraContext } from "../Contexts/CameraContext";
-import { Trash } from "../Contexts/TrashContext";
+import { useLocationContext } from "../Contexts/LocationContex";
+import { Trash } from "../Contexts/UserContext";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 import LocationScreen from "./Location";
-import { useLocationContext } from "../Contexts/LocationContex";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 
@@ -35,11 +35,19 @@ export default function Gather({ navigation }: Props) {
   }, [camera?.uri]);
 
   const handleSaveTrash = () => {
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}-${(
+      currentDate.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${currentDate.getDate().toString().padStart(2, "0")}`;
+
     const trash: Trash = {
       id: parseInt(Date.now.toString()),
       url: imageUri ?? "",
       material: material ?? "okänt",
       location: location ?? { latitude: 0, longitude: 0 },
+      date: formattedDate,
     };
 
     addTrash(trash);

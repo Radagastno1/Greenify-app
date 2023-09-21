@@ -1,5 +1,13 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { Trash } from "./TrashContext";
+import { Location } from "./LocationContex";
+
+export type Trash = {
+  id: number;
+  url: string;
+  material: string;
+  location: Location;
+  date: string;
+};
 
 export type User = {
   id: number;
@@ -14,7 +22,7 @@ export type User = {
 type UserContextType = {
   user: User | null;
   setUser: (user: User | null) => void;
-  addTrash: (trash:Trash) => void;
+  addTrash: (trash: Trash) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -22,7 +30,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  function addTrash(trash:Trash){
+  function addTrash(trash: Trash) {
     user?.trash.push(trash);
   }
 

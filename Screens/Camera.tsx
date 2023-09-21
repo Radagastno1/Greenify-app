@@ -12,7 +12,7 @@ export default function CameraScreen({ navigation }: Props) {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  const { camera, setCamera } = useCameraContext();
+  const { setCamera } = useCameraContext();
   const cameraRef = useRef<Camera | null>(null);
 
   const [photoUri, setPhotoUri] = useState<string | null>(null);

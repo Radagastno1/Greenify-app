@@ -11,9 +11,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { RootStackParamList } from "../App";
 import CustomButton from "../Components/CustomButton";
 import { useCameraContext } from "../Contexts/CameraContext";
+import { useTrashContext } from "../Contexts/TrashContext";
+import { RootStackParamList } from "../Navigator";
 import LocationScreen from "./Location";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
@@ -21,12 +22,23 @@ type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 export default function Gather({ navigation }: Props) {
   const { camera } = useCameraContext();
   const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
+  const [material, setMaterial] = useState<string | null>(null);
+  const { trash, setTrash } = useTrashContext();
 
   useEffect(() => {
     if (camera?.uri) {
       setImageUri(camera.uri);
     }
   }, [camera?.uri]);
+
+  const handleSaveTrash = () => {
+    setTrash({
+      ...trash,
+      url: imageUri ?? "okänt",
+      material: material ?? "okänt",
+    });
+    navigation.navigate("Profile");
+  };
 
   return (
     <KeyboardAvoidingView
@@ -59,6 +71,8 @@ export default function Gather({ navigation }: Props) {
               color: "#333",
             }}
             placeholder="Select material (e.g., plastic, paper)"
+            onChangeText={(text) => setMaterial(text)}
+            value={material || ""}
           />
         </View>
 
@@ -69,12 +83,7 @@ export default function Gather({ navigation }: Props) {
           }}
         />
 
-        <CustomButton
-          title="Done"
-          onPress={() => {
-            console.log(imageUri);
-          }}
-        />
+        <CustomButton title="Done" onPress={handleSaveTrash} />
       </ScrollView>
     </KeyboardAvoidingView>
   );

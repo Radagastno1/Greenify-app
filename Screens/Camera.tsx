@@ -3,7 +3,7 @@ import { Camera, CameraType } from "expo-camera";
 import * as FileSystem from "expo-file-system";
 import { useRef, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "../App";
+import { RootStackParamList } from "../Navigator";
 import { useCameraContext } from "../Contexts/CameraContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "CameraScreen">;

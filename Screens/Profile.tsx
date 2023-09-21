@@ -1,16 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import { RootStackParamList } from "../App";
+import { RootStackParamList } from "../Navigator";
 import CustomButton from "../Components/CustomButton";
-import { users } from "../MockedUsers";
+import { useUserContext } from "../Contexts/UserContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
-export default function ProfileScreen({ route, navigation }: Props) {
-  //detta ska kanske hända i inlogg? eller
-  const userId = route.params?.userId;
-  const allUsers = users;
-  const thisUser = allUsers.find((u) => u.id === userId);
+export default function ProfileScreen({ navigation }: Props) {
+  const { user } = useUserContext();
 
   return (
     <View
@@ -30,14 +27,14 @@ export default function ProfileScreen({ route, navigation }: Props) {
               fontSize: 20,
             }}
           >
-            {thisUser?.username}
+            {user?.username}
           </Text>
           <Text
             style={{
               fontSize: 12,
             }}
           >
-            Medlem sedan {thisUser?.memberSince}
+            Medlem sedan {user?.memberSince}
           </Text>
         </View>
       </ImageBackground>
@@ -53,7 +50,7 @@ export default function ProfileScreen({ route, navigation }: Props) {
           position: "absolute",
         }}
       >
-        {thisUser?.points} poäng
+        {user?.points} poäng
       </Text>
 
       <View style={styles.navigationContainer}>

@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../App";
+import CustomButton from "../Components/CustomButton";
 import { users } from "../MockedUsers";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
@@ -50,6 +51,30 @@ export default function ProfileScreen({ route, navigation }: Props) {
       >
         {thisUser?.points} poäng
       </Text>
+
+      <View style={styles.navigationContainer}>
+        <CustomButton
+          title="Greenify"
+          color="rgba(223, 243, 193)"
+          onPress={() => {
+            console.log("grenify");
+          }}
+        />
+        <CustomButton
+          title="Mina skatter"
+          color="rgba(251, 224, 238, 0.9)"
+          onPress={() => {
+            console.log("treasures");
+          }}
+        />
+        <CustomButton
+          title="Inställningar"
+          color="rgba(251, 224, 238, 0.9)"
+          onPress={() => {
+            console.log("settings");
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -66,5 +91,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(247, 226, 237, 0.6)",
     borderRadius: 10,
     top: 120,
+  },
+  navigationContainer: {
+    marginVertical: 100,
   },
 });

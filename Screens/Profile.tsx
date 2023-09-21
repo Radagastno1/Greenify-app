@@ -61,14 +61,14 @@ export default function ProfileScreen({ route, navigation }: Props) {
           title="Greenify"
           color="rgba(223, 243, 193, 1)"
           onPress={() => {
-            console.log("grenify");
+            navigation.navigate("Gather");
           }}
         />
         <CustomButton
           title="Mina skatter"
           color="rgba(251, 224, 238, 0.9)"
           onPress={() => {
-            console.log("treasures");
+            navigation.navigate("HistoryScreen");
           }}
         />
         <CustomButton

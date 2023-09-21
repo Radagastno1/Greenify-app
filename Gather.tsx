@@ -72,7 +72,7 @@ export default function Gather({ navigation }: Props) {
         <CustomButton
           title="Done"
           onPress={() => {
-            console.log(camera?.uri);
+            console.log(imageUri);
           }}
         />
       </ScrollView>

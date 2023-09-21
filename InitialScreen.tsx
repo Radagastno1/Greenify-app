@@ -14,6 +14,12 @@ export default function InitialScreen({ navigation }: Props) {
           navigation.navigate("Gather");
         }}
       />
+      <Button
+        title="Min profil"
+        onPress={() => {
+          navigation.navigate("Profile");
+        }}
+      />
     </View>
   );
 }

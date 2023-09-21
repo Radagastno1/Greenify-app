@@ -1,6 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -35,17 +36,24 @@ export default function Gather() {
               borderRadius: 8,
               backgroundColor: "#f5f5f5",
               color: "#333",
-              marginBottom: 20,
             }}
             placeholder="Select material (e.g., plastic, paper)"
           />
-          <CustomButton
-            title="Done"
-            onPress={() => {
-              console.log("Knappen klickades!");
-            }}
-          />
         </View>
+
+        <Image
+          style={styles.image}
+          source={{
+            uri: "https://cdn.abicart.com/shop/ws25/110325/art25/h9589/180459589-origpic-130a2e.jpg",
+          }}
+        />
+
+        <CustomButton
+          title="Done"
+          onPress={() => {
+            console.log("Knappen klickades!");
+          }}
+        />
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -54,8 +62,8 @@ export default function Gather() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   scrollContainer: {
     flexGrow: 1,
@@ -70,8 +78,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   inputContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    marginBottom: 16,
+    marginTop: 0,
+    paddingHorizontal: 20,
+  },
+  image: {
+    height: 100,
+    width: 100,
+    marginVertical: 20,
   },
 });

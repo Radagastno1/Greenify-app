@@ -8,5 +8,6 @@ export const users: User[] = [
     points: 1350,
     memberSince: 2023,
     isLoggedIn: false,
+    trash: [],
   },
 ];

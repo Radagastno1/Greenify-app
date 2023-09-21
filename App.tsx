@@ -1,14 +1,14 @@
 import React from "react";
-import { TrashProvider } from "./Contexts/TrashContext";
+import { LocationProvider } from "./Contexts/LocationContex";
 import { UserProvider } from "./Contexts/UserContext";
 import Navigator from "./Navigator";
 
 export default function App() {
   return (
     <UserProvider>
-      <TrashProvider>
+      <LocationProvider>
         <Navigator />
-      </TrashProvider>
+      </LocationProvider>
     </UserProvider>
   );
 }

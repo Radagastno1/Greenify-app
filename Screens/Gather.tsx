@@ -13,9 +13,11 @@ import {
 } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import { useCameraContext } from "../Contexts/CameraContext";
-import { useTrashContext } from "../Contexts/TrashContext";
+import { Trash } from "../Contexts/TrashContext";
+import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 import LocationScreen from "./Location";
+import { useLocationContext } from "../Contexts/LocationContex";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 
@@ -23,7 +25,8 @@ export default function Gather({ navigation }: Props) {
   const { camera } = useCameraContext();
   const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
   const [material, setMaterial] = useState<string | null>(null);
-  const { trash, setTrash } = useTrashContext();
+  const { location } = useLocationContext();
+  const { addTrash } = useUserContext();
 
   useEffect(() => {
     if (camera?.uri) {
@@ -32,11 +35,15 @@ export default function Gather({ navigation }: Props) {
   }, [camera?.uri]);
 
   const handleSaveTrash = () => {
-    setTrash({
-      ...trash,
-      url: imageUri ?? "okänt",
+    const trash: Trash = {
+      id: parseInt(Date.now.toString()),
+      url: imageUri ?? "",
       material: material ?? "okänt",
-    });
+      location: location ?? { latitude: 0, longitude: 0 },
+    };
+
+    addTrash(trash);
+
     navigation.navigate("Profile");
   };
 

@@ -6,10 +6,10 @@ export type Location = {
 };
 
 export type Trash = {
-  id?: number;
-  url?: string;
-  material?: string;
-  location?: Location;
+  id: number;
+  url: string;
+  material: string;
+  location: Location;
 };
 
 type TrashContextType = {

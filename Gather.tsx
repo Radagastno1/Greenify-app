@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   KeyboardAvoidingView,
@@ -12,13 +12,22 @@ import {
   View,
 } from "react-native";
 import { RootStackParamList } from "./App";
+import { useCameraContext } from "./CameraContext";
 import CustomButton from "./CustomButton";
 import LocationScreen from "./Location";
-
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 
 export default function Gather({ navigation }: Props) {
+  const { camera } = useCameraContext();
+  const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
+
+  useEffect(() => {
+    if (camera?.uri) {
+      setImageUri(camera.uri);
+    }
+  }, [camera?.uri]);
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -56,14 +65,14 @@ export default function Gather({ navigation }: Props) {
         <Image
           style={styles.image}
           source={{
-            uri: "https://cdn.abicart.com/shop/ws25/110325/art25/h9589/180459589-origpic-130a2e.jpg",
+            uri: imageUri || "default_image_uri",
           }}
         />
 
         <CustomButton
           title="Done"
           onPress={() => {
-            console.log("done");
+            console.log(camera?.uri);
           }}
         />
       </ScrollView>

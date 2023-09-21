@@ -4,6 +4,7 @@ import * as FileSystem from "expo-file-system";
 import { useRef, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "./App";
+import { useCameraContext } from "./CameraContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "CameraScreen">;
 
@@ -11,7 +12,7 @@ export default function CameraScreen({ navigation }: Props) {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  const [camera, setCamera] = useState<Camera | null>(null);
+  const { camera, setCamera } = useCameraContext();
   const cameraRef = useRef<Camera | null>(null);
 
   const [photoUri, setPhotoUri] = useState<string | null>(null);
@@ -20,8 +21,10 @@ export default function CameraScreen({ navigation }: Props) {
     if (cameraRef.current) {
       try {
         const { uri } = await cameraRef.current.takePictureAsync();
+        setCamera({ uri });
         setPhotoUri(uri);
         savePicture();
+        console.log(uri);
         navigation.goBack();
       } catch (error) {
         console.error("Error taking picture:", error);
@@ -72,8 +75,8 @@ export default function CameraScreen({ navigation }: Props) {
         type={type}
         ref={(ref) => {
           if (ref) {
-            setCamera(ref);
             cameraRef.current = ref;
+            setCamera(null);
           }
         }}
       >

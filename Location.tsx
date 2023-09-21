@@ -30,7 +30,6 @@ export default function LocationScreen() {
   }, []);
 
   useEffect(() => {
-    //tvingar omrendering när location ändras
   }, [location]);
 
   return (

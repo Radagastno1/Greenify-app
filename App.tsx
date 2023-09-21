@@ -1,17 +1,17 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import CameraScreen from "./Camera";
-import { CameraProvider } from "./CameraContext";
-import Gather from "./Gather";
-import InitialScreen from "./InitialScreen";
-import ProfileScreen from "./Profile";
+import { CameraProvider } from "./Contexts/CameraContext";
+import ProfileScreen from "./Screens/Profile";
+import CameraScreen from "./Screens/Camera";
+import Gather from "./Screens/Gather";
+import InitialScreen from "./Screens/InitialScreen";
 
 export type RootStackParamList = {
   Initial: undefined;
   Gather: undefined;
   CameraScreen: undefined;
-  Profile: undefined;
+  Profile: { userId: number };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

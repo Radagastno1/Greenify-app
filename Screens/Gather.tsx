@@ -11,9 +11,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { RootStackParamList } from "./App";
-import { useCameraContext } from "./CameraContext";
-import CustomButton from "./CustomButton";
+import { RootStackParamList } from "../App";
+import CustomButton from "../Components/CustomButton";
+import { useCameraContext } from "../Contexts/CameraContext";
 import LocationScreen from "./Location";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;

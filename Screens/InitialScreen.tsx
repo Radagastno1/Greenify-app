@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Text, View } from "react-native";
-import { RootStackParamList } from "./App";
+import { RootStackParamList } from "../App";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Initial">;
 
@@ -17,7 +17,7 @@ export default function InitialScreen({ navigation }: Props) {
       <Button
         title="Min profil"
         onPress={() => {
-          navigation.navigate("Profile");
+          navigation.navigate("Profile", {userId: 1});
         }}
       />
     </View>

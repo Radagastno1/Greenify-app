@@ -1,4 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
   Image,
@@ -10,10 +11,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { RootStackParamList } from "./App";
 import CustomButton from "./CustomButton";
 import LocationScreen from "./Location";
 
-export default function Gather() {
+type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
+
+export default function Gather({ navigation }: Props) {
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -51,7 +55,7 @@ export default function Gather() {
         <CustomButton
           title="Done"
           onPress={() => {
-            console.log("Knappen klickades!");
+            navigation.navigate("CameraScreen");
           }}
         />
       </ScrollView>
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 275,
     alignSelf: "center",
-    backgroundColor: "blue",
+    backgroundColor: "black",
     borderRadius: 50,
     padding: 10,
   },

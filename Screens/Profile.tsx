@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useEffect } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import { useUserContext } from "../Contexts/UserContext";
@@ -17,68 +18,56 @@ export default function ProfileScreen({ navigation }: Props) {
     return pointsSum;
   };
 
+  useEffect(() => {
+    if (user?.username) {
+      navigation.setOptions({
+        title: user.username,
+        headerTitleStyle: {
+          fontSize: 20,
+        },
+        headerStyle: {
+          backgroundColor: "rgba(207, 182, 195, 0.8)",
+        },
+      });
+    }
+  }, [user?.username]);
+
   return (
     <View
       style={{
         alignItems: "center",
+        backgroundColor: "rgba(207, 182, 195, 0.8)",
       }}
     >
       <ImageBackground
         style={styles.backgroundImage}
         source={{
-          uri: "https://sites.edgehill.ac.uk/sustainnet/files/2020/06/WorldHands.jpg",
+          uri: "https://www.ox.ac.uk/sites/files/oxford/styles/ow_medium_feature/s3/field/field_image_main/shutterstock_1379741990.jpg?itok=x_E4gx1C",
         }}
       >
-        <View style={styles.userInformationContainer}>
-          <Text
-            style={{
-              fontSize: 20,
-            }}
-          >
-            {user?.username}
-          </Text>
-          <Text
-            style={{
-              fontSize: 12,
-            }}
-          >
-            Medlem sedan {user?.memberSince}
-          </Text>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.pointsContainer}>{totalPoints()} poäng</Text>
         </View>
       </ImageBackground>
-
-      <Text
-        style={{
-          textAlign: "center",
-          padding: 20,
-          fontSize: 20,
-          backgroundColor: "rgba(247, 226, 237, 0.8)",
-          borderRadius: 10,
-          top: 170,
-          position: "absolute",
-        }}
-      >
-        {totalPoints()} poäng
-      </Text>
 
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="rgba(223, 243, 193, 1)"
+          color="rgba(154, 192, 153, 0.61)"
           onPress={() => {
             navigation.navigate("Gather");
           }}
         />
         <CustomButton
           title="Mina skatter"
-          color="rgba(251, 224, 238, 0.9)"
+          color="rgba(241, 227, 236, 0.61)"
           onPress={() => {
             navigation.navigate("HistoryScreen");
           }}
         />
         <CustomButton
           title="Inställningar"
-          color="rgba(251, 224, 238, 0.9)"
+          color="rgba(241, 227, 236, 0.61)"
           onPress={() => {
             console.log("settings");
           }}
@@ -90,16 +79,19 @@ export default function ProfileScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 200,
+    height: 300,
     width: "100%",
   },
-  userInformationContainer: {
+  pointsContainer: {
     alignItems: "center",
-    padding: 2,
+    padding: 20,
     fontSize: 20,
-    backgroundColor: "rgba(247, 226, 237, 0.6)",
-    borderRadius: 10,
-    top: 120,
+    backgroundColor: "rgba(157, 133, 112, 0.8)",
+    borderRadius: 45,
+    top: 270,
+    position: "absolute",
+    fontWeight: "bold",
+    color: "white",
   },
   navigationContainer: {
     marginVertical: 100,

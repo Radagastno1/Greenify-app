@@ -1,13 +1,21 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import { RootStackParamList } from "../Navigator";
 import CustomButton from "../Components/CustomButton";
 import { useUserContext } from "../Contexts/UserContext";
+import { RootStackParamList } from "../Navigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 export default function ProfileScreen({ navigation }: Props) {
   const { user } = useUserContext();
+
+  const totalPoints = () => {
+    const pointsSum = user?.trash.reduce((accumulator, trash) => {
+      return accumulator + (trash?.point || 0);
+    }, 0);
+
+    return pointsSum;
+  };
 
   return (
     <View
@@ -50,7 +58,7 @@ export default function ProfileScreen({ navigation }: Props) {
           position: "absolute",
         }}
       >
-        {user?.points} poäng
+        {totalPoints()} poäng
       </Text>
 
       <View style={styles.navigationContainer}>

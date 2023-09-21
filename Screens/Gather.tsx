@@ -14,8 +14,7 @@ import {
 import CustomButton from "../Components/CustomButton";
 import { useCameraContext } from "../Contexts/CameraContext";
 import { useLocationContext } from "../Contexts/LocationContex";
-import { Trash } from "../Contexts/UserContext";
-import { useUserContext } from "../Contexts/UserContext";
+import { Trash, useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 import LocationScreen from "./Location";
 
@@ -34,6 +33,28 @@ export default function Gather({ navigation }: Props) {
     }
   }, [camera?.uri]);
 
+  const getPoint = () => {
+    if (
+      material?.toLowerCase() == "plast" ||
+      material?.toLowerCase() == "plastic"
+    ) {
+      return 100;
+    } else if (material?.toLowerCase() == "glas") {
+      return 1000000;
+    } else if (material?.toLowerCase() === "fimp") {
+      return 100;
+    } else if (
+      material?.toLowerCase() == "pet" ||
+      material?.toLowerCase() == "pet-flaska" ||
+      material?.toLowerCase() == "plastflaska"
+    ) {
+      return 100;
+    } else if (material?.toLowerCase() == "aluminium") {
+      return 500;
+    }
+    return 0;
+  };
+
   const handleSaveTrash = () => {
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}-${(
@@ -43,15 +64,16 @@ export default function Gather({ navigation }: Props) {
       .padStart(2, "0")}-${currentDate.getDate().toString().padStart(2, "0")}`;
 
     const trash: Trash = {
-      id: parseInt(Date.now.toString()),
-      url: imageUri ?? "",
-      material: material ?? "okänt",
+      id: parseInt(Date.now().toString().slice(-4)),
+      url: imageUri ?? "unknown",
+      material: material ?? "unknown",
       location: location ?? { latitude: 0, longitude: 0 },
       date: formattedDate,
+      point: getPoint(),
     };
 
     addTrash(trash);
-
+    console.log(trash.point);
     navigation.navigate("Profile");
   };
 

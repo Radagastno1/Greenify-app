@@ -7,6 +7,8 @@ export type Trash = {
   material: string;
   location: Location;
   date: string;
+  //man ska få så många poäng som materialet tar för att förmultna
+  point: number;
 };
 
 export type User = {

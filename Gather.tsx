@@ -15,6 +15,7 @@ import { RootStackParamList } from "./App";
 import CustomButton from "./CustomButton";
 import LocationScreen from "./Location";
 
+
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 
 export default function Gather({ navigation }: Props) {
@@ -27,7 +28,14 @@ export default function Gather({ navigation }: Props) {
         <LocationScreen />
 
         <TouchableOpacity style={styles.cameraButton}>
-          <FontAwesome name="camera" size={30} color="white" />
+          <FontAwesome
+            name="camera"
+            size={30}
+            color="white"
+            onPress={() => {
+              navigation.navigate("CameraScreen");
+            }}
+          />
         </TouchableOpacity>
 
         <View style={styles.inputContainer}>
@@ -55,7 +63,7 @@ export default function Gather({ navigation }: Props) {
         <CustomButton
           title="Done"
           onPress={() => {
-            navigation.navigate("CameraScreen");
+            console.log("done");
           }}
         />
       </ScrollView>

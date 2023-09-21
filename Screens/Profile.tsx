@@ -13,7 +13,11 @@ export default function ProfileScreen({ route, navigation }: Props) {
   const thisUser = allUsers.find((u) => u.id === userId);
 
   return (
-    <View style={{ alignItems: "center" }}>
+    <View
+      style={{
+        alignItems: "center",
+      }}
+    >
       <ImageBackground
         style={styles.backgroundImage}
         source={{
@@ -55,7 +59,7 @@ export default function ProfileScreen({ route, navigation }: Props) {
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="rgba(223, 243, 193)"
+          color="rgba(223, 243, 193, 1)"
           onPress={() => {
             console.log("grenify");
           }}

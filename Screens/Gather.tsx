@@ -99,12 +99,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   inputContainer: {
-    marginTop: 0,
-    paddingHorizontal: 20,
+    marginTop: 10,
+    paddingHorizontal: 5,
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     marginVertical: 20,
   },
 });

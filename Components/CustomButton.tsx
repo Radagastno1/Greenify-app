@@ -21,12 +21,18 @@ export default function CustomButton(props: Props) {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 8,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: 40,
+    paddingVertical: 20,
     marginVertical: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   buttonText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });

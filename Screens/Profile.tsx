@@ -1,5 +1,6 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import { useUserContext } from "../Contexts/UserContext";
@@ -9,14 +10,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 export default function ProfileScreen({ navigation }: Props) {
   const { user } = useUserContext();
-
-  const totalPoints = () => {
-    const pointsSum = user?.trash.reduce((accumulator, trash) => {
-      return accumulator + (trash?.point || 0);
-    }, 0);
-
-    return pointsSum;
-  };
+  const [pointSum, setPointSum] = useState<number>(0);
 
   useEffect(() => {
     if (user?.username) {
@@ -32,6 +26,18 @@ export default function ProfileScreen({ navigation }: Props) {
     }
   }, [user?.username]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      if (user && user.trash) {
+        const newPointSum = user.trash.reduce((accumulator, trash) => {
+          return accumulator + (trash?.point || 0);
+        }, 0);
+
+        setPointSum(newPointSum);
+      }
+    }, [user])
+  );
+
   return (
     <View
       style={{
@@ -46,7 +52,7 @@ export default function ProfileScreen({ navigation }: Props) {
         }}
       >
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.pointsContainer}>{totalPoints()} poäng</Text>
+          <Text style={styles.pointsContainer}>{pointSum} poäng</Text>
         </View>
       </ImageBackground>
 

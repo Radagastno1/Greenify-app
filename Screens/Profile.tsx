@@ -1,8 +1,9 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import CustomButton from "../Components/CustomButton";
+import PointComponent from "../Components/PointComponent";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 
@@ -55,28 +56,31 @@ export default function ProfileScreen({ navigation }: Props) {
         }}
       >
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.pointsContainer}>{pointSum} poäng</Text>
+          {/* <Text style={styles.pointsContainer}>{pointSum} poäng</Text> */}
+          <PointComponent points={pointSum} />
         </View>
       </ImageBackground>
 
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="rgba(154, 192, 153, 0.8)"
+          color="rgba(82,112,92,0.5)"
           onPress={() => {
             navigation.navigate("Gather");
           }}
         />
         <CustomButton
+          //DENNA
           title="Mina skatter"
-          color="rgba(219, 155, 77, 0.87)"
+          color="#f5b297"
           onPress={() => {
             navigation.navigate("HistoryScreen");
           }}
         />
         <CustomButton
+          //O DENNA
           title="Inställningar"
-          color="rgba(219, 155, 77, 0.87)"
+          color="#d67149"
           onPress={() => {
             console.log("settings");
           }}

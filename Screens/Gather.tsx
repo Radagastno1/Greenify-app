@@ -120,12 +120,19 @@ export default function Gather({ navigation }: Props) {
           />
         </View>
 
-        <Image
-          style={styles.image}
-          source={{
-            uri: imageUri || "default_image_uri",
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        />
+        >
+          <Image
+            style={styles.image}
+            source={{
+              uri: imageUri || "default_image_uri",
+            }}
+          />
+        </View>
 
         <CustomButton
           title="Done"
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    paddingBottom: 5,
+    paddingBottom: 0,
   },
   cameraButton: {
     position: "absolute",
@@ -156,12 +163,14 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   inputContainer: {
-    flex: 2,
+    flex: 1,
     paddingHorizontal: 5,
   },
   image: {
-    height: 80,
-    width: 80,
-    marginVertical: 20,
+    height: 200,
+    width: 180,
+    borderRadius: 10,
+    borderColor: "white",
+    borderWidth: 10,
   },
 });

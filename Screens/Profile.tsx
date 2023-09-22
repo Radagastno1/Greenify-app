@@ -18,9 +18,10 @@ export default function ProfileScreen({ navigation }: Props) {
         title: user.username,
         headerTitleStyle: {
           fontSize: 20,
+          color: "rgba(81, 50, 12, 1)",
         },
         headerStyle: {
-          backgroundColor: "rgba(207, 182, 195, 0.8)",
+          backgroundColor: "rgba(154, 192, 153, 0.61)",
         },
       });
     }
@@ -42,7 +43,7 @@ export default function ProfileScreen({ navigation }: Props) {
     <View
       style={{
         alignItems: "center",
-        backgroundColor: "rgba(207, 182, 195, 0.8)",
+        backgroundColor: "rgba(154, 192, 153, 0.61)",
       }}
     >
       <ImageBackground
@@ -59,21 +60,21 @@ export default function ProfileScreen({ navigation }: Props) {
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="rgba(154, 192, 153, 0.61)"
+          color="rgba(154, 192, 153, 0.8)"
           onPress={() => {
             navigation.navigate("Gather");
           }}
         />
         <CustomButton
           title="Mina skatter"
-          color="rgba(241, 227, 236, 0.61)"
+          color="rgba(219, 155, 77, 0.87)"
           onPress={() => {
             navigation.navigate("HistoryScreen");
           }}
         />
         <CustomButton
           title="Inställningar"
-          color="rgba(241, 227, 236, 0.61)"
+          color="rgba(219, 155, 77, 0.87)"
           onPress={() => {
             console.log("settings");
           }}
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     fontSize: 20,
-    backgroundColor: "rgba(157, 133, 112, 0.8)",
+    backgroundColor: "rgba(255, 173, 2, 0.61)",
     borderRadius: 45,
     top: 270,
     position: "absolute",

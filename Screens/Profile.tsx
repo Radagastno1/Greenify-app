@@ -15,6 +15,7 @@ export default function ProfileScreen({ navigation }: Props) {
   useEffect(() => {
     if (user?.username) {
       navigation.setOptions({
+        headerTransparent: true,
         title: user.username,
         headerTitleStyle: {
           fontSize: 20,
@@ -44,6 +45,7 @@ export default function ProfileScreen({ navigation }: Props) {
       style={{
         alignItems: "center",
         backgroundColor: "rgba(154, 192, 153, 0.61)",
+        flex: 1,
       }}
     >
       <ImageBackground
@@ -86,7 +88,7 @@ export default function ProfileScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 300,
+    height: 400,
     width: "100%",
   },
   pointsContainer: {
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     backgroundColor: "rgba(255, 173, 2, 0.61)",
     borderRadius: 45,
-    top: 270,
+    top: 370,
     position: "absolute",
     fontWeight: "bold",
     color: "white",

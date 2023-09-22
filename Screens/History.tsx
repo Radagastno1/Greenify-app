@@ -1,8 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
-import { Trash } from "../Contexts/UserContext";
-import { useUserContext } from "../Contexts/UserContext";
+import React, { useEffect } from "react";
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { Trash, useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "HistoryScreen">;
@@ -14,33 +20,81 @@ export default function History({ navigation }: Props) {
     <View style={styles.listItem}>
       <Image source={{ uri: item.url }} style={styles.image} />
       <View style={styles.details}>
-        <Text style={styles.material}>{item.material}</Text>
+        <Text style={styles.material}>{item.material.toUpperCase()}</Text>
         <Text style={styles.date}>{item.date}</Text>
+      </View>
+      <View
+        style={{
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.point}>{item.point} p</Text>
       </View>
     </View>
   );
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true,
+    });
+  }, []);
+
   return (
-    <FlatList
-      data={user?.trash || []}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={renderItem}
-    />
+    <View style={styles.container}>
+      <ImageBackground
+        style={styles.backgroundImage}
+        source={{
+          uri: "https://mobcup.net/images/wt/01fe9941b604b4269a44e1ea1f3c32cf.jpg",
+        }}
+      ></ImageBackground>
+      <Text
+        style={{
+          textAlign: "center",
+          padding: 10,
+          marginVertical: 50,
+          fontSize: 20,
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+        }}
+      >
+        Mina skatter
+      </Text>
+      <FlatList
+        data={user?.trash || []}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   listItem: {
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
     borderBottomWidth: 1,
+    marginBottom: 2,
     borderColor: "#ccc",
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    position: "absolute", // Lägg till position: "absolute"
+    height: "100%", // Sätt en fast höjd
+    width: "100%",
   },
   image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
+    marginHorizontal: 10,
+    height: 100,
+    width: 100,
+    borderRadius: 10,
+    borderColor: "white",
+    borderWidth: 10,
   },
   details: {
     flex: 1,
@@ -48,9 +102,23 @@ const styles = StyleSheet.create({
   material: {
     fontSize: 16,
     fontWeight: "bold",
+    color: "rgba(40, 24, 2, 0.87)",
   },
   date: {
-    fontSize: 14,
-    color: "#888",
+    fontSize: 15,
+    color: "rgba(84, 59, 27, 0.87)",
+  },
+  point: {
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+    borderColor: "rgba(255, 173, 2, 0.61)",
+    borderWidth: 10,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "white",
+    backgroundColor: "rgba(255, 173, 2, 0.61)",
   },
 });

@@ -1,6 +1,7 @@
+import { Link } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import { Input } from "react-native-elements";
 import CustomButton from "../Components/CustomButton";
 import { useUserContext } from "../Contexts/UserContext";
@@ -27,20 +28,43 @@ export default function Login({ navigation }: Props) {
   };
 
   return (
-    <View>
+    <View style={{ alignItems: "center" }}>
+      <Image
+        source={{
+          uri: "https://i.imgur.com/QYZY07a.png",
+        }}
+        style={{ height: 150, width: "100%", marginBottom: 50 }}
+      />
+
       <Input
-        label="username"
         placeholder="Användarnamn"
-        leftIcon={{ type: "font-awesome", name: "user" }}
+        // leftIcon={{ type: "font-awesome", name: "user" }}
         onChangeText={(text) => setUsername(text)}
       />
       <Input
-        label="password"
         placeholder="Lösenord"
-        leftIcon={{ type: "font-awesome", name: "user" }}
+        // leftIcon={{ type: "font-awesome", name: "lock" }}
         onChangeText={(text) => setPassword(text)}
       />
-      <CustomButton title="Logga in" onPress={handleLogIn} />
+
+      <View style={{ width: "80%" }}>
+        <CustomButton
+          title="Logga in"
+          onPress={handleLogIn}
+          color="rgba(154, 192, 153, 1)"
+        />
+        <CustomButton
+          title="Kom igång"
+          onPress={handleLogIn}
+          color="rgba(219, 155, 77, 0.87)"
+        />
+        <Link
+          to="/"
+          style={{ color: "rgba(71, 44, 11, 0.87)", textAlign: "center" }}
+        >
+          Glömt lösenord?
+        </Link>
+      </View>
     </View>
   );
 }

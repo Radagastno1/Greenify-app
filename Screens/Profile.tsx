@@ -92,7 +92,7 @@ export default function ProfileScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    height: 400,
+    height: 350,
     width: "100%",
   },
   pointsContainer: {

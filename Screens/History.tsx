@@ -6,6 +6,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Trash, useUserContext } from "../Contexts/UserContext";
@@ -17,20 +18,33 @@ export default function History({ navigation }: Props) {
   const { user } = useUserContext();
 
   const renderItem = ({ item }: { item: Trash }) => (
-    <View style={styles.listItem}>
-      <Image source={{ uri: item.url }} style={styles.image} />
-      <View style={styles.details}>
-        <Text style={styles.material}>{item.material.toUpperCase()}</Text>
-        <Text style={styles.date}>{item.date}</Text>
-      </View>
+    <TouchableOpacity
+      style={styles.listItem}
+      onPress={() => {
+        navigation.navigate("TreasureInfo", { id: item.id });
+      }}
+    >
       <View
         style={{
+          flexDirection: "row",
+          justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Text style={styles.point}>{item.point} p</Text>
+        <Image source={{ uri: item.url }} style={styles.image} />
+        <View style={styles.details}>
+          <Text style={styles.material}>{item.material.toUpperCase()}</Text>
+          <Text style={styles.date}>{item.date}</Text>
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+          }}
+        >
+          <Text style={styles.point}>{item.point} p</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   useEffect(() => {
@@ -52,7 +66,7 @@ export default function History({ navigation }: Props) {
         style={{
           textAlign: "center",
           padding: 10,
-          marginVertical: 50,
+          marginVertical: 30,
           fontSize: 20,
           backgroundColor: "rgba(255, 255, 255, 0.2)",
         }}

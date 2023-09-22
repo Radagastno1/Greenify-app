@@ -156,19 +156,19 @@ const styles = StyleSheet.create({
   },
   cameraButton: {
     position: "absolute",
-    top: 355,
+    top: 305,
     alignSelf: "center",
     backgroundColor: "rgba(255, 173, 2, 1)",
     borderRadius: 50,
     padding: 20,
   },
   inputContainer: {
-    flex: 1,
+    flex: 1 / 3,
     paddingHorizontal: 5,
   },
   image: {
-    height: 200,
-    width: 180,
+    height: 180,
+    width: 160,
     borderRadius: 10,
     borderColor: "white",
     borderWidth: 10,

@@ -1,6 +1,6 @@
 import { Link } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { Input } from "react-native-elements";
 import CustomButton from "../Components/CustomButton";
@@ -15,6 +15,13 @@ export default function Login({ navigation }: Props) {
   const [password, setPassword] = useState("");
   const { setUser } = useUserContext();
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true,
+    });
+  }, []);
+
   const handleLogIn = async () => {
     const allUsers = users;
     const loggedInUser = allUsers.find(
@@ -28,7 +35,7 @@ export default function Login({ navigation }: Props) {
   };
 
   return (
-    <View style={{ alignItems: "center" }}>
+    <View style={{ alignItems: "center", marginTop: 100 }}>
       <Image
         source={{
           uri: "https://i.imgur.com/QYZY07a.png",

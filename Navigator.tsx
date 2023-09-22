@@ -7,6 +7,7 @@ import Gather from "./Screens/Gather";
 import History from "./Screens/History";
 import Login from "./Screens/Login";
 import ProfileScreen from "./Screens/Profile";
+import TreasureInfo from "./Screens/TreasureInfo";
 
 export type RootStackParamList = {
   Gather: undefined;
@@ -14,6 +15,7 @@ export type RootStackParamList = {
   Profile: undefined;
   HistoryScreen: undefined;
   Login: undefined;
+  TreasureInfo: { id: number };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -51,6 +53,11 @@ export default function Navigator() {
             name="Login"
             component={Login}
             options={{ title: "Logga in" }}
+          />
+          <Stack.Screen
+            name="TreasureInfo"
+            component={TreasureInfo}
+            options={{ title: "Mer information" }}
           />
         </Stack.Navigator>
       </CameraProvider>

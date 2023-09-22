@@ -77,6 +77,13 @@ export default function Gather({ navigation }: Props) {
     navigation.navigate("Profile");
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true, // Gör navigationshuvudet transparent
+    });
+  }, []);
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -88,7 +95,7 @@ export default function Gather({ navigation }: Props) {
         <TouchableOpacity style={styles.cameraButton}>
           <FontAwesome
             name="camera"
-            size={30}
+            size={40}
             color="white"
             onPress={() => {
               navigation.navigate("CameraScreen");
@@ -107,7 +114,7 @@ export default function Gather({ navigation }: Props) {
               backgroundColor: "#f5f5f5",
               color: "#333",
             }}
-            placeholder="Select material (e.g., plastic, paper)"
+            placeholder="Material (plast, pet, glas, tuggummi...)"
             onChangeText={(text) => setMaterial(text)}
             value={material || ""}
           />
@@ -120,7 +127,11 @@ export default function Gather({ navigation }: Props) {
           }}
         />
 
-        <CustomButton title="Done" onPress={handleSaveTrash} />
+        <CustomButton
+          title="Done"
+          onPress={handleSaveTrash}
+          color={"rgba(154, 192, 153, 1)"}
+        />
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -129,23 +140,23 @@ export default function Gather({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-around",
     alignItems: "center",
+    backgroundColor: "rgba(154, 192, 153, 0.61)",
   },
   scrollContainer: {
     flexGrow: 1,
-    paddingBottom: 20,
+    paddingBottom: 5,
   },
   cameraButton: {
     position: "absolute",
-    top: 275,
+    top: 355,
     alignSelf: "center",
-    backgroundColor: "black",
+    backgroundColor: "rgba(255, 173, 2, 1)",
     borderRadius: 50,
-    padding: 10,
+    padding: 20,
   },
   inputContainer: {
-    marginTop: 10,
+    flex: 2,
     paddingHorizontal: 5,
   },
   image: {

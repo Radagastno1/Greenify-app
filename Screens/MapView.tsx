@@ -47,6 +47,7 @@ export default function MapViewScreen({ latitude, longitude }: Props) {
 const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
-    height: 300,
+    height: 400,
+    alignItems: "center",
   },
 });

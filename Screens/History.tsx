@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     borderColor: "#ccc",
     backgroundColor: "rgba(255, 255, 255, 0.6)",
+    borderRadius: 20,
   },
   backgroundImage: {
     flex: 1,

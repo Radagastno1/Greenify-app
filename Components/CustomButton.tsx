@@ -20,8 +20,8 @@ export default function CustomButton(props: Props) {
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
-    paddingHorizontal: 40,
+    borderRadius: 40,
+    paddingHorizontal: 30,
     paddingVertical: 20,
     marginVertical: 10,
     shadowColor: "#000",

@@ -59,10 +59,10 @@ export default function History({ navigation }: Props) {
       <ImageBackground
         style={styles.backgroundImage}
         source={{
-          uri: "https://mobcup.net/images/wt/01fe9941b604b4269a44e1ea1f3c32cf.jpg",
+          uri: "https://i.imgur.com/sWAQJaD.png",
         }}
       ></ImageBackground>
-      <Text
+      {/* <Text
         style={{
           textAlign: "center",
           padding: 10,
@@ -72,8 +72,9 @@ export default function History({ navigation }: Props) {
         }}
       >
         Mina skatter
-      </Text>
+      </Text> */}
       <FlatList
+        style={styles.list}
         data={user?.trash || []}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
@@ -85,6 +86,9 @@ export default function History({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  list: {
+    marginTop: 100,
   },
   listItem: {
     flexDirection: "row",
@@ -99,8 +103,8 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
-    position: "absolute", // Lägg till position: "absolute"
-    height: "100%", // Sätt en fast höjd
+    position: "absolute",
+    height: "100%",
     width: "100%",
   },
   image: {
@@ -125,13 +129,13 @@ const styles = StyleSheet.create({
   },
   point: {
     borderRadius: 50,
-    height: 100,
-    width: 100,
+    height: 85,
+    width: 85,
     borderColor: "rgba(255, 173, 2, 0.61)",
     borderWidth: 10,
     textAlign: "center",
     textAlignVertical: "center",
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "bold",
     color: "white",
     backgroundColor: "rgba(255, 173, 2, 0.61)",

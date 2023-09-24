@@ -3,20 +3,25 @@ import { StyleSheet, Text, View } from "react-native";
 
 interface Props {
   points: number;
+  username?: string;
 }
 
-export default function PointIndicator({ points }: Props) {
+export default function PointIndicator(props: Props) {
   const [barWidth, setBarWidth] = useState(0);
 
   useEffect(() => {
     // Begränsa bredden till 100% när poängen når eller överstiger 10,000
-    const clampedWidth = points >= 10000 ? 100 : (points / 10000) * 100;
+    const clampedWidth =
+      props.points >= 10000 ? 100 : (props.points / 10000) * 100;
     setBarWidth(clampedWidth);
-  }, [points]);
+  }, [props.points]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Poäng: {points}</Text>
+      {props.username ? (
+        <Text style={styles.username}>{props.username}</Text>
+      ) : null}
+      <Text style={styles.label}>Poäng: {props.points}</Text>
       <View style={styles.progressBar}>
         <View style={[styles.progressBarFill, { width: barWidth }]} />
       </View>
@@ -37,6 +42,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     fontWeight: "bold",
     color: "white",
+  },
+  username: {
+    color: "white",
+    fontSize: 25,
+    fontWeight: "bold",
   },
   label: {
     fontSize: 18,

@@ -24,6 +24,7 @@ export default function Gather({ navigation }: Props) {
   const { camera } = useCameraContext();
   const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
   const [material, setMaterial] = useState<string | null>(null);
+  const [buttonActive, setButtonActive] = useState(false);
   const { location } = useLocationContext();
   const { addTrash } = useUserContext();
 
@@ -103,36 +104,40 @@ export default function Gather({ navigation }: Props) {
           />
         </TouchableOpacity>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={{
-              height: 60,
-              borderColor: "gray",
-              borderWidth: 1,
-              paddingHorizontal: 10,
-              borderRadius: 8,
-              backgroundColor: "#f5f5f5",
-              color: "#333",
-            }}
-            placeholder="Material (plast, pet, glas, tuggummi...)"
-            onChangeText={(text) => setMaterial(text)}
-            value={material || ""}
-          />
-        </View>
+        {imageUri ? (
+          <View>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={{
+                  height: 60,
+                  borderColor: "gray",
+                  borderWidth: 1,
+                  paddingHorizontal: 10,
+                  borderRadius: 8,
+                  backgroundColor: "#f5f5f5",
+                  color: "#333",
+                }}
+                placeholder="Material (plast, pet, glas, tuggummi...)"
+                onChangeText={(text) => setMaterial(text)}
+                value={material || ""}
+              />
+            </View>
 
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Image
-            style={styles.image}
-            source={{
-              uri: imageUri || "default_image_uri",
-            }}
-          />
-        </View>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                style={styles.image}
+                source={{
+                  uri: imageUri || "default_image_uri",
+                }}
+              />
+            </View>
+          </View>
+        ) : null}
 
         <CustomButton
           title="Done"
@@ -148,7 +153,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "rgba(154, 192, 153, 0.61)",
+    backgroundColor: "white",
   },
   scrollContainer: {
     flexGrow: 1,
@@ -170,7 +175,7 @@ const styles = StyleSheet.create({
     height: 180,
     width: 160,
     borderRadius: 10,
-    borderColor: "white",
-    borderWidth: 10,
+    borderColor: "rgba(154, 192, 153, 1)",
+    borderWidth: 6,
   },
 });

@@ -14,17 +14,17 @@ export default function TreasureInfo() {
   const specificTrash = user?.trash.find((t) => t.id === id);
   const [description, setDescription] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (specificTrash) {
-      fetchDataByMaterial(specificTrash.material)
-        .then((data) => {
-          setDescription(data.description);
-        })
-        .catch((error) => {
-          console.error("Fel vid hämtning av data från API:et:", error.message);
-        });
-    }
-  }, [specificTrash]);
+  // useEffect(() => {
+  //   if (specificTrash) {
+  //     fetchDataByMaterial(specificTrash.material)
+  //       .then((data) => {
+  //         setDescription(data.description);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Fel vid hämtning av data från API:et:", error.message);
+  //       });
+  //   }
+  // }, [specificTrash]);
 
   return (
     <View style={styles.container}>

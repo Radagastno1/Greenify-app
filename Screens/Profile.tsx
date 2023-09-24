@@ -1,7 +1,8 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ResizeMode, Video } from "expo-av";
 import React, { useEffect, useState } from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import PointComponent from "../Components/PointComponent";
 import { useUserContext } from "../Contexts/UserContext";
@@ -14,20 +15,18 @@ export default function ProfileScreen({ navigation }: Props) {
   const [pointSum, setPointSum] = useState<number>(0);
 
   useEffect(() => {
-    if (user?.username) {
-      navigation.setOptions({
-        headerTransparent: true,
-        title: user.username,
-        headerTitleStyle: {
-          fontSize: 20,
-          color: "rgba(81, 50, 12, 1)",
-        },
-        headerStyle: {
-          backgroundColor: "rgba(154, 192, 153, 0.61)",
-        },
-      });
-    }
-  }, [user?.username]);
+    navigation.setOptions({
+      headerTransparent: true,
+      title: "",
+      // headerTitleStyle: {
+      //   fontSize: 20,
+      //   color: "rgba(81, 50, 12, 1)",
+      // },
+      headerStyle: {
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+      },
+    });
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -42,29 +41,33 @@ export default function ProfileScreen({ navigation }: Props) {
   );
 
   return (
-    <View
-      style={{
-        alignItems: "center",
-        backgroundColor: "rgba(154, 192, 153, 0.61)",
-        flex: 1,
-      }}
-    >
-      <ImageBackground
-        style={styles.backgroundImage}
+    <View style={{ flex: 1 }}>
+      <Video
         source={{
-          uri: "https://www.ox.ac.uk/sites/files/oxford/styles/ow_medium_feature/s3/field/field_image_main/shutterstock_1379741990.jpg?itok=x_E4gx1C",
+          uri: "https://v3.cdnpk.net/videvo_files/video/free/2020-07/large_watermarked/06_1596083776_preview.mp4",
+        }}
+        style={{ flex: 1 }}
+        resizeMode={ResizeMode.COVER}
+        shouldPlay
+        isLooping
+        isMuted={true}
+      />
+
+      <View
+        style={{
+          alignItems: "center",
+          position: "absolute",
+          top: 20,
+          width: "100%",
         }}
       >
-        <View style={{ alignItems: "center" }}>
-          {/* <Text style={styles.pointsContainer}>{pointSum} poäng</Text> */}
-          <PointComponent points={pointSum} />
-        </View>
-      </ImageBackground>
+        <PointComponent points={pointSum} username={user?.username} />
+      </View>
 
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="rgba(82,112,92,0.5)"
+          color="#a0be98"
           onPress={() => {
             navigation.navigate("Gather");
           }}
@@ -91,21 +94,6 @@ export default function ProfileScreen({ navigation }: Props) {
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    height: 350,
-    width: "100%",
-  },
-  pointsContainer: {
-    alignItems: "center",
-    padding: 20,
-    fontSize: 20,
-    backgroundColor: "rgba(255, 173, 2, 0.61)",
-    borderRadius: 45,
-    top: 370,
-    position: "absolute",
-    fontWeight: "bold",
-    color: "white",
-  },
   navigationContainer: {
     marginVertical: 100,
   },

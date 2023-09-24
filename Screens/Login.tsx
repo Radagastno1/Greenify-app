@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { Input } from "react-native-elements";
 import CustomButton from "../Components/CustomButton";
-import { useUserContext } from "../Contexts/UserContext";
-import { users } from "../MockedUsers";
+import { User, useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
+import { fetchLogInUser } from "../api";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -23,10 +23,13 @@ export default function Login({ navigation }: Props) {
   }, []);
 
   const handleLogIn = async () => {
-    const allUsers = users;
-    const loggedInUser = allUsers.find(
-      (u) => u.username === username && u.password === password
-    );
+    // const allUsers = users;
+    // const loggedInUser = allUsers.find(
+    //   (u) => u.username === username && u.password === password
+    // );
+    console.log("handle log in anropas");
+    const loggedInUser: User = await fetchLogInUser(username, password);
+    console.log("logged in user:", loggedInUser);
     if (loggedInUser) {
       loggedInUser.isLoggedIn = true;
       setUser(loggedInUser);
@@ -57,12 +60,14 @@ export default function Login({ navigation }: Props) {
       <View style={{ width: "100%", alignItems: "center" }}>
         <CustomButton
           title="Logga in"
-          onPress={handleLogIn}
+          onLogin={handleLogIn}
           color="rgba(154, 192, 153, 1)"
         />
         <CustomButton
           title="Kom igång"
-          onPress={handleLogIn}
+          onPress={() => {
+            console.log("kom igång");
+          }}
           color="rgba(219, 155, 77, 0.87)"
         />
         <Link

@@ -41,9 +41,9 @@ export default function Login({ navigation }: Props) {
     <View style={{ alignItems: "center", marginTop: 100 }}>
       <Image
         source={{
-          uri: "https://i.imgur.com/QYZY07a.png",
+          uri: "https://i.imgur.com/BKoVXXp.png",
         }}
-        style={{ height: 150, width: "100%", marginBottom: 50 }}
+        style={{ height: 250, width: "100%", marginBottom: 50 }}
       />
 
       <Input
@@ -61,19 +61,16 @@ export default function Login({ navigation }: Props) {
         <CustomButton
           title="Logga in"
           onLogin={handleLogIn}
-          color="rgba(154, 192, 153, 1)"
+          color="rgba(79,44,84,255)"
         />
         <CustomButton
           title="Kom igång"
           onPress={() => {
             console.log("kom igång");
           }}
-          color="rgba(219, 155, 77, 0.87)"
+          color="rgb(164,116,156)"
         />
-        <Link
-          to="/"
-          style={{ color: "rgba(71, 44, 11, 0.87)", textAlign: "center" }}
-        >
+        <Link to="/" style={{ color: "rgb(164,116,156)", textAlign: "center" }}>
           Glömt lösenord?
         </Link>
       </View>

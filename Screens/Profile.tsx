@@ -30,8 +30,8 @@ export default function ProfileScreen({ navigation }: Props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (user && user.trash) {
-        const newPointSum = user.trash.reduce((accumulator, trash) => {
+      if (user && user.trashList) {
+        const newPointSum = user.trashList.reduce((accumulator, trash) => {
           return accumulator + (trash?.point || 0);
         }, 0);
 

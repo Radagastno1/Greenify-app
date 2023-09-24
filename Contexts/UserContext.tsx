@@ -18,7 +18,7 @@ export type User = {
   points: number;
   memberSince: number;
   isLoggedIn: boolean;
-  trash: Trash[];
+  trashList: Trash[];
 };
 
 type UserContextType = {
@@ -33,7 +33,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   function addTrash(trash: Trash) {
-    user?.trash.push(trash);
+    if (user?.trashList) {
+      user?.trashList.push(trash);
+    } else {
+      const newTrashList: Trash[] = [];
+      newTrashList.push(trash);
+    }
   }
 
   return (

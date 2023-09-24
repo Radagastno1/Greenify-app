@@ -11,7 +11,7 @@ export default function TreasureInfo() {
   const { user } = useUserContext();
   const route = useRoute<Props>();
   const { id } = route.params;
-  const specificTrash = user?.trash.find((t) => t.id === id);
+  const specificTrash = user?.trashList.find((t) => t.id === id);
   const [description, setDescription] = useState<string | null>(null);
 
   // useEffect(() => {

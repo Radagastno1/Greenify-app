@@ -75,7 +75,7 @@ export default function History({ navigation }: Props) {
       </Text> */}
       <FlatList
         style={styles.list}
-        data={user?.trash || []}
+        data={user?.trashList || []}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
       />

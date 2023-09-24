@@ -62,17 +62,7 @@ export default function History({ navigation }: Props) {
           uri: "https://i.imgur.com/sWAQJaD.png",
         }}
       ></ImageBackground>
-      {/* <Text
-        style={{
-          textAlign: "center",
-          padding: 10,
-          marginVertical: 30,
-          fontSize: 20,
-          backgroundColor: "rgba(255, 255, 255, 0.2)",
-        }}
-      >
-        Mina skatter
-      </Text> */}
+
       <FlatList
         style={styles.list}
         data={user?.trashList || []}

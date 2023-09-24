@@ -34,6 +34,7 @@ export default function Gather({ navigation }: Props) {
     }
   }, [camera?.uri]);
 
+  //DETTA KAN GÅ BORT SEN NÄR APIET HAR EN ADDTRASH METOD om den ska det
   const getPoint = () => {
     if (
       material?.toLowerCase() == "plast" ||
@@ -81,7 +82,7 @@ export default function Gather({ navigation }: Props) {
   useEffect(() => {
     navigation.setOptions({
       title: "",
-      headerTransparent: true, // Gör navigationshuvudet transparent
+      headerTransparent: true,
     });
   }, []);
 

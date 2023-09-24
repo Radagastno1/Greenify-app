@@ -1,3 +1,4 @@
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -10,7 +11,6 @@ export default function PointIndicator(props: Props) {
   const [barWidth, setBarWidth] = useState(0);
 
   useEffect(() => {
-    // Begränsa bredden till 100% när poängen når eller överstiger 10,000
     const clampedWidth =
       props.points >= 10000 ? 100 : (props.points / 10000) * 100;
     setBarWidth(clampedWidth);
@@ -18,6 +18,18 @@ export default function PointIndicator(props: Props) {
 
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        <Entypo name="share" size={24} color="black" />
+        <Entypo name="brush" size={24} color="rgb(93, 110, 99)" />
+        <AntDesign name="logout" size={24} color="rgb(93, 110, 99)" />
+      </View>
       {props.username ? (
         <Text style={styles.username}>{props.username}</Text>
       ) : null}

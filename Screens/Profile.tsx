@@ -18,10 +18,6 @@ export default function ProfileScreen({ navigation }: Props) {
     navigation.setOptions({
       headerTransparent: true,
       title: "",
-      // headerTitleStyle: {
-      //   fontSize: 20,
-      //   color: "rgba(81, 50, 12, 1)",
-      // },
       headerStyle: {
         backgroundColor: "rgba(255, 255, 255, 0.5)",
       },

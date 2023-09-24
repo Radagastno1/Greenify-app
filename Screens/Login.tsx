@@ -54,7 +54,7 @@ export default function Login({ navigation }: Props) {
         onChangeText={(text) => setPassword(text)}
       />
 
-      <View style={{ width: "80%" }}>
+      <View style={{ width: "100%", alignItems: "center" }}>
         <CustomButton
           title="Logga in"
           onPress={handleLogIn}

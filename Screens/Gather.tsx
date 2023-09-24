@@ -139,11 +139,13 @@ export default function Gather({ navigation }: Props) {
           </View>
         ) : null}
 
-        <CustomButton
-          title="Done"
-          onPress={handleSaveTrash}
-          color={"rgba(154, 192, 153, 1)"}
-        />
+        <View style={{ width: "100%", alignItems: "center" }}>
+          <CustomButton
+            title="Done"
+            onPress={handleSaveTrash}
+            color={"rgba(154, 192, 153, 1)"}
+          />
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -169,10 +171,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1 / 3,
-    paddingHorizontal: 5,
+    padding: 5,
   },
   image: {
-    height: 180,
+    height: 160,
     width: 160,
     borderRadius: 10,
     borderColor: "rgba(154, 192, 153, 1)",

@@ -57,7 +57,7 @@ export default function ProfileScreen({ navigation }: Props) {
         style={{
           alignItems: "center",
           position: "absolute",
-          top: 20,
+          top: "20%",
           width: "100%",
         }}
       >
@@ -67,7 +67,7 @@ export default function ProfileScreen({ navigation }: Props) {
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="#a0be98"
+          color="rgb(138, 165, 147 )"
           onPress={() => {
             navigation.navigate("Gather");
           }}
@@ -75,7 +75,7 @@ export default function ProfileScreen({ navigation }: Props) {
         <CustomButton
           //DENNA
           title="Mina skatter"
-          color="#f5b297"
+          color="rgb(239, 223, 223)"
           onPress={() => {
             navigation.navigate("HistoryScreen");
           }}
@@ -83,7 +83,7 @@ export default function ProfileScreen({ navigation }: Props) {
         <CustomButton
           //O DENNA
           title="Inställningar"
-          color="#d67149"
+          color="rgb(232, 218, 218))"
           onPress={() => {
             console.log("settings");
           }}
@@ -95,6 +95,10 @@ export default function ProfileScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   navigationContainer: {
-    marginVertical: 100,
+    alignItems: "center",
+    display: "flex",
+    position: "absolute",
+    top: "55%",
+    width: "100%",
   },
 });

@@ -21,7 +21,7 @@ export default function PointIndicator(props: Props) {
       {props.username ? (
         <Text style={styles.username}>{props.username}</Text>
       ) : null}
-      <Text style={styles.label}>Poäng: {props.points}</Text>
+      <Text style={styles.label}>{props.points} poäng</Text>
       <View style={styles.progressBar}>
         <View style={[styles.progressBarFill, { width: barWidth }]} />
       </View>
@@ -36,32 +36,34 @@ const styles = StyleSheet.create({
     width: 300,
     fontSize: 20,
     // backgroundColor: "rgba(206, 165, 165, 0.9)",
-    backgroundColor: "#a0be98",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 40,
-    top: 320,
-    position: "absolute",
+    // top: 320,
+    // position: "absolute",
     fontWeight: "bold",
     color: "white",
   },
   username: {
-    color: "white",
-    fontSize: 25,
+    color: "rgb(204, 175, 175 )",
+    fontSize: 30,
     fontWeight: "bold",
+    paddingVertical: 40,
   },
   label: {
     fontSize: 18,
     marginBottom: 10,
-    color: "white",
+    color: "rgb(93, 110, 99)",
+    fontWeight: "bold",
   },
   progressBar: {
     width: "80%",
-    height: 20,
+    height: 24,
     backgroundColor: "#ddd",
     borderRadius: 10,
     overflow: "hidden",
   },
   progressBarFill: {
     height: "100%",
-    backgroundColor: "green",
+    backgroundColor: "rgb(138, 165, 147)",
   },
 });

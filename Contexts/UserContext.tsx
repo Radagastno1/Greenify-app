@@ -19,12 +19,15 @@ export type User = {
   memberSince: number;
   isLoggedIn: boolean;
   trashList: Trash[];
+  animalImageUrl?: string;
 };
 
 type UserContextType = {
   user: User | null;
   setUser: (user: User | null) => void;
   addTrash: (trash: Trash) => void;
+  signOut: () => void;
+  addImageUrl: (imageUrl: string) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -34,7 +37,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   function addTrash(trash: Trash) {
     if (user?.trashList) {
-      //AJ AAAAJ FIXA DETTA MED EN GÅNG ANGELINA
+      //AJ AAAAJ FIXA DETTA MED EN GÅNG ANGELINA push hit o push dit nej
       user?.trashList.push(trash);
     } else {
       const newTrashList: Trash[] = [];
@@ -42,8 +45,20 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  function signOut() {
+    setUser(null);
+  }
+
+  function addImageUrl(imageUrl: string) {
+    if (user) {
+      setUser({ ...user, animalImageUrl: imageUrl });
+    }
+  }
+
   return (
-    <UserContext.Provider value={{ user, setUser, addTrash }}>
+    <UserContext.Provider
+      value={{ user, setUser, addTrash, signOut, addImageUrl }}
+    >
       {children}
     </UserContext.Provider>
   );

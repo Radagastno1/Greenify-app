@@ -4,7 +4,7 @@ import { ResizeMode, Video } from "expo-av";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CustomButton from "../Components/CustomButton";
-import PointComponent from "../Components/PointComponent";
+import ProfileCard from "../Components/ProfileCard";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 
@@ -53,11 +53,11 @@ export default function ProfileScreen({ navigation }: Props) {
         style={{
           alignItems: "center",
           position: "absolute",
-          top: "20%",
+          top: "15%",
           width: "100%",
         }}
       >
-        <PointComponent points={pointSum} username={user?.username} />
+        <ProfileCard points={pointSum} username={user?.username} />
       </View>
 
       <View style={styles.navigationContainer}>

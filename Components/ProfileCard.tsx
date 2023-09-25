@@ -1,6 +1,7 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useUserContext } from "../Contexts/UserContext";
 import ShareModal from "./SharingPoints";
 
 interface Props {
@@ -8,15 +9,20 @@ interface Props {
   username?: string;
 }
 
-export default function PointIndicator(props: Props) {
+export default function ProfileCard(props: Props) {
   const [barWidth, setBarWidth] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const { signOut } = useUserContext();
 
   useEffect(() => {
     const clampedWidth =
       props.points >= 10000 ? 100 : (props.points / 10000) * 100;
     setBarWidth(clampedWidth);
   }, [props.points]);
+
+  const handleLogOut = () => {
+    signOut();
+  };
 
   return (
     <View style={styles.container}>
@@ -31,8 +37,12 @@ export default function PointIndicator(props: Props) {
         <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Entypo name="share" size={24} color="black" />
         </TouchableOpacity>
-        <Entypo name="brush" size={24} color="rgb(93, 110, 99)" />
-        <AntDesign name="logout" size={24} color="rgb(93, 110, 99)" />
+        <TouchableOpacity onPress={() => {}}>
+          <Entypo name="brush" size={24} color="rgb(93, 110, 99)" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleLogOut}>
+          <AntDesign name="logout" size={24} color="rgb(93, 110, 99)" />
+        </TouchableOpacity>
         <ShareModal
           visible={modalVisible}
           onClose={() => setModalVisible(false)}

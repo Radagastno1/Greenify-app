@@ -33,7 +33,7 @@ export function fetchLogInUser(username: string, password: string) {
     password,
   };
 
-  return fetch(libraryApiUrl, {
+  return fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

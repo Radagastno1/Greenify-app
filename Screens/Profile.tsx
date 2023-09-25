@@ -57,7 +57,7 @@ export default function ProfileScreen({ navigation }: Props) {
           width: "100%",
         }}
       >
-        <ProfileCard points={pointSum} username={user?.username} />
+        <ProfileCard />
       </View>
 
       <View style={styles.navigationContainer}>

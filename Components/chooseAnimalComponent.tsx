@@ -32,7 +32,15 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
   };
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "white",
+          padding: 20,
+        }}
+      >
         {allAnimalPictures.map((a, index) => (
           <TouchableOpacity
             key={index}

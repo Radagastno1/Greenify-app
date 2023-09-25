@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
+import { animalImages } from "../animalImages";
 import { Location } from "./LocationContex";
 
 export type Trash = {
@@ -19,7 +20,7 @@ export type User = {
   memberSince: number;
   isLoggedIn: boolean;
   trashList: Trash[];
-  animalImageUrl?: string;
+  animalImageUrl: string;
 };
 
 type UserContextType = {
@@ -33,11 +34,20 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>({
+    id: 0, // Lägg till övriga standardvärden här
+    username: "",
+    password: "",
+    points: 0,
+    memberSince: 0,
+    isLoggedIn: false,
+    trashList: [],
+    animalImageUrl: animalImages[0].imageURL, 
+  });
 
   function addTrash(trash: Trash) {
     if (user?.trashList) {
-      //AJ AAAAJ FIXA DETTA MED EN GÅNG ANGELINA push hit o push dit nej
+//push!?nej
       user?.trashList.push(trash);
     } else {
       const newTrashList: Trash[] = [];

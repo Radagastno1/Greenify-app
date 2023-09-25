@@ -3,22 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useUserContext } from "../Contexts/UserContext";
 import ShareModal from "./SharingPoints";
+import { ChooseAnimalComponent } from "./chooseAnimalComponent";
 
-interface Props {
-  points: number;
-  username?: string;
-}
-
-export default function ProfileCard(props: Props) {
+export default function ProfileCard() {
   const [barWidth, setBarWidth] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const { signOut } = useUserContext();
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const { signOut, user } = useUserContext();
 
   useEffect(() => {
-    const clampedWidth =
-      props.points >= 10000 ? 100 : (props.points / 10000) * 100;
-    setBarWidth(clampedWidth);
-  }, [props.points]);
+    if (user?.points) {
+      const clampedWidth =
+        user?.points >= 10000 ? 100 : (user?.points / 10000) * 100;
+      setBarWidth(clampedWidth);
+    }
+  }, [user?.points]);
 
   const handleLogOut = () => {
     signOut();
@@ -37,7 +36,11 @@ export default function ProfileCard(props: Props) {
         <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Entypo name="share" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            setEditModalVisible(true);
+          }}
+        >
           <Entypo name="brush" size={24} color="rgb(93, 110, 99)" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleLogOut}>
@@ -47,13 +50,17 @@ export default function ProfileCard(props: Props) {
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
         />
+        <ChooseAnimalComponent
+          visible={editModalVisible}
+          onClose={() => setEditModalVisible(false)}
+        />
       </View>
-      {props.username ? (
-        <Text style={styles.username}>{props.username}</Text>
+      {user?.username ? (
+        <Text style={styles.username}>{user?.username}</Text>
       ) : null}
       <Image
         source={{
-          uri: "https://image.shutterstock.com/image-photo/photo-owl-macro-photography-high-260nw-1178957458.jpg",
+          uri: user?.animalImageUrl,
         }}
         style={{
           height: 50,
@@ -61,7 +68,7 @@ export default function ProfileCard(props: Props) {
           marginVertical: 10,
         }}
       />
-      <Text style={styles.label}>{props.points} poäng</Text>
+      <Text style={styles.label}>{user?.points} poäng</Text>
       <View style={styles.progressBar}>
         <View style={[styles.progressBarFill, { width: barWidth }]} />
       </View>
@@ -75,11 +82,8 @@ const styles = StyleSheet.create({
     padding: 20,
     width: 300,
     fontSize: 20,
-    // backgroundColor: "rgba(206, 165, 165, 0.9)",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 40,
-    // top: 320,
-    // position: "absolute",
     fontWeight: "bold",
     color: "white",
   },

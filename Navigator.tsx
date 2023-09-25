@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CameraProvider } from "./Contexts/CameraContext";
 import { useUserContext } from "./Contexts/UserContext";
 import CameraScreen from "./Screens/Camera";
+import EditScreen from "./Screens/EditScreen";
 import Gather from "./Screens/Gather";
 import History from "./Screens/History";
 import Login from "./Screens/Login";
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   HistoryScreen: undefined;
   Login: undefined;
   TreasureInfo: { id: number };
+  EditScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -58,6 +60,11 @@ export default function Navigator() {
             name="TreasureInfo"
             component={TreasureInfo}
             options={{ title: "Mer information" }}
+          />
+          <Stack.Screen
+            name="EditScreen"
+            component={EditScreen}
+            options={{ title: "Edit" }}
           />
         </Stack.Navigator>
       </CameraProvider>

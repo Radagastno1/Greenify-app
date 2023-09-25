@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import {
   FlatList,
   Image,
-  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -56,12 +55,12 @@ export default function History({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
+      {/* <ImageBackground
         style={styles.backgroundImage}
         source={{
           uri: "https://i.imgur.com/sWAQJaD.png",
         }}
-      ></ImageBackground>
+      ></ImageBackground> */}
 
       <FlatList
         style={styles.list}
@@ -76,6 +75,7 @@ export default function History({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   list: {
     marginTop: 100,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 2,
     borderColor: "#ccc",
-    backgroundColor: "rgba(255, 255, 255, 0.6)",
+    backgroundColor: "rgba(53,182,96, 0.4)",
     borderRadius: 20,
   },
   backgroundImage: {
@@ -103,13 +103,13 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 10,
     borderColor: "white",
-    borderWidth: 10,
+    borderWidth: 5,
   },
   details: {
     flex: 1,
   },
   material: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     color: "rgba(40, 24, 2, 0.87)",
   },

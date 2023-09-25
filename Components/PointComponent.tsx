@@ -1,6 +1,7 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import ShareModal from "./SharingPoints";
 
 interface Props {
   points: number;
@@ -9,6 +10,7 @@ interface Props {
 
 export default function PointIndicator(props: Props) {
   const [barWidth, setBarWidth] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const clampedWidth =
@@ -26,13 +28,29 @@ export default function PointIndicator(props: Props) {
           alignItems: "center",
         }}
       >
-        <Entypo name="share" size={24} color="black" />
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <Entypo name="share" size={24} color="black" />
+        </TouchableOpacity>
         <Entypo name="brush" size={24} color="rgb(93, 110, 99)" />
         <AntDesign name="logout" size={24} color="rgb(93, 110, 99)" />
+        <ShareModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+        />
       </View>
       {props.username ? (
         <Text style={styles.username}>{props.username}</Text>
       ) : null}
+      <Image
+        source={{
+          uri: "https://image.shutterstock.com/image-photo/photo-owl-macro-photography-high-260nw-1178957458.jpg",
+        }}
+        style={{
+          height: 50,
+          width: 50,
+          marginVertical: 10,
+        }}
+      />
       <Text style={styles.label}>{props.points} poäng</Text>
       <View style={styles.progressBar}>
         <View style={[styles.progressBarFill, { width: barWidth }]} />
@@ -59,7 +77,7 @@ const styles = StyleSheet.create({
     color: "rgb(204, 175, 175 )",
     fontSize: 30,
     fontWeight: "bold",
-    paddingVertical: 40,
+    paddingVertical: 20,
   },
   label: {
     fontSize: 18,

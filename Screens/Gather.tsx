@@ -34,6 +34,13 @@ export default function Gather({ navigation }: Props) {
     }
   }, [camera?.uri]);
 
+  useEffect(() => {
+    if (imageUri && material && location) {
+      setButtonActive(true);
+    }
+    //kolla vad i dependency listan??
+  }, []);
+
   //DETTA KAN GÅ BORT SEN NÄR APIET HAR EN ADDTRASH METOD om den ska det
   const getPoint = () => {
     if (
@@ -144,7 +151,8 @@ export default function Gather({ navigation }: Props) {
           <CustomButton
             title="Done"
             onPress={handleSaveTrash}
-            color={"rgba(154, 192, 153, 1)"}
+            isDisabled={buttonActive}
+            color="rgba(79,44,84,255)"
           />
         </View>
       </ScrollView>
@@ -166,7 +174,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 305,
     alignSelf: "center",
-    backgroundColor: "rgba(255, 173, 2, 1)",
+    backgroundColor: "rgb(53,182,96)",
     borderRadius: 50,
     padding: 20,
   },

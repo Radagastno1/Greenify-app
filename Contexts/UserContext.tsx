@@ -34,6 +34,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   function addTrash(trash: Trash) {
     if (user?.trashList) {
+      //AJ AAAAJ FIXA DETTA MED EN GÅNG ANGELINA
       user?.trashList.push(trash);
     } else {
       const newTrashList: Trash[] = [];

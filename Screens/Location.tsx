@@ -29,6 +29,7 @@ export default function LocationScreen() {
     requestLocation();
   }, []);
 
+  //denna så att location ska uppdateras? eller varför igen
   useEffect(() => {}, [location]);
 
   return (

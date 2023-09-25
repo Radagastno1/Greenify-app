@@ -26,12 +26,14 @@ export function fetchDataByMaterial(material: string) {
 
 export function fetchLogInUser(username: string, password: string) {
   const apiUrl = "http://192.168.50.201:5072/users/login";
+  const schoolApiUrl = "http://10.23.14.178:5072/users/login";
+  const libraryApiUrl = "http://10.29.174.100:5072/users/login";
   const requestBody = {
     username,
     password,
   };
 
-  return fetch(apiUrl, {
+  return fetch(libraryApiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

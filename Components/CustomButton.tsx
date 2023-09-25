@@ -5,6 +5,7 @@ interface Props {
   color?: string;
   onPress?: () => void;
   onLogin?: (username: string, password: string) => void;
+  isDisabled?: boolean;
 }
 
 export default function CustomButton(props: Props) {
@@ -12,6 +13,7 @@ export default function CustomButton(props: Props) {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor }]}
+      disabled={props.isDisabled}
       onPress={() => {
         if (props.onPress) {
           props.onPress();

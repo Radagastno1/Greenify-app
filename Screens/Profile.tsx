@@ -37,10 +37,10 @@ export default function ProfileScreen({ navigation }: Props) {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <Video
         source={{
-          uri: "https://v3.cdnpk.net/videvo_files/video/free/2020-07/large_watermarked/06_1596083776_preview.mp4",
+          uri: "https://i.imgur.com/1uf9JOQ.mp4",
         }}
         style={{ flex: 1 }}
         resizeMode={ResizeMode.COVER}
@@ -63,7 +63,7 @@ export default function ProfileScreen({ navigation }: Props) {
       <View style={styles.navigationContainer}>
         <CustomButton
           title="Greenify"
-          color="rgb(138, 165, 147 )"
+          color="rgba(79,44,84,255)"
           onPress={() => {
             navigation.navigate("Gather");
           }}
@@ -71,7 +71,7 @@ export default function ProfileScreen({ navigation }: Props) {
         <CustomButton
           //DENNA
           title="Mina skatter"
-          color="rgb(239, 223, 223)"
+          color="rgb(164,116,156)"
           onPress={() => {
             navigation.navigate("HistoryScreen");
           }}
@@ -79,7 +79,7 @@ export default function ProfileScreen({ navigation }: Props) {
         <CustomButton
           //O DENNA
           title="Inställningar"
-          color="rgb(232, 218, 218))"
+          color="rgb(164,116,156)"
           onPress={() => {
             console.log("settings");
           }}

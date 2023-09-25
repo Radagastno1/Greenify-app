@@ -63,9 +63,9 @@ export default function ProfileCard() {
           uri: user?.animalImageUrl,
         }}
         style={{
-          height: 50,
-          width: 50,
-          marginVertical: 10,
+          height: 90,
+          width: 90,
+          borderRadius: 10,
         }}
       />
       <Text style={styles.label}>{user?.points} poäng</Text>

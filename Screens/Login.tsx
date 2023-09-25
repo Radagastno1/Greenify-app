@@ -28,6 +28,7 @@ export default function Login({ navigation }: Props) {
     //   (u) => u.username === username && u.password === password
     // );
     console.log("handle log in anropas");
+
     const loggedInUser: User = await fetchLogInUser(username, password);
     console.log("logged in user:", loggedInUser);
     if (loggedInUser) {
@@ -37,13 +38,16 @@ export default function Login({ navigation }: Props) {
     }
   };
 
+  //INPUT FÄLTEN SKA JU ÅKA UPP SÅ BEHÖVER EN SCROLLLLVIEW
+
   return (
     <View style={{ alignItems: "center", marginTop: 100 }}>
       <Image
         source={{
           uri: "https://i.imgur.com/BKoVXXp.png",
         }}
-        style={{ height: 250, width: "100%", marginBottom: 50 }}
+        style={{ height: 250, width: "90%", marginBottom: 50 }}
+        resizeMode="contain"
       />
 
       <Input

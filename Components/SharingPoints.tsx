@@ -1,6 +1,5 @@
-import * as Sharing from "expo-sharing";
 import React, { useState } from "react";
-import { Button, Modal, Text, View } from "react-native";
+import { Button, Linking, Modal, Text, View } from "react-native";
 import { useUserContext } from "../Contexts/UserContext";
 
 interface ShareModalProps {
@@ -16,7 +15,8 @@ const ShareModal: React.FC<ShareModalProps> = ({ visible, onClose }) => {
 
   const shareMessage = async () => {
     try {
-      const message = await Sharing.shareAsync(initialMessage);
+      const smsUri = `sms:?body=${encodeURIComponent(initialMessage)}`;
+      await Linking.openURL(smsUri);
       setShared(true);
     } catch (error) {
       console.error(error);

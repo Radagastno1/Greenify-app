@@ -5,6 +5,7 @@ import { Location } from "./LocationContex";
 
 type ActionType =
   | { type: "SET_USER"; payload: User | null }
+  | { type: "UPDATE_USER"; payload: Partial<User> }
   | { type: "ADD_TRASH"; payload: Trash }
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
   | { type: "SIGN_OUT" }
@@ -33,7 +34,8 @@ export type User = {
 type UserContextType = {
   user: User | null;
   dispatch: (action: ActionType) => void;
-  handleSignIn: (username: string, password: string) => void;
+  handleSignIn: (username: string, password: string) => void; 
+  updateUser: (partialUser: Partial<User>) => void; 
 };
 
 const initialState: User | null = {
@@ -67,6 +69,8 @@ function userReducer(state: User | null, action: ActionType): User | null {
       return action.payload
         ? { ...action.payload, isLoggedIn: true }
         : initialState;
+    case "UPDATE_USER":
+      return state ? { ...state, ...action.payload } : null;
     case "ADD_TRASH":
       if (state) {
         const updatedTrashList = [...state.trashList, action.payload];
@@ -105,8 +109,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
     console.log(user);
   };
 
+  const updateUser = (partialUser: Partial<User>) => {
+    dispatch({ type: "UPDATE_USER", payload: partialUser });
+  };
+
   return (
-    <UserContext.Provider value={{ user, dispatch, handleSignIn }}>
+    <UserContext.Provider value={{ user, dispatch, handleSignIn, updateUser }}>
       {children}
     </UserContext.Provider>
   );

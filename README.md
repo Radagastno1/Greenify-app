@@ -32,3 +32,4 @@ I historiken kan du klicka dig in på en av dina omgångar och läsa mer om just
 -ScrollView
 -Dimensions
 -Marker
+-Switch

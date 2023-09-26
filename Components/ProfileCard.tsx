@@ -9,7 +9,7 @@ export default function ProfileCard() {
   const [barWidth, setBarWidth] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const { signOut, user } = useUserContext();
+  const { user, dispatch } = useUserContext();
 
   useEffect(() => {
     if (user?.points) {
@@ -19,8 +19,8 @@ export default function ProfileCard() {
     }
   }, [user?.points]);
 
-  const handleLogOut = () => {
-    signOut();
+  const handleLogout = () => {
+    dispatch({ type: "SIGN_OUT" });
   };
 
   return (
@@ -43,7 +43,7 @@ export default function ProfileCard() {
         >
           <Entypo name="brush" size={24} color="rgb(93, 110, 99)" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleLogOut}>
+        <TouchableOpacity onPress={handleLogout}>
           <AntDesign name="logout" size={24} color="rgb(93, 110, 99)" />
         </TouchableOpacity>
         <ShareModal

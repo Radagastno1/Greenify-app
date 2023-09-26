@@ -1,6 +1,14 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
+import { fetchLogInUser } from "../api";
 import { Location } from "./LocationContex";
+
+type ActionType =
+  | { type: "SET_USER"; payload: User | null }
+  | { type: "ADD_TRASH"; payload: Trash }
+  | { type: "SIGN_IN"; payload: { username: string; password: string } }
+  | { type: "SIGN_OUT" }
+  | { type: "ADD_IMAGE_URL"; payload: string };
 
 export type Trash = {
   id: number;
@@ -8,7 +16,6 @@ export type Trash = {
   material: string;
   location: Location;
   date: string;
-  //man ska få så många poäng som materialet tar för att förmultna
   point: number;
 };
 
@@ -25,50 +32,81 @@ export type User = {
 
 type UserContextType = {
   user: User | null;
-  setUser: (user: User | null) => void;
-  addTrash: (trash: Trash) => void;
-  signOut: () => void;
-  addImageUrl: (imageUrl: string) => void;
+  dispatch: (action: ActionType) => void;
+  handleSignIn: (username: string, password: string) => void;
 };
+
+const initialState: User | null = {
+  id: 0,
+  username: "",
+  password: "",
+  points: 0,
+  memberSince: 0,
+  isLoggedIn: false,
+  trashList: [],
+  animalImageUrl: animalImages[0].imageURL,
+};
+
+async function signInAsync(
+  username: string,
+  password: string
+): Promise<User | null> {
+  try {
+    const user: User = await fetchLogInUser(username, password);
+    const signedInUser = { ...user, isLoggedIn: true };
+    return signedInUser;
+  } catch (error) {
+    console.error("An error occurred during sign in:", error);
+    return null;
+  }
+}
+
+function userReducer(state: User | null, action: ActionType): User | null {
+  switch (action.type) {
+    case "SET_USER":
+      return action.payload
+        ? { ...action.payload, isLoggedIn: true }
+        : initialState;
+    case "ADD_TRASH":
+      if (state) {
+        const updatedTrashList = [...state.trashList, action.payload];
+        const totalPoints = updatedTrashList.reduce(
+          (acc, trash) => acc + trash.point,
+          0
+        );
+        const updatedUser = {
+          ...state,
+          trashList: updatedTrashList,
+          points: totalPoints,
+        };
+        return updatedUser;
+      } else {
+        return null;
+      }
+    case "SIGN_OUT":
+      return state ? { ...state, isLoggedIn: false } : null;
+    case "ADD_IMAGE_URL":
+      return state ? { ...state, animalImageUrl: action.payload } : null;
+    default:
+      return state;
+  }
+}
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>({
-    id: 0, // Lägg till övriga standardvärden här
-    username: "",
-    password: "",
-    points: 0,
-    memberSince: 0,
-    isLoggedIn: false,
-    trashList: [],
-    animalImageUrl: animalImages[0].imageURL, 
-  });
+  const [user, dispatch] = useReducer(userReducer, initialState);
 
-  function addTrash(trash: Trash) {
-    if (user?.trashList) {
-//push!?nej
-      user?.trashList.push(trash);
-    } else {
-      const newTrashList: Trash[] = [];
-      newTrashList.push(trash);
-    }
-  }
-
-  function signOut() {
-    setUser(null);
-  }
-
-  function addImageUrl(imageUrl: string) {
-    if (user) {
-      setUser({ ...user, animalImageUrl: imageUrl });
-    }
-  }
+  const handleSignIn = async (username: string, password: string) => {
+    console.log("handlesign in anropas");
+    const result = await signInAsync(username, password);
+    console.log("result from login:", result);
+    dispatch({ type: "SET_USER", payload: result });
+    console.log(user);
+  };
 
   return (
-    <UserContext.Provider
-      value={{ user, setUser, addTrash, signOut, addImageUrl }}
-    >
+    <UserContext.Provider value={{ user, dispatch, handleSignIn }}>
       {children}
     </UserContext.Provider>
   );

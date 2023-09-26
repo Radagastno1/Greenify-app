@@ -4,16 +4,15 @@ import React, { useEffect, useState } from "react";
 import { Image, View } from "react-native";
 import { Input } from "react-native-elements";
 import CustomButton from "../Components/CustomButton";
-import { User, useUserContext } from "../Contexts/UserContext";
+import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
-import { fetchLogInUser } from "../api";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function Login({ navigation }: Props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useUserContext();
+  const { handleSignIn } = useUserContext();
 
   useEffect(() => {
     navigation.setOptions({
@@ -27,15 +26,8 @@ export default function Login({ navigation }: Props) {
     // const loggedInUser = allUsers.find(
     //   (u) => u.username === username && u.password === password
     // );
-    console.log("handle log in anropas");
-
-    const loggedInUser: User = await fetchLogInUser(username, password);
-    console.log("logged in user:", loggedInUser);
-    if (loggedInUser) {
-      loggedInUser.isLoggedIn = true;
-      setUser(loggedInUser);
-      navigation.navigate("Profile");
-    }
+    handleSignIn(username, password);
+    navigation.navigate("Profile");
   };
 
   //INPUT FÄLTEN SKA JU ÅKA UPP SÅ BEHÖVER EN SCROLLLLVIEW

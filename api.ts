@@ -28,12 +28,13 @@ export function fetchLogInUser(username: string, password: string) {
   const apiUrl = "http://192.168.50.201:5072/users/login";
   const schoolApiUrl = "http://10.23.14.178:5072/users/login";
   const libraryApiUrl = "http://10.27.213.130:5072/users/login";
+  const elinasApiUrl = "http://192.168.1.211:5072/users/login";
   const requestBody = {
     username,
     password,
   };
 
-  return fetch(apiUrl, {
+  return fetch(elinasApiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

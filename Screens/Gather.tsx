@@ -26,7 +26,7 @@ export default function Gather({ navigation }: Props) {
   const [material, setMaterial] = useState<string | null>(null);
   const [buttonActive, setButtonActive] = useState(false);
   const { location } = useLocationContext();
-  const { addTrash } = useUserContext();
+  const { dispatch } = useUserContext();
 
   useEffect(() => {
     if (camera?.uri) {
@@ -81,7 +81,7 @@ export default function Gather({ navigation }: Props) {
       point: getPoint(),
     };
 
-    addTrash(trash);
+    dispatch({ type: "ADD_TRASH", payload: trash });
     console.log(trash.point);
     navigation.navigate("Profile");
   };

@@ -14,7 +14,7 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
   visible,
   onClose,
 }) => {
-  const { addImageUrl } = useUserContext();
+  const { dispatch } = useUserContext();
   const allAnimalPictures = animalImages;
   console.log(allAnimalPictures);
 
@@ -28,7 +28,7 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
 
   const closeModal = () => {
     if (selectedImage) {
-      addImageUrl(selectedImage);
+      dispatch({ type: "ADD_IMAGE_URL", payload: selectedImage });
     }
 
     onClose();

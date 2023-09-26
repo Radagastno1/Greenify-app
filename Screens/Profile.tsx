@@ -36,6 +36,12 @@ export default function ProfileScreen({ navigation }: Props) {
     }, [user])
   );
 
+  useEffect(() => {
+    if (!user?.isLoggedIn) {
+      navigation.navigate("Login");
+    }
+  }, [user?.isLoggedIn]);
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Video

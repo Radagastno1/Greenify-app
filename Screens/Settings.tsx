@@ -16,7 +16,7 @@ export default function Settings({ navigation }: Props) {
   const toggleSoundSwitch = () =>
     setSoundIsEnabled((previousState) => !previousState);
 
-  const [isNightmodeEnabled, setNightmodeIsEnabled] = useState(false);
+  const [isNightmodeEnabled, setNightmodeIsEnabled] = useState(user?.isInNightMode);
   const toggleNightmodeSwitch = () =>
     setNightmodeIsEnabled((previousState) => !previousState);
 
@@ -115,7 +115,11 @@ export default function Settings({ navigation }: Props) {
       <View style={{ width: "100%", alignItems: "center" }}>
         <CustomButton
           onPress={() => {
-            updateUser({ password: password, username: username });
+            updateUser({
+              password: password,
+              username: username,
+              isInNightMode: isNightmodeEnabled,
+            });
           }}
           title="Save"
         ></CustomButton>

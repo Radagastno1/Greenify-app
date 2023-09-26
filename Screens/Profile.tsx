@@ -14,6 +14,10 @@ export default function ProfileScreen({ navigation }: Props) {
   const { user } = useUserContext();
   const [pointSum, setPointSum] = useState<number>(0);
 
+  const videoUrl = user?.isInNightMode
+    ? "https://i.imgur.com/FWN9Gox.mp4"
+    : "https://i.imgur.com/1uf9JOQ.mp4";
+
   useEffect(() => {
     navigation.setOptions({
       headerTransparent: true,
@@ -46,7 +50,7 @@ export default function ProfileScreen({ navigation }: Props) {
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Video
         source={{
-          uri: "https://i.imgur.com/1uf9JOQ.mp4",
+          uri: videoUrl,
         }}
         style={{ flex: 1 }}
         resizeMode={ResizeMode.COVER}

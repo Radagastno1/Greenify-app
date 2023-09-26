@@ -29,13 +29,14 @@ export type User = {
   isLoggedIn: boolean;
   trashList: Trash[];
   animalImageUrl: string;
+  isInNightMode: boolean;
 };
 
 type UserContextType = {
   user: User | null;
   dispatch: (action: ActionType) => void;
-  handleSignIn: (username: string, password: string) => void; 
-  updateUser: (partialUser: Partial<User>) => void; 
+  handleSignIn: (username: string, password: string) => void;
+  updateUser: (partialUser: Partial<User>) => void;
 };
 
 const initialState: User | null = {
@@ -47,6 +48,7 @@ const initialState: User | null = {
   isLoggedIn: false,
   trashList: [],
   animalImageUrl: animalImages[0].imageURL,
+  isInNightMode: false,
 };
 
 async function signInAsync(

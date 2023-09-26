@@ -4,20 +4,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useUserContext } from "../Contexts/UserContext";
 import ShareModal from "./SharingPoints";
 import { ChooseAnimalComponent } from "./chooseAnimalComponent";
+import PointBarComponent from "./PointBarComponent";
 
 export default function ProfileCard() {
-  const [barWidth, setBarWidth] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const { user, dispatch } = useUserContext();
-
-  useEffect(() => {
-    if (user?.points) {
-      const clampedWidth =
-        user?.points >= 10000 ? 100 : (user?.points / 10000) * 100;
-      setBarWidth(clampedWidth);
-    }
-  }, [user?.points]);
 
   const handleLogout = () => {
     dispatch({ type: "SIGN_OUT" });
@@ -68,10 +60,7 @@ export default function ProfileCard() {
           borderRadius: 10,
         }}
       />
-      <Text style={styles.label}>{user?.points} poäng</Text>
-      <View style={styles.progressBar}>
-        <View style={[styles.progressBarFill, { width: barWidth }]} />
-      </View>
+      <PointBarComponent/>
     </View>
   );
 }
@@ -92,22 +81,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     paddingVertical: 20,
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-    color: "rgb(93, 110, 99)",
-    fontWeight: "bold",
-  },
-  progressBar: {
-    width: "80%",
-    height: 24,
-    backgroundColor: "#ddd",
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  progressBarFill: {
-    height: "100%",
-    backgroundColor: "rgb(138, 165, 147)",
-  },
+  }
 });

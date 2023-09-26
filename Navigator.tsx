@@ -8,6 +8,7 @@ import History from "./Screens/History";
 import Login from "./Screens/Login";
 import ProfileScreen from "./Screens/Profile";
 import TreasureInfo from "./Screens/TreasureInfo";
+import Settings from "./Screens/Settings";
 
 export type RootStackParamList = {
   Gather: undefined;
@@ -16,16 +17,8 @@ export type RootStackParamList = {
   HistoryScreen: undefined;
   Login: undefined;
   TreasureInfo: { id: number };
+  Settings: undefined;
 };
-
-// const navigation = useNavigation();
-// const { user } = useUserContext();
-
-// useEffect(() => {
-//   if (!user?.isLoggedIn) {
-//     navigation.navigate("Login" as never);
-//   }
-// }, [user?.isLoggedIn]);
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -67,6 +60,11 @@ export default function Navigator() {
             name="TreasureInfo"
             component={TreasureInfo}
             options={{ title: "Mer information" }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{ title: "Inställningar" }}
           />
         </Stack.Navigator>
       </CameraProvider>

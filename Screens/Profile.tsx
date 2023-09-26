@@ -75,7 +75,6 @@ export default function ProfileScreen({ navigation }: Props) {
           }}
         />
         <CustomButton
-          //DENNA
           title="Mina skatter"
           color="rgb(164,116,156)"
           onPress={() => {
@@ -83,11 +82,10 @@ export default function ProfileScreen({ navigation }: Props) {
           }}
         />
         <CustomButton
-          //O DENNA
           title="Inställningar"
           color="rgb(164,116,156)"
           onPress={() => {
-            console.log("settings");
+            navigation.navigate("Settings");
           }}
         />
       </View>

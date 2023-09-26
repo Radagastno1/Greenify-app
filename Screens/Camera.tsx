@@ -3,8 +3,8 @@ import { Camera, CameraType } from "expo-camera";
 import * as FileSystem from "expo-file-system";
 import { useRef, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "../Navigator";
 import { useCameraContext } from "../Contexts/CameraContext";
+import { RootStackParamList } from "../Navigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "CameraScreen">;
 
@@ -80,11 +80,11 @@ export default function CameraScreen({ navigation }: Props) {
           }
         }}
       >
-        <View style={styles.buttonContainer}>
+        {/* <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <Text style={styles.text}>Flip Camera</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={takePicture}>
             <Text style={styles.text}>Take Picture</Text>
@@ -116,6 +116,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "flex-end",
     alignItems: "center",
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: "rgb(164,116,156)",
   },
   text: {
     fontSize: 24,

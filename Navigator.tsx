@@ -3,12 +3,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CameraProvider } from "./Contexts/CameraContext";
 import { useUserContext } from "./Contexts/UserContext";
 import CameraScreen from "./Screens/Camera";
+import CreateAccount from "./Screens/CreateAccount";
 import Gather from "./Screens/Gather";
 import History from "./Screens/History";
 import Login from "./Screens/Login";
 import ProfileScreen from "./Screens/Profile";
-import TreasureInfo from "./Screens/TreasureInfo";
 import Settings from "./Screens/Settings";
+import TreasureInfo from "./Screens/TreasureInfo";
 
 export type RootStackParamList = {
   Gather: undefined;
@@ -18,6 +19,7 @@ export type RootStackParamList = {
   Login: undefined;
   TreasureInfo: { id: number };
   Settings: undefined;
+  CreateAccount: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -65,6 +67,11 @@ export default function Navigator() {
             name="Settings"
             component={Settings}
             options={{ title: "Inställningar" }}
+          />
+          <Stack.Screen
+            name="CreateAccount"
+            component={CreateAccount}
+            options={{ title: "Skapa konto" }}
           />
         </Stack.Navigator>
       </CameraProvider>

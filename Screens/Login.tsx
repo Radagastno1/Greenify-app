@@ -62,7 +62,7 @@ export default function Login({ navigation }: Props) {
         <CustomButton
           title="Kom igång"
           onPress={() => {
-            console.log("kom igång");
+            navigation.navigate("CreateAccount");
           }}
           color="rgb(164,116,156)"
         />

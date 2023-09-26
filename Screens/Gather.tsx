@@ -112,48 +112,33 @@ export default function Gather({ navigation }: Props) {
           />
         </TouchableOpacity>
 
-        {imageUri ? (
-          <View>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={{
-                  height: 60,
-                  borderColor: "gray",
-                  borderWidth: 1,
-                  paddingHorizontal: 10,
-                  borderRadius: 8,
-                  backgroundColor: "#f5f5f5",
-                  color: "#333",
-                }}
-                placeholder="Material (plast, pet, glas, tuggummi...)"
-                onChangeText={(text) => setMaterial(text)}
-                value={material || ""}
-              />
-            </View>
-
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+        <View style={styles.contentContainer}>
+          {imageUri ? (
+            <View style={styles.imageInputContainer}>
               <Image
                 style={styles.image}
                 source={{
                   uri: imageUri || "default_image_uri",
                 }}
               />
+              <TextInput
+                style={styles.input}
+                placeholder="Material (plast, pet, glas, tuggummi...)"
+                onChangeText={(text) => setMaterial(text)}
+                value={material || ""}
+              />
             </View>
-          </View>
-        ) : null}
+          ) : null}
 
-        <View style={{ width: "100%", alignItems: "center" }}>
-          <CustomButton
-            title="Done"
-            onPress={handleSaveTrash}
-            isDisabled={buttonActive}
-            color="rgba(79,44,84,255)"
-          />
+          {imageUri ? (
+            <View style={styles.buttonContainer}>
+              <CustomButton
+                title="Done"
+                onPress={handleSaveTrash}
+                color="rgba(79,44,84,255)"
+              />
+            </View>
+          ) : null}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -169,24 +154,53 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     paddingBottom: 0,
+    alignItems: "center",
+    flexDirection: "column",
   },
   cameraButton: {
     position: "absolute",
-    top: 305,
+    top: "50%",
     alignSelf: "center",
     backgroundColor: "rgb(53,182,96)",
     borderRadius: 50,
     padding: 20,
   },
-  inputContainer: {
-    flex: 1 / 3,
-    padding: 5,
+  contentContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    position: "absolute",
+    top: "70%",
+    width: "100%",
+  },
+  imageInputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 16,
   },
   image: {
-    height: 160,
-    width: 160,
-    borderRadius: 10,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
     borderColor: "rgba(154, 192, 153, 1)",
     borderWidth: 6,
+  },
+  input: {
+    height: 80,
+    borderColor: "gray",
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    backgroundColor: "#f5f5f5",
+    color: "#333",
+    flex: 1,
+    fontSize: 24,
+  },
+  buttonContainer: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    bottom: 0,
   },
 });

@@ -123,7 +123,7 @@ export default function Gather({ navigation }: Props) {
               />
               <TextInput
                 style={styles.input}
-                placeholder="Material (plast, pet, glas, tuggummi...)"
+                placeholder="Plast/Glas/Fimp..."
                 onChangeText={(text) => setMaterial(text)}
                 value={material || ""}
               />
@@ -161,9 +161,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "50%",
     alignSelf: "center",
-    backgroundColor: "rgb(53,182,96)",
+    backgroundColor: "rgb(164,116,156)",
     borderRadius: 50,
     padding: 20,
+    borderWidth: 5,
+    borderColor: "rgba(79,44,84,255)",
   },
   contentContainer: {
     flexDirection: "column",
@@ -173,26 +175,26 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   imageInputContainer: {
-    flex: 1,
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 16,
   },
   image: {
     height: 100,
     width: 100,
     borderRadius: 50,
-    borderColor: "rgba(154, 192, 153, 1)",
-    borderWidth: 6,
+    borderColor: "rgba(79,44,84,255)",
+    borderWidth: 2,
   },
   input: {
     height: 80,
     borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 10,
+    marginHorizontal: 5,
     borderRadius: 8,
-    backgroundColor: "#f5f5f5",
-    color: "#333",
+    backgroundColor: "white",
+    color: "black",
     flex: 1,
     fontSize: 24,
   },

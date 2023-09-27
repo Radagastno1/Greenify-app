@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Modal, TouchableOpacity, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Image } from "react-native-elements";
 import { useUserContext } from "../Contexts/UserContext";
 import { animalImages } from "../animalImages";
@@ -35,33 +43,59 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
   };
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "white",
-          padding: 20,
-        }}
+      <KeyboardAvoidingView
+        style={{ flex: 1, marginTop: 50, width: "100%" }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        {allAnimalPictures.map((a, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => handleImageSelect(a.imageURL)}
-            style={{
-              opacity: isPressed && selectedImage === a.imageURL ? 0.2 : 1, // Sätt opacity om bilden är vald
-            }}
-          >
-            <Image
-              source={{
-                uri: a.imageURL,
-              }}
-              style={{ height: 200, width: 200, marginVertical: 20 }}
-            />
-          </TouchableOpacity>
-        ))}
-        <PopupButton title="Välj" onPress={closeModal} />
-      </View>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "white",
+            padding: 20,
+          }}
+        >
+          <View style={styles.imageContainer}>
+            {allAnimalPictures.map((a, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleImageSelect(a.imageURL)}
+                style={[
+                  styles.imageWrapper,
+                  {
+                    opacity:
+                      isPressed && selectedImage === a.imageURL ? 0.2 : 1,
+                  },
+                ]}
+              >
+                <Image
+                  source={{
+                    uri: a.imageURL,
+                  }}
+                  style={styles.image}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+          <PopupButton title="Välj" onPress={closeModal} />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  imageWrapper: {
+    margin: 5,
+  },
+  image: {
+    height: 150,
+    width: 150,
+  },
+});

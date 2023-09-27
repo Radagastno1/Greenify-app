@@ -12,4 +12,12 @@ export const animalImages: AnimalImage[] = [
     animal: "Seal",
     imageURL: "https://i.imgur.com/l5fWtyg.jpg",
   },
+  {
+    animal: "Fox",
+    imageURL: "https://i.imgur.com/ApS5GNq.jpg",
+  },
+  {
+    animal: "Squirrel",
+    imageURL: "https://i.imgur.com/ptFw8jV.jpg",
+  },
 ];

@@ -25,7 +25,6 @@ export default function Gather({ navigation }: Props) {
   const { camera } = useCameraContext();
   const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
   const [material, setMaterial] = useState<string | null>(null);
-  const [buttonActive, setButtonActive] = useState(false);
   const { location } = useLocationContext();
   const { dispatch } = useUserContext();
 
@@ -34,13 +33,6 @@ export default function Gather({ navigation }: Props) {
       setImageUri(camera.uri);
     }
   }, [camera?.uri]);
-
-  useEffect(() => {
-    if (imageUri && material && location) {
-      setButtonActive(true);
-    }
-    //kolla vad i dependency listan??
-  }, []);
 
   //DETTA KAN GÅ BORT SEN NÄR APIET HAR EN ADDTRASH METOD om den ska det
   const getPoint = () => {

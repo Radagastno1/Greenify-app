@@ -16,7 +16,9 @@ export default function Settings({ navigation }: Props) {
   const toggleSoundSwitch = () =>
     setSoundIsEnabled((previousState) => !previousState);
 
-  const [isNightmodeEnabled, setNightmodeIsEnabled] = useState(user?.isInNightMode);
+  const [isNightmodeEnabled, setNightmodeIsEnabled] = useState(
+    user?.isNightMode
+  );
   const toggleNightmodeSwitch = () =>
     setNightmodeIsEnabled((previousState) => !previousState);
 
@@ -118,7 +120,7 @@ export default function Settings({ navigation }: Props) {
             updateUser({
               password: password,
               username: username,
-              isInNightMode: isNightmodeEnabled,
+              isNightMode: isNightmodeEnabled,
             });
           }}
           title="Save"

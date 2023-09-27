@@ -17,13 +17,6 @@ export default function PopupButton(props: Props) {
       onPress={() => {
         if (props.onPress) {
           props.onPress();
-        } else if (props.onLogin) {
-          // Här skulle du behöva ha tillgång till användarnamn och lösenord
-          // som du kan skicka med som argument till onLogin-funktionen.
-          // Anta att du har dem i ditt komponents tillstånd.
-          const username = "användarnamn"; // Byt ut detta med rätt värden
-          const password = "lösenord"; // Byt ut detta med rätt värden
-          props.onLogin(username, password);
         }
       }}
     >

@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
-import { User } from "./Contexts/UserContext";
 import { FactsModel } from "./FactsModel";
+import { User } from "./types";
 
 export function fetchDataByMaterial(material: string) {
   const apiUrl = `http://ec2-16-16-24-47.eu-north-1.compute.amazonaws.com/api/facts/${material.toLowerCase()}`;

@@ -1,9 +1,9 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
 import { fetchCreateUserReal, fetchLogInUser } from "../api";
-import { Location } from "./LocationContex";
+import { Trash, User } from "../types";
 
-type ActionType =
+export type ActionType =
   | { type: "SET_USER"; payload: User | null }
   | { type: "UPDATE_USER"; payload: Partial<User> }
   | { type: "CREATE_USER"; payload: User | null }
@@ -11,27 +11,6 @@ type ActionType =
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
   | { type: "SIGN_OUT" }
   | { type: "ADD_IMAGE_URL"; payload: string };
-
-export type Trash = {
-  id: number;
-  url: string;
-  material: string;
-  location: Location;
-  date: string;
-  point: number;
-};
-
-export type User = {
-  id: number;
-  username: string;
-  password: string;
-  points: number;
-  memberSince: string;
-  isLoggedIn: boolean;
-  trashList: Trash[];
-  animalImageUrl: string;
-  isNightMode: boolean;
-};
 
 type UserContextType = {
   user: User | null;

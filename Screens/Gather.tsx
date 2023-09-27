@@ -14,8 +14,9 @@ import {
 import CustomButton from "../Components/CustomButton";
 import { useCameraContext } from "../Contexts/CameraContext";
 import { useLocationContext } from "../Contexts/LocationContex";
-import { Trash, useUserContext } from "../Contexts/UserContext";
+import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
+import { Trash } from "../types";
 import LocationScreen from "./Location";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
@@ -76,7 +77,7 @@ export default function Gather({ navigation }: Props) {
       id: parseInt(Date.now().toString().slice(-4)),
       url: imageUri ?? "unknown",
       material: material ?? "unknown",
-      location: location ?? { latitude: 0, longitude: 0 },
+      location: location ?? { longitude: 0, latitude: 0 },
       date: formattedDate,
       point: getPoint(),
     };

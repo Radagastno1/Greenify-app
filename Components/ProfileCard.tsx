@@ -18,10 +18,11 @@ export default function ProfileCard(props: Props) {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const { user, dispatch } = useUserContext();
   const backGroundColor = user?.isNightMode
-    ? "rgba(36, 25, 64, 0.4)"
+    ? "rgba(255, 255, 255, 0.0)"
     : "rgba(255, 255, 255, 0.8)";
 
   const usernameColor = user?.isNightMode ? "white" : "rgba(79,44,84,255)";
+  const textColor = user?.isNightMode ? "white" : "black";
   const maxPoints = 100000;
   const pointsLeft = maxPoints - (user?.points ?? 0);
 
@@ -135,20 +136,28 @@ export default function ProfileCard(props: Props) {
             padding: 10,
           }}
         >
-          <Text style={{ fontSize: 15 }}>{user?.trashList.length}</Text>
-          <Text style={{ fontSize: 15 }}>SKRÄP</Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>
+            {user?.trashList.length}
+          </Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>SKRÄP</Text>
         </View>
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
-          <Text style={{ fontSize: 15 }}>{getUniqueLocations()}</Text>
-          <Text style={{ fontSize: 15 }}>INCHECKNINGAR</Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>
+            {getUniqueLocations()}
+          </Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>
+            INCHECKNINGAR
+          </Text>
         </View>
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
-          <Text style={{ fontSize: 15 }}>{user?.points}</Text>
-          <Text style={{ fontSize: 15 }}>POÄNG</Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>
+            {user?.points}
+          </Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>POÄNG</Text>
         </View>
       </View>
 
@@ -170,7 +179,9 @@ export default function ProfileCard(props: Props) {
       </View> */}
 
       <View style={{ paddingVertical: 50, alignItems: "center" }}>
-        <Text>{pointsLeft} poäng till nästa level</Text>
+        <Text style={{ color: textColor, ...styles.statusText }}>
+          {pointsLeft} poäng till nästa level
+        </Text>
         <PointBarComponent />
       </View>
 
@@ -203,5 +214,8 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 40,
     fontWeight: "bold",
+  },
+  statusText: {
+    fontSize: 15,
   },
 });

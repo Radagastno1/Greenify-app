@@ -1,9 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-
-export type Location = {
-  longitude: number | undefined;
-  latitude: number | undefined;
-};
+import { Location } from "../types";
 
 type LocationContextType = {
   location: Location | null;

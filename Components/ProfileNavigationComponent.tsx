@@ -31,6 +31,7 @@ export default function ProfileNavigationComponent(props: Props) {
 
 const styles = StyleSheet.create({
   navigationContainer: {
+    flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",

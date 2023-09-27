@@ -17,7 +17,7 @@ type UserContextType = {
   dispatch: (action: ActionType) => void;
   handleSignIn: (username: string, password: string) => void;
   updateUser: (partialUser: Partial<User>) => void;
-  createUser: (username: string, password: string) => void;
+  createUser: (username: string, password: string) => Promise<User | null>;
 };
 
 const initialState: User | null = {
@@ -48,8 +48,11 @@ async function signInAsync(
 
 async function createAccountAsync(user: User): Promise<User | null> {
   try {
-    const createdUser: User = await fetchCreateUserReal(user);
-    return createdUser;
+    const createdUser = await fetchCreateUserReal(user);
+    if (createdUser != null) {
+      return createdUser;
+    }
+    return null;
   } catch (error) {
     console.error("An error occurred during sign in:", error);
     return null;
@@ -108,7 +111,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "UPDATE_USER", payload: partialUser });
   };
 
-  const createUser = async (username: string, password: string) => {
+  const createUser = async (
+    username: string,
+    password: string
+  ): Promise<User | null> => {
     const newUser: User = {
       id: 5,
       username: username,
@@ -124,6 +130,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     console.log("result from create:", result);
     dispatch({ type: "CREATE_USER", payload: result });
     console.log(user);
+    return result;
   };
 
   return (

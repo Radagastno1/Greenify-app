@@ -44,13 +44,12 @@ export default function Login({ navigation }: Props) {
 
       <Input
         placeholder="Användarnamn"
-        // leftIcon={{ type: "font-awesome", name: "user" }}
         onChangeText={(text) => setUsername(text)}
       />
       <Input
         placeholder="Lösenord"
-        // leftIcon={{ type: "font-awesome", name: "lock" }}
         onChangeText={(text) => setPassword(text)}
+        secureTextEntry={true}
       />
 
       <View style={{ width: "100%", alignItems: "center" }}>

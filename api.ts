@@ -67,30 +67,33 @@ export function fetchCreateUserReal(user: User) {
     user,
   };
 
+  const headers = {
+    "Content-Type": "application/json", // Set the content type to JSON
+    // Add other headers here if required
+  };
+
   return fetch(apiUrl, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(requestBody),
+    headers,
+    body: JSON.stringify(user), // Convert the user object to JSON
   })
     .then((response) => {
-      console.log("response:", response);
       if (!response.ok) {
-        throw new Error(`Nätverksfel - ${response.status}`);
+        throw new Error("Network response was not ok");
       }
-      return response.json();
+      return response.json() as Promise<User>; // Parse the response JSON
     })
-    .then((user) => {
-      console.log(user);
-      return user as User;
+    .then((userCreated) => {
+      // Handle the user creation success
+      console.log("User created:", userCreated);
+      // Perform any additional actions as needed
     })
     .catch((error) => {
-      console.error(error);
-      throw error;
+      // Handle errors
+      console.error("Error creating user:", error);
+      // Perform error handling and display appropriate messages to the user
     });
 }
-
 // export function fetchCreateUser(user: User) {
 //   const apiUrl = "http://192.168.50.201:5072/users";
 //   const schoolApiUrl = "http://10.23.14.178:5072/users";

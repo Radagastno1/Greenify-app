@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     fontWeight: "bold",
     color: "white",
-    height: "75%",
+    height: "80%",
   },
   username: {
     fontSize: 40,

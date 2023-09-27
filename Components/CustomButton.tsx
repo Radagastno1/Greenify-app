@@ -18,11 +18,8 @@ export default function CustomButton(props: Props) {
         if (props.onPress) {
           props.onPress();
         } else if (props.onLogin) {
-          // Här skulle du behöva ha tillgång till användarnamn och lösenord
-          // som du kan skicka med som argument till onLogin-funktionen.
-          // Anta att du har dem i ditt komponents tillstånd.
-          const username = "användarnamn"; // Byt ut detta med rätt värden
-          const password = "lösenord"; // Byt ut detta med rätt värden
+          const username = "användarnamn";
+          const password = "lösenord";
           props.onLogin(username, password);
         }
       }}
@@ -36,7 +33,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 40,
     paddingHorizontal: 30,
-    paddingVertical: 20,
+    paddingVertical: 18,
     marginVertical: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },

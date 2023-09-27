@@ -121,12 +121,22 @@ export default function ProfileCard(props: Props) {
         ) : null}
       </View>
 
-      <View style={{ flexDirection: "row" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <View
-          style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
+          style={{
+            flexDirection: "column",
+            alignItems: "center",
+            padding: 10,
+          }}
         >
           <Text style={{ fontSize: 15 }}>{user?.trashList.length}</Text>
-          <Text style={{ fontSize: 15 }}>PLOCKAT SKRÄP</Text>
+          <Text style={{ fontSize: 15 }}>SKRÄP</Text>
         </View>
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}

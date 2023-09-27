@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useUserContext } from "../Contexts/UserContext";
+import ProfileNavigationComponent from "./ProfileNavigationComponent";
 
 export default function PointBarComponent() {
   const [barWidth, setBarWidth] = useState(0);
@@ -8,8 +9,9 @@ export default function PointBarComponent() {
 
   useEffect(() => {
     if (user?.points) {
-      const clampedWidth =
-        user?.points >= 10000 ? 100 : (user?.points / 10000) * 100;
+      const percent = (user.points / 50000) * 100;
+      const clampedPercent = Math.min(100, Math.max(0, percent));
+      const clampedWidth = (clampedPercent / 100) * 100;
       setBarWidth(clampedWidth);
     }
   }, [user?.points]);
@@ -21,32 +23,42 @@ export default function PointBarComponent() {
         flexDirection: "column",
         width: "100%",
         alignItems: "center",
+        marginTop: 20,
       }}
     >
-      <Text style={styles.label}>{user?.points} poäng</Text>
       <View style={styles.progressBar}>
-        <View style={[styles.progressBarFill, { width: barWidth }]} />
+        {/* <Text style={styles.label}>{user?.points} poäng</Text> */}
+        <View
+          style={[styles.progressBarFill, { width: `${barWidth}%` }]}
+        ></View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-    color: "rgb(93, 110, 99)",
-    fontWeight: "bold",
-  },
+  // label: {
+  //   fontSize: 20,
+  //   marginLeft: 35,
+  //   marginBottom: 10,
+  //   color: "black",
+  //   fontWeight: "bold",
+  //   position: "absolute",
+  //   zIndex: 1,
+  // },
   progressBar: {
-    width: "80%",
-    height: 24,
-    backgroundColor: "#ddd",
+    width: "90%",
+    height: 30,
+    backgroundColor: "white",
     borderRadius: 10,
     overflow: "hidden",
+    justifyContent: "center",
+    // alignItems: "center",
   },
   progressBarFill: {
     height: "100%",
-    backgroundColor: "rgb(138, 165, 147)",
+    width: "100%",
+    backgroundColor: "rgb(104, 191, 140)",
+    position: "absolute",
   },
 });

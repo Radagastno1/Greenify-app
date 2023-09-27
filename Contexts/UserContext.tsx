@@ -1,11 +1,12 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
-import { fetchLogInUser } from "../api";
+import { fetchCreateUserReal, fetchLogInUser } from "../api";
 import { Location } from "./LocationContex";
 
 type ActionType =
   | { type: "SET_USER"; payload: User | null }
   | { type: "UPDATE_USER"; payload: Partial<User> }
+  | { type: "CREATE_USER"; payload: User | null }
   | { type: "ADD_TRASH"; payload: Trash }
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
   | { type: "SIGN_OUT" }
@@ -25,11 +26,11 @@ export type User = {
   username: string;
   password: string;
   points: number;
-  memberSince: number;
+  memberSince: string;
   isLoggedIn: boolean;
   trashList: Trash[];
   animalImageUrl: string;
-  isInNightMode: boolean;
+  isNightMode: boolean;
 };
 
 type UserContextType = {
@@ -37,6 +38,7 @@ type UserContextType = {
   dispatch: (action: ActionType) => void;
   handleSignIn: (username: string, password: string) => void;
   updateUser: (partialUser: Partial<User>) => void;
+  createUser: (username: string, password: string) => void;
 };
 
 const initialState: User | null = {
@@ -44,11 +46,11 @@ const initialState: User | null = {
   username: "",
   password: "",
   points: 0,
-  memberSince: 0,
+  memberSince: "",
   isLoggedIn: false,
   trashList: [],
   animalImageUrl: animalImages[0].imageURL,
-  isInNightMode: false,
+  isNightMode: false,
 };
 
 async function signInAsync(
@@ -65,6 +67,16 @@ async function signInAsync(
   }
 }
 
+async function createAccountAsync(user: User): Promise<User | null> {
+  try {
+    const createdUser: User = await fetchCreateUserReal(user);
+    return createdUser;
+  } catch (error) {
+    console.error("An error occurred during sign in:", error);
+    return null;
+  }
+}
+
 function userReducer(state: User | null, action: ActionType): User | null {
   switch (action.type) {
     case "SET_USER":
@@ -72,6 +84,8 @@ function userReducer(state: User | null, action: ActionType): User | null {
         ? { ...action.payload, isLoggedIn: true }
         : initialState;
     case "UPDATE_USER":
+      return state ? { ...state, ...action.payload } : null;
+    case "CREATE_USER":
       return state ? { ...state, ...action.payload } : null;
     case "ADD_TRASH":
       if (state) {
@@ -115,8 +129,28 @@ export function UserProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "UPDATE_USER", payload: partialUser });
   };
 
+  const createUser = async (username: string, password: string) => {
+    const newUser: User = {
+      id: 5,
+      username: username,
+      password: password,
+      points: 0,
+      memberSince: new Date().toISOString(),
+      isLoggedIn: false,
+      trashList: [],
+      animalImageUrl: "https://i.imgur.com/Xafd1eE.jpg",
+      isNightMode: false,
+    };
+    const result = await createAccountAsync(newUser);
+    console.log("result from create:", result);
+    dispatch({ type: "CREATE_USER", payload: result });
+    console.log(user);
+  };
+
   return (
-    <UserContext.Provider value={{ user, dispatch, handleSignIn, updateUser }}>
+    <UserContext.Provider
+      value={{ user, dispatch, handleSignIn, updateUser, createUser }}
+    >
       {children}
     </UserContext.Provider>
   );

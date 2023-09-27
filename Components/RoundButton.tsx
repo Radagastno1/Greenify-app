@@ -8,7 +8,7 @@ interface Props {
   isDisabled?: boolean;
 }
 
-export default function CustomButton(props: Props) {
+export default function RoundButton(props: Props) {
   const backgroundColor = props.color || "black";
   return (
     <TouchableOpacity
@@ -18,11 +18,8 @@ export default function CustomButton(props: Props) {
         if (props.onPress) {
           props.onPress();
         } else if (props.onLogin) {
-          // Här skulle du behöva ha tillgång till användarnamn och lösenord
-          // som du kan skicka med som argument till onLogin-funktionen.
-          // Anta att du har dem i ditt komponents tillstånd.
-          const username = "användarnamn"; // Byt ut detta med rätt värden
-          const password = "lösenord"; // Byt ut detta med rätt värden
+          const username = "användarnamn";
+          const password = "lösenord";
           props.onLogin(username, password);
         }
       }}
@@ -34,19 +31,19 @@ export default function CustomButton(props: Props) {
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 40,
-    paddingHorizontal: 30,
-    paddingVertical: 20,
-    marginVertical: 10,
+    borderRadius: 30,
+    width: 100,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    width: "80%",
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 15,
     textAlign: "center",
     fontWeight: "bold",
   },

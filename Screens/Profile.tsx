@@ -2,8 +2,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ResizeMode, Video } from "expo-av";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import CustomButton from "../Components/CustomButton";
+import { View } from "react-native";
 import ProfileCard from "../Components/ProfileCard";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
@@ -14,7 +13,7 @@ export default function ProfileScreen({ navigation }: Props) {
   const { user } = useUserContext();
   const [pointSum, setPointSum] = useState<number>(0);
 
-  const videoUrl = user?.isInNightMode
+  const videoUrl = user?.isNightMode
     ? "https://i.imgur.com/FWN9Gox.mp4"
     : "https://i.imgur.com/1uf9JOQ.mp4";
 
@@ -65,30 +64,17 @@ export default function ProfileScreen({ navigation }: Props) {
           position: "absolute",
           top: "15%",
           width: "100%",
+          height: "100%",
         }}
       >
-        <ProfileCard />
-      </View>
-
-      <View style={styles.navigationContainer}>
-        <CustomButton
-          title="Greenify"
-          color="rgba(79,44,84,255)"
-          onPress={() => {
+        <ProfileCard
+          onPressGreenify={() => {
             navigation.navigate("Gather");
           }}
-        />
-        <CustomButton
-          title="Mina skatter"
-          color="rgb(164,116,156)"
-          onPress={() => {
+          onPressMinaSkatter={() => {
             navigation.navigate("HistoryScreen");
           }}
-        />
-        <CustomButton
-          title="Inställningar"
-          color="rgb(164,116,156)"
-          onPress={() => {
+          onPressInställningar={() => {
             navigation.navigate("Settings");
           }}
         />
@@ -96,13 +82,3 @@ export default function ProfileScreen({ navigation }: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  navigationContainer: {
-    alignItems: "center",
-    display: "flex",
-    position: "absolute",
-    top: "55%",
-    width: "100%",
-  },
-});

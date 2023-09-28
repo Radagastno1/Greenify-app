@@ -1,30 +1,33 @@
-import fetch from "cross-fetch";
-import { FactsModel } from "./FactsModel";
-import { User } from "./types";
+import { User } from "../types";
 
-export function fetchDataByMaterial(material: string) {
-  const apiUrl = `http://ec2-16-16-24-47.eu-north-1.compute.amazonaws.com/api/facts/${material.toLowerCase()}`;
-
-  return fetch(apiUrl)
-    .then((response) => {
-      console.log(response);
-      if (!response.ok) {
-        console.log(response);
-        throw new Error(`Nätverksfel - ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      return data as FactsModel;
-    })
-    .catch((error) => {
-      console.error(error);
-      throw error;
-    });
+export async function signInAsync(
+  username: string,
+  password: string
+): Promise<User | null> {
+  try {
+    const user: User = await fetchLogInUser(username, password);
+    const signedInUser = { ...user, isLoggedIn: true };
+    return signedInUser;
+  } catch (error) {
+    console.error("An error occurred during sign in:", error);
+    return null;
+  }
 }
 
-export function fetchLogInUser(username: string, password: string) {
+export async function createAccountAsync(user: User): Promise<User | null> {
+  try {
+    const createdUser = await fetchCreateUserReal(user);
+    if (createdUser != null) {
+      return createdUser;
+    }
+    return null;
+  } catch (error) {
+    console.error("An error occurred during sign in:", error);
+    return null;
+  }
+}
+
+function fetchLogInUser(username: string, password: string) {
   const apiUrl = "http://192.168.50.201:5072/users/login";
   const schoolApiUrl = "http://10.23.14.178:5072/users/login";
   const libraryApiUrl = "http://10.27.213.130:5072/users/login";
@@ -34,7 +37,7 @@ export function fetchLogInUser(username: string, password: string) {
     password,
   };
 
-  return fetch(apiUrl, {
+  return fetch(notHomeApiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +61,7 @@ export function fetchLogInUser(username: string, password: string) {
     });
 }
 
-export function fetchCreateUserReal(user: User) {
+function fetchCreateUserReal(user: User) {
   const apiUrl = "http://192.168.50.201:5072/users/create";
   const schoolApiUrl = "http://10.23.14.178:5072/users";
   const libraryApiUrl = "http://10.27.213.130:5072/users";
@@ -71,7 +74,7 @@ export function fetchCreateUserReal(user: User) {
     "Content-Type": "application/json",
   };
 
-  return fetch(apiUrl, {
+  return fetch(notHomeApiUrl, {
     method: "POST",
     headers,
     body: JSON.stringify(user),

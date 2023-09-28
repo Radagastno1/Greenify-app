@@ -1,6 +1,6 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
-import { fetchCreateUserReal, fetchLogInUser } from "../api";
+import { createAccountAsync, signInAsync } from "../api/user";
 import { Trash, User } from "../types";
 
 export type ActionType =
@@ -31,33 +31,6 @@ const initialState: User | null = {
   animalImageUrl: animalImages[0].imageURL,
   isNightMode: false,
 };
-
-async function signInAsync(
-  username: string,
-  password: string
-): Promise<User | null> {
-  try {
-    const user: User = await fetchLogInUser(username, password);
-    const signedInUser = { ...user, isLoggedIn: true };
-    return signedInUser;
-  } catch (error) {
-    console.error("An error occurred during sign in:", error);
-    return null;
-  }
-}
-
-async function createAccountAsync(user: User): Promise<User | null> {
-  try {
-    const createdUser = await fetchCreateUserReal(user);
-    if (createdUser != null) {
-      return createdUser;
-    }
-    return null;
-  } catch (error) {
-    console.error("An error occurred during sign in:", error);
-    return null;
-  }
-}
 
 function userReducer(state: User | null, action: ActionType): User | null {
   switch (action.type) {

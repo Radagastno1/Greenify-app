@@ -12,3 +12,28 @@ export default function App() {
     </UserProvider>
   );
 }
+
+// DATABASE
+// interface UserTable {
+//   id: number; // PK
+//   name: string;
+// }
+
+// interface GarbageTable {
+//   id: number; // PK
+//   userId: number; // FK (UserTable)
+// }
+
+// // SQL JOIN QUERY --> UserDTO
+// // SELECT * FROM UserTable
+// // INNER JOIN GarbageTable
+// // ON UserTable.id = GarbageTable.userId
+
+// // SERVER
+// interface UserDTO {
+//   id: number;
+//   name: string;
+//   garbage: GarbageDTO[];
+// }
+
+// // UserDTO --> Appen

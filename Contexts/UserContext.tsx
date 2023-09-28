@@ -1,13 +1,13 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
 import { createAccountAsync, signInAsync } from "../api/user";
-import { Trash, User } from "../types";
+import { Garbage, User } from "../types";
 
 export type ActionType =
   | { type: "SET_USER"; payload: User | null }
   | { type: "UPDATE_USER"; payload: Partial<User> }
   | { type: "CREATE_USER"; payload: User | null }
-  | { type: "ADD_TRASH"; payload: Trash }
+  | { type: "ADD_TRASH"; payload: Garbage }
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
   | { type: "SIGN_OUT" }
   | { type: "ADD_IMAGE_URL"; payload: string };

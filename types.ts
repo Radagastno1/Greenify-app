@@ -1,4 +1,4 @@
-export type Trash = {
+export type Garbage = {
   id: number;
   url: string;
   material: string;
@@ -14,7 +14,7 @@ export type User = {
   points: number;
   memberSince: string;
   isLoggedIn: boolean;
-  trashList: Trash[];
+  trashList: Garbage[];
   animalImageUrl: string;
   isNightMode: boolean;
 };

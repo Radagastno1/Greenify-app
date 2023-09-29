@@ -12,7 +12,7 @@ type GarbageContextType = {
   garbage: Garbage[];
   dispatch: (action: ActionType) => void;
   addGarbage: (garbage: Garbage) => Promise<void>;
-  getGarbage: (id: number) => Promise<void>;
+  getGarbage: () => Promise<Garbage[]>;
 };
 
 const initialState: Garbage[] = [];
@@ -45,16 +45,22 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const getGarbage = async (id: number) => {
-    if (user?.id === id) {
+  const getGarbage = async (): Promise<Garbage[]> => {
+    if (user) {
       try {
-        const result = await fetchGetGarbage(id);
-        dispatch({ type: "SET_GARBAGE", payload: result });
+        const result = await fetchGetGarbage(user?.id);
+        dispatch({ type: "SET_GARBAGE", payload: result }); // Uppdatera state med hämtad data
+        return result; // Returnera den hämtade datan
       } catch (error) {
         console.error("Det uppstod ett fel när du hämtade skräp:", error);
+        throw error; // Kasta felet vidare om det uppstår ett fel
       }
     }
+  
+    // Om user är falsk eller om det inte finns data att hämta, returnera en tom array
+    return [];
   };
+  
 
   return (
     <GarbageContext.Provider

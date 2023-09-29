@@ -1,4 +1,5 @@
 import React from "react";
+import { GarbageProvider } from "./Contexts/GarbageContext";
 import { LocationProvider } from "./Contexts/LocationContex";
 import { UserProvider } from "./Contexts/UserContext";
 import Navigator from "./Navigator";
@@ -6,9 +7,11 @@ import Navigator from "./Navigator";
 export default function App() {
   return (
     <UserProvider>
-      <LocationProvider>
-        <Navigator />
-      </LocationProvider>
+      <GarbageProvider>
+        <LocationProvider>
+          <Navigator />
+        </LocationProvider>
+      </GarbageProvider>
     </UserProvider>
   );
 }

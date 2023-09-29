@@ -1,5 +1,6 @@
 export type Garbage = {
   id: number;
+  userId: number;
   url: string;
   material: string;
   location: Location;

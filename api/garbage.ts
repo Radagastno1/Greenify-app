@@ -33,10 +33,10 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
 }
 
 export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
-  const apiUrl = `http://192.168.50.201:5072/garbage/userid/${id}`;
-  const schoolApiUrl = `http://10.23.14.178:5072/garbage/userid/${id}`;
-  const libraryApiUrl = `http://10.27.213.130:5072/garbage/userid/${id}`;
-  const notHomeApiUrl = `http://192.168.1.211:5072/garbage/userid/${id}`;
+  const apiUrl = `http://192.168.50.201:5072/garbage/${id}`;
+  const schoolApiUrl = `http://10.23.14.178:5072/garbage/${id}`;
+  const libraryApiUrl = `http://10.27.213.130:5072/garbage/${id}`;
+  const notHomeApiUrl = `http://192.168.1.211:5072/garbage/${id}`;
 
   const headers = {
     "Content-Type": "application/json",

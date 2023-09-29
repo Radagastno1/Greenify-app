@@ -8,15 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Trash, useUserContext } from "../Contexts/UserContext";
+import { useGarbageContext } from "../Contexts/GarbageContext";
 import { RootStackParamList } from "../Navigator";
+import { Garbage } from "../types";
 
 type Props = NativeStackScreenProps<RootStackParamList, "HistoryScreen">;
 
 export default function History({ navigation }: Props) {
-  const { user } = useUserContext();
+  const { garbage, getGarbage } = useGarbageContext();
 
-  const renderItem = ({ item }: { item: Trash }) => (
+  const renderItem = ({ item }: { item: Garbage }) => (
     <TouchableOpacity
       style={styles.listItem}
       onPress={() => {
@@ -47,11 +48,16 @@ export default function History({ navigation }: Props) {
   );
 
   useEffect(() => {
+    // Anropa getGarbage när komponenten monteras
+    getGarbage().catch((error) => {
+      console.error("Det uppstod ett fel när du hämtade skräp:", error);
+    });
+
     navigation.setOptions({
       title: "",
       headerTransparent: true,
     });
-  }, []);
+  }, [getGarbage, navigation]);
 
   return (
     <View style={styles.container}>
@@ -64,7 +70,7 @@ export default function History({ navigation }: Props) {
 
       <FlatList
         style={styles.list}
-        data={user?.trashList || []}
+        data={garbage || []}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
       />

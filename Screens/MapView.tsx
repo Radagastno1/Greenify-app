@@ -4,8 +4,8 @@ import MapView, { Marker } from "react-native-maps";
 import { useLocationContext } from "../Contexts/LocationContex";
 
 interface Props {
-  latitude: number | undefined;
-  longitude: number | undefined;
+  latitude: number;
+  longitude: number;
 }
 
 export default function MapViewScreen({ latitude, longitude }: Props) {

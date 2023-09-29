@@ -13,10 +13,11 @@ import {
 } from "react-native";
 import CustomButton from "../Components/CustomButton";
 import { useCameraContext } from "../Contexts/CameraContext";
+import { useGarbageContext } from "../Contexts/GarbageContext";
 import { useLocationContext } from "../Contexts/LocationContex";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
-import { Trash } from "../types";
+import { Garbage } from "../types";
 import LocationScreen from "./Location";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
@@ -24,59 +25,25 @@ type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 export default function Gather({ navigation }: Props) {
   const { camera } = useCameraContext();
   const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
-  const [material, setMaterial] = useState<string | null>(null);
+  const [material, setMaterial] = useState<string>("");
   const { location } = useLocationContext();
-  const { dispatch } = useUserContext();
+  const { user } = useUserContext();
+  const { addGarbage } = useGarbageContext();
 
   useEffect(() => {
     if (camera?.uri) {
       setImageUri(camera.uri);
     }
+    console.log(user);
   }, [camera?.uri]);
 
-  //DETTA KAN GÅ BORT SEN NÄR APIET HAR EN ADDTRASH METOD om den ska det
-  const getPoint = () => {
-    if (
-      material?.toLowerCase() == "plast" ||
-      material?.toLowerCase() == "plastic"
-    ) {
-      return 100;
-    } else if (material?.toLowerCase() == "glas") {
-      return 1000000;
-    } else if (material?.toLowerCase() === "fimp") {
-      return 100;
-    } else if (
-      material?.toLowerCase() == "pet" ||
-      material?.toLowerCase() == "pet-flaska" ||
-      material?.toLowerCase() == "plastflaska"
-    ) {
-      return 100;
-    } else if (material?.toLowerCase() == "aluminium") {
-      return 500;
+  const handleSaveTrash = async () => {
+
+    if (user?.id && location && imageUri) {
+      await addGarbage(imageUri, material, location.latitude, location.longitude);
+
+      navigation.navigate("Profile");
     }
-    return 0;
-  };
-
-  const handleSaveTrash = () => {
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getFullYear()}-${(
-      currentDate.getMonth() + 1
-    )
-      .toString()
-      .padStart(2, "0")}-${currentDate.getDate().toString().padStart(2, "0")}`;
-
-    const trash: Trash = {
-      id: parseInt(Date.now().toString().slice(-4)),
-      url: imageUri ?? "unknown",
-      material: material ?? "unknown",
-      location: location ?? { longitude: 0, latitude: 0 },
-      date: formattedDate,
-      point: getPoint(),
-    };
-
-    dispatch({ type: "ADD_TRASH", payload: trash });
-    console.log(trash.point);
-    navigation.navigate("Profile");
   };
 
   useEffect(() => {

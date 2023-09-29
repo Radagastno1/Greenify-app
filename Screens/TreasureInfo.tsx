@@ -1,17 +1,16 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useUserContext } from "../Contexts/UserContext";
+import { useGarbageContext } from "../Contexts/GarbageContext";
 import { RootStackParamList } from "../Navigator";
-import { fetchDataByMaterial } from "../api";
 
 type Props = RouteProp<RootStackParamList, "TreasureInfo">;
 
 export default function TreasureInfo() {
-  const { user } = useUserContext();
+  const { garbage } = useGarbageContext();
   const route = useRoute<Props>();
   const { id } = route.params;
-  const specificTrash = user?.trashList.find((t) => t.id === id);
+  const specificGarbage = garbage.find((g) => g.id === id);
   const [description, setDescription] = useState<string | null>(null);
 
   // useEffect(() => {
@@ -29,11 +28,11 @@ export default function TreasureInfo() {
   return (
     <View style={styles.container}>
       <Text style={styles.materialText}>
-        Du hittade skräp av typen {specificTrash?.material}.
+        Du hittade skräp av typen {specificGarbage?.material}.
       </Text>
       <Text style={styles.infoText}>
-        {specificTrash?.date} tog du bort något från naturen som annars skulle
-        varit där i upp till {specificTrash?.point} år.
+        {specificGarbage?.date} tog du bort något från naturen som annars skulle
+        varit där i upp till {specificGarbage?.points} år.
       </Text>
       <Text style={styles.infoText}>Visste du?</Text>
       {description ? (

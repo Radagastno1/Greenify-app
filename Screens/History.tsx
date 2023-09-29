@@ -15,7 +15,14 @@ import { Garbage } from "../types";
 type Props = NativeStackScreenProps<RootStackParamList, "HistoryScreen">;
 
 export default function History({ navigation }: Props) {
-  const { garbage, getGarbage } = useGarbageContext();
+  const { garbage } = useGarbageContext();
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true,
+    });
+  }, []);
 
   const renderItem = ({ item }: { item: Garbage }) => (
     <TouchableOpacity
@@ -33,7 +40,12 @@ export default function History({ navigation }: Props) {
       >
         <Image source={{ uri: item.url }} style={styles.image} />
         <View style={styles.details}>
-          <Text style={styles.material}>{item.material.toUpperCase()}</Text>
+          <Text style={styles.material}>
+            {item.material
+              ? item.material.toUpperCase()
+              : "Ingen materialinformation"}
+          </Text>
+
           <Text style={styles.date}>{item.date}</Text>
         </View>
         <View
@@ -41,39 +53,24 @@ export default function History({ navigation }: Props) {
             alignItems: "center",
           }}
         >
-          <Text style={styles.point}>{item.point} p</Text>
+          <Text style={styles.point}>{item.points} p</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 
-  useEffect(() => {
-    // Anropa getGarbage när komponenten monteras
-    getGarbage().catch((error) => {
-      console.error("Det uppstod ett fel när du hämtade skräp:", error);
-    });
-
-    navigation.setOptions({
-      title: "",
-      headerTransparent: true,
-    });
-  }, [getGarbage, navigation]);
-
   return (
     <View style={styles.container}>
-      {/* <ImageBackground
-        style={styles.backgroundImage}
-        source={{
-          uri: "https://i.imgur.com/sWAQJaD.png",
-        }}
-      ></ImageBackground> */}
-
-      <FlatList
-        style={styles.list}
-        data={garbage || []}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-      />
+      {garbage.length < 0 ? (
+        <Text>Ingen skatt än</Text>
+      ) : (
+        <FlatList
+          style={styles.list}
+          data={garbage || []}
+          keyExtractor={(item) => item.id?.toString() || ""}
+          renderItem={renderItem}
+        />
+      )}
     </View>
   );
 }
@@ -82,6 +79,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    //VET INTE HUR DETTA BLIR NÄR LISTAN ÄR DÄR
+    alignItems: "center",
+    justifyContent: "center",
   },
   list: {
     marginTop: 100,

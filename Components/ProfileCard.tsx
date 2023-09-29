@@ -1,6 +1,7 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useGarbageContext } from "../Contexts/GarbageContext";
 import { useUserContext } from "../Contexts/UserContext";
 import PointBarComponent from "./PointBarComponent";
 import ProfileNavigationComponent from "./ProfileNavigationComponent";
@@ -17,6 +18,7 @@ export default function ProfileCard(props: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const { user, dispatch } = useUserContext();
+  const { garbage } = useGarbageContext();
   const backGroundColor = user?.isNightMode
     ? "rgba(255, 255, 255, 0.0)"
     : "rgba(255, 255, 255, 0.8)";
@@ -33,10 +35,12 @@ export default function ProfileCard(props: Props) {
   const getUniqueLocations = () => {
     const uniqueLocations = new Set<string>();
 
-    user?.trashList.forEach((trash) => {
-      const { latitude, longitude } = trash.location;
-      const locationKey = `${latitude},${longitude}`;
-      uniqueLocations.add(locationKey);
+    garbage?.forEach((garbage) => {
+      // console.log("locations:", garbage.points);
+      if (garbage.latitude && garbage.longitude) {
+        const locationKey = `${garbage.latitude},${garbage.longitude}`;
+        uniqueLocations.add(locationKey);
+      }
     });
 
     const uniqueLocationObjects = Array.from(uniqueLocations).map(
@@ -137,7 +141,7 @@ export default function ProfileCard(props: Props) {
           }}
         >
           <Text style={{ color: textColor, ...styles.statusText }}>
-            {user?.trashList.length}
+            {garbage?.length}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>SKRÄP</Text>
         </View>

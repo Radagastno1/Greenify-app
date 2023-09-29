@@ -1,9 +1,10 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { Location } from "../types";
 
 type LocationContextType = {
-  location: Location | null;
-  setLocation: (location: Location | null) => void;
+  location: { latitude: number; longitude: number } | null;
+  setLocation: (
+    location: { latitude: number; longitude: number } | null
+  ) => void;
 };
 
 const LocationContext = createContext<LocationContextType | undefined>(
@@ -11,7 +12,10 @@ const LocationContext = createContext<LocationContextType | undefined>(
 );
 
 export function LocationProvider({ children }: { children: ReactNode }) {
-  const [location, setLocation] = useState<Location | null>(null);
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
 
   return (
     <LocationContext.Provider

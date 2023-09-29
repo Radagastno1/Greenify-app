@@ -24,7 +24,6 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
 }) => {
   const { dispatch } = useUserContext();
   const allAnimalPictures = animalImages;
-  console.log(allAnimalPictures);
 
   const [selectedImage, setSelectedImage] = useState<string | undefined>("");
   const [isPressed, setIsPressed] = useState(false);

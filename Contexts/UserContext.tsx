@@ -7,7 +7,6 @@ export type ActionType =
   | { type: "SET_USER"; payload: User | null }
   | { type: "UPDATE_USER"; payload: Partial<User> }
   | { type: "CREATE_USER"; payload: User | null }
-  | { type: "ADD_TRASH"; payload: Garbage }
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
   | { type: "SIGN_OUT" }
   | { type: "ADD_IMAGE_URL"; payload: string };
@@ -27,7 +26,6 @@ const initialState: User | null = {
   points: 0,
   memberSince: "",
   isLoggedIn: false,
-  trashList: [],
   animalImageUrl: animalImages[0].imageURL,
   isNightMode: false,
 };
@@ -42,22 +40,6 @@ function userReducer(state: User | null, action: ActionType): User | null {
       return state ? { ...state, ...action.payload } : null;
     case "CREATE_USER":
       return state ? { ...state, ...action.payload } : null;
-    case "ADD_TRASH":
-      if (state) {
-        const updatedTrashList = [...state.trashList, action.payload];
-        const totalPoints = updatedTrashList.reduce(
-          (acc, trash) => acc + trash.point,
-          0
-        );
-        const updatedUser = {
-          ...state,
-          trashList: updatedTrashList,
-          points: totalPoints,
-        };
-        return updatedUser;
-      } else {
-        return null;
-      }
     case "SIGN_OUT":
       return state ? { ...state, isLoggedIn: false } : null;
     case "ADD_IMAGE_URL":
@@ -95,7 +77,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
       points: 0,
       memberSince: new Date().toISOString(),
       isLoggedIn: false,
-      trashList: [],
       animalImageUrl: "https://i.imgur.com/Xafd1eE.jpg",
       isNightMode: false,
     };

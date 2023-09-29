@@ -37,7 +37,7 @@ function fetchLogInUser(username: string, password: string) {
     password,
   };
 
-  return fetch(notHomeApiUrl, {
+  return fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -74,7 +74,7 @@ function fetchCreateUserReal(user: User) {
     "Content-Type": "application/json",
   };
 
-  return fetch(notHomeApiUrl, {
+  return fetch(apiUrl, {
     method: "POST",
     headers,
     body: JSON.stringify(user),

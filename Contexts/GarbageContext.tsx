@@ -1,7 +1,35 @@
-import React, { ReactNode, createContext, useContext, useReducer } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { fetchCreateGarbage, fetchGetGarbage } from "../api/garbage";
 import { Garbage } from "../types";
 import { useUserContext } from "./UserContext";
+
+const getPoint = (material: string) => {
+  if (
+    material?.toLowerCase() == "plast" ||
+    material?.toLowerCase() == "plastic"
+  ) {
+    return 100;
+  } else if (material?.toLowerCase() == "glas") {
+    return 1000000;
+  } else if (material?.toLowerCase() === "fimp") {
+    return 100;
+  } else if (
+    material?.toLowerCase() == "pet" ||
+    material?.toLowerCase() == "pet-flaska" ||
+    material?.toLowerCase() == "plastflaska"
+  ) {
+    return 100;
+  } else if (material?.toLowerCase() == "aluminium") {
+    return 500;
+  }
+  return 0;
+};
 
 export type ActionType =
   | { type: "SET_GARBAGE"; payload: Garbage[] }
@@ -11,7 +39,12 @@ export type ActionType =
 type GarbageContextType = {
   garbage: Garbage[];
   dispatch: (action: ActionType) => void;
-  addGarbage: (garbage: Garbage) => Promise<void>;
+  addGarbage: (
+    url: string,
+    material: string,
+    latitude: number,
+    longitude: number
+  ) => Promise<void>;
   getGarbage: () => Promise<Garbage[]>;
 };
 
@@ -36,10 +69,36 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
   const { user } = useUserContext();
   const [garbage, dispatch] = useReducer(garbageReducer, initialState);
 
-  const addGarbage = async (garbage: Garbage) => {
+  const addGarbage = async (
+    url: string,
+    material: string,
+    latitude: number,
+    longitude: number
+  ) => {
+    const currentDate = new Date();
+
+    const formattedDate = `${currentDate.getFullYear()}-${(
+      currentDate.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${currentDate.getDate().toString().padStart(2, "0")}`;
+
     try {
-      const result = await fetchCreateGarbage(garbage);
-      dispatch({ type: "ADD_GARBAGE", payload: result });
+      if (user) {
+        const newGarbage: Garbage = {
+          id: 0,
+          userId: user?.id,
+          url: url,
+          material: material,
+          latitude: latitude,
+          longitude: longitude,
+          date: formattedDate,
+          points: getPoint(material),
+        };
+
+        await fetchCreateGarbage(newGarbage);
+        // dispatch({ type: "ADD_GARBAGE", payload: result });
+      }
     } catch (error) {
       console.error("Det uppstod ett fel när du lade till skräp:", error);
     }
@@ -49,18 +108,15 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
     if (user) {
       try {
         const result = await fetchGetGarbage(user?.id);
-        dispatch({ type: "SET_GARBAGE", payload: result }); // Uppdatera state med hämtad data
-        return result; // Returnera den hämtade datan
+        dispatch({ type: "SET_GARBAGE", payload: result });
+        return result;
       } catch (error) {
         console.error("Det uppstod ett fel när du hämtade skräp:", error);
-        throw error; // Kasta felet vidare om det uppstår ett fel
+        throw error;
       }
     }
-  
-    // Om user är falsk eller om det inte finns data att hämta, returnera en tom array
     return [];
   };
-  
 
   return (
     <GarbageContext.Provider

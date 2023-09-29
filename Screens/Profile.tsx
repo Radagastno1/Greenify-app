@@ -4,12 +4,14 @@ import { ResizeMode, Video } from "expo-av";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ProfileCard from "../Components/ProfileCard";
+import { useGarbageContext } from "../Contexts/GarbageContext";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 export default function ProfileScreen({ navigation }: Props) {
+  const { garbage, getGarbage } = useGarbageContext();
   const { user } = useUserContext();
   const [pointSum, setPointSum] = useState<number>(0);
 
@@ -17,21 +19,20 @@ export default function ProfileScreen({ navigation }: Props) {
     ? "https://i.imgur.com/FWN9Gox.mp4"
     : "https://i.imgur.com/1uf9JOQ.mp4";
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerTransparent: true,
-      title: "",
-      headerStyle: {
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
-      },
-    });
-  }, []);
+  async function someFunction() {
+    try {
+      const list = await getGarbage();
+      console.log("list:", list);
+    } catch (error) {
+      console.error("Ett fel inträffade:", error);
+    }
+  }
 
   useFocusEffect(
     React.useCallback(() => {
-      if (user && user.trashList) {
-        const newPointSum = user.trashList.reduce((accumulator, trash) => {
-          return accumulator + (trash?.point || 0);
+      if (garbage) {
+        const newPointSum = garbage.reduce((accumulator, trash) => {
+          return accumulator + (trash?.points || 0);
         }, 0);
 
         setPointSum(newPointSum);
@@ -39,10 +40,24 @@ export default function ProfileScreen({ navigation }: Props) {
     }, [user])
   );
 
+  useFocusEffect(
+    React.useCallback(() => {
+      someFunction();
+    }, [])
+  );
+
   useEffect(() => {
     if (!user?.isLoggedIn) {
       navigation.navigate("Login");
     }
+
+    navigation.setOptions({
+      headerTransparent: true,
+      title: "",
+      headerStyle: {
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+      },
+    });
   }, [user?.isLoggedIn]);
 
   return (

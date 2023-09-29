@@ -62,12 +62,6 @@ export default function CameraScreen({ navigation }: Props) {
     );
   }
 
-  function toggleCameraType() {
-    setType((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back
-    );
-  }
-
   return (
     <View style={styles.container}>
       <Camera
@@ -80,18 +74,12 @@ export default function CameraScreen({ navigation }: Props) {
           }
         }}
       >
-        {/* <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
-        </View> */}
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={takePicture}>
             <Text style={styles.text}>Take Picture</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.button} onPress={savePicture}>
-            <Text style={styles.text}>Save Picture</Text>
-          </TouchableOpacity> */}
+
         </View>
       </Camera>
     </View>

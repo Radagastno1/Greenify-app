@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    width: "80%",
+    width: "70%",
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
   },

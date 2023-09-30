@@ -150,7 +150,7 @@ export default function ProfileCard(props: Props) {
             padding: 10,
           }}
         >
-          <Text style={{ color: textColor, ...styles.statusText }}>
+          <Text style={{ color: textColor, ...styles.statusNumber }}>
             {garbage?.length}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>SKRÄP</Text>
@@ -158,7 +158,7 @@ export default function ProfileCard(props: Props) {
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
-          <Text style={{ color: textColor, ...styles.statusText }}>
+          <Text style={{ color: textColor, ...styles.statusNumber }}>
             {getUniqueLocations()}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>
@@ -168,7 +168,7 @@ export default function ProfileCard(props: Props) {
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
-          <Text style={{ color: textColor, ...styles.statusText }}>
+          <Text style={{ color: textColor, ...styles.statusNumber }}>
             {userPoints}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>POÄNG</Text>
@@ -176,7 +176,7 @@ export default function ProfileCard(props: Props) {
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
-          <Text style={{ color: textColor, ...styles.statusText }}>
+          <Text style={{ color: textColor, ...styles.statusNumber }}>
             {user?.level}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>LEVEL</Text>
@@ -229,10 +229,14 @@ const styles = StyleSheet.create({
     height: "80%",
   },
   username: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
   },
   statusText: {
+    fontSize: 12,
+  },
+  statusNumber: {
     fontSize: 15,
+    fontWeight: "bold",
   },
 });

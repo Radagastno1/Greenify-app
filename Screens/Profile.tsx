@@ -17,7 +17,7 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const videoUrl = user?.isNightMode
     ? "https://i.imgur.com/FWN9Gox.mp4"
-    : "https://i.imgur.com/1uf9JOQ.mp4";
+    : "https://i.imgur.com/RoVqYQ8.mp4";
 
   async function someFunction() {
     try {

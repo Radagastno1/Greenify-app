@@ -9,7 +9,7 @@ export default function PointBarComponent() {
   const level = user?.level || 0;
   const textColor = user?.isNightMode ? "white" : "black";
 
-  const pointsToNextLevel = 1000 - ((user?.points ?? 1) % 1000 || 1000);
+  const pointsToNextLevel = 1000 - ((user?.points || 0) % 1000);
 
   function getMaxPointsForLevel(level: number) {
     return level * 1000;
@@ -19,33 +19,29 @@ export default function PointBarComponent() {
     const percent = ((1000 - pointsToNextLevel) / 1000) * 100;
 
     console.log("userns poäng:", user?.points);
-    // const percent = (user?.points ?? 0 / maxPointsForLevel) * 100;
-    // const percent = ((user?.points ?? 0) / 1000) * 100;
-
     const clampedPercent = Math.min(100, Math.max(0, percent));
     setBarWidth(clampedPercent);
     console.log("clampedpercent:", clampedPercent);
     console.log("level:", level);
-  }, [user?.points, level]); // Lägg till user?.points och level som beroenden
+  }, [user?.points, level]);
 
   return (
     <View
       style={{
-        // flex: 1,
+        flex: 1 / 2,
         flexDirection: "column",
         width: "100%",
         alignItems: "center",
-        marginVertical: 30,
+        justifyContent: "center",
       }}
     >
-      <View style={{ paddingVertical: 20, alignItems: "center" }}>
+      <View style={{ paddingTop: 10, alignItems: "center" }}>
         <Text style={{ color: textColor, ...styles.statusText }}>
           {pointsToNextLevel} poäng till nästa level
         </Text>
       </View>
 
       <View style={styles.progressBar}>
-        {/* <Text style={styles.label}>{user?.points} poäng</Text> */}
         <View
           style={[styles.progressBarFill, { width: `${barWidth}%` }]}
         ></View>
@@ -55,15 +51,6 @@ export default function PointBarComponent() {
 }
 
 const styles = StyleSheet.create({
-  // label: {
-  //   fontSize: 20,
-  //   marginLeft: 35,
-  //   marginBottom: 10,
-  //   color: "black",
-  //   fontWeight: "bold",
-  //   position: "absolute",
-  //   zIndex: 1,
-  // },
   progressBar: {
     width: "90%",
     height: 30,
@@ -71,7 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
     justifyContent: "center",
-    // alignItems: "center",
+    marginVertical: 20,
   },
   progressBarFill: {
     height: "100%",

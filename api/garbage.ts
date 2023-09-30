@@ -16,7 +16,7 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
       body: JSON.stringify(garbage),
     };
     console.log("Request:", requestInfo); // Logga hela anropet innan begäran
-    const response = await fetch(denthuApiUrl, requestInfo);
+    const response = await fetch(apiUrl, requestInfo);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -43,7 +43,7 @@ export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
   };
 
   try {
-    const response = await fetch(denthuApiUrl, {
+    const response = await fetch(apiUrl, {
       method: "GET",
       headers,
     });

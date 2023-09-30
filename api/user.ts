@@ -38,7 +38,7 @@ function fetchLogInUser(username: string, password: string) {
     password,
   };
 
-  return fetch(denthuApiUrl, {
+  return fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,13 +63,13 @@ function fetchLogInUser(username: string, password: string) {
 }
 
 export function fetchGetUser(id: number) {
-  const apiUrl = "http://192.168.50.201:5072/users/login";
-  const schoolApiUrl = "http://10.23.14.178:5072/users/login";
-  const libraryApiUrl = "http://10.27.213.130:5072/users/login";
-  const notHomeApiUrl = "http://192.168.1.211:5072/users/login";
+  const apiUrl = `http://192.168.50.201:5072/users/${id}`;
+  const schoolApiUrl = "http://10.23.14.178:5072/users";
+  const libraryApiUrl = "http://10.27.213.130:5072/users";
+  const notHomeApiUrl = "http://192.168.1.211:5072/users";
   const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
 
-  return fetch(denthuApiUrl, {
+  return fetch(apiUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export function fetchGetUser(id: number) {
     .then((response) => {
       console.log("response:", response);
       if (!response.ok) {
-        throw new Error(`Nätverksfel - ${response.status}`);
+        throw new Error(`Nätverksfel get user by id- ${response.status}`);
       }
       return response.json();
     })
@@ -106,7 +106,7 @@ function fetchCreateUserReal(user: User) {
     "Content-Type": "application/json",
   };
 
-  return fetch(denthuApiUrl, {
+  return fetch(apiUrl, {
     method: "POST",
     headers,
     body: JSON.stringify(user),
@@ -128,6 +128,7 @@ function fetchCreateUserReal(user: User) {
 export function fetchEditUser(user: User, id: number) {
   const notHomeApiUrl = `http://192.168.1.211:5072/users/${id}`;
   const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
+  const apiUrl = `http://192.168.50.201:5072/users/${id}`;
 
   const requestBody = { ...user, id };
 
@@ -135,7 +136,7 @@ export function fetchEditUser(user: User, id: number) {
     "Content-Type": "application/json",
   };
 
-  return fetch(denthuApiUrl, {
+  return fetch(apiUrl, {
     method: "PUT",
     headers,
     body: JSON.stringify(requestBody),

@@ -18,7 +18,7 @@ export default function ProfileCard(props: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const { user, dispatch } = useUserContext();
-  const { garbage } = useGarbageContext();
+  const { garbage, calculateTotalPoints } = useGarbageContext();
   const backGroundColor = user?.isNightMode
     ? "rgba(255, 255, 255, 0.0)"
     : "rgba(255, 255, 255, 0.8)";
@@ -26,7 +26,8 @@ export default function ProfileCard(props: Props) {
   const usernameColor = user?.isNightMode ? "white" : "rgba(79,44,84,255)";
   const textColor = user?.isNightMode ? "white" : "black";
   const maxPoints = 100000;
-  const pointsLeft = maxPoints - (user?.points ?? 0);
+  const userPoints = calculateTotalPoints();
+  const pointsLeft = maxPoints - userPoints;
 
   const handleLogout = () => {
     dispatch({ type: "SIGN_OUT" });
@@ -159,7 +160,7 @@ export default function ProfileCard(props: Props) {
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
           <Text style={{ color: textColor, ...styles.statusText }}>
-            {user?.points}
+            {userPoints}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>POÄNG</Text>
         </View>

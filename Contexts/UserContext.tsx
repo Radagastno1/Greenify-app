@@ -2,6 +2,7 @@ import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
 import { createAccountAsync, signInAsync } from "../api/user";
 import { Garbage, User } from "../types";
+import { useGarbageContext } from "./GarbageContext";
 
 export type ActionType =
   | { type: "SET_USER"; payload: User | null }
@@ -30,11 +31,16 @@ const initialState: User | null = {
   isNightMode: false,
 };
 
+
+
 function userReducer(state: User | null, action: ActionType): User | null {
   switch (action.type) {
     case "SET_USER":
       return action.payload
-        ? { ...action.payload, isLoggedIn: true }
+        ? {
+            ...action.payload,
+            isLoggedIn: true,
+          }
         : initialState;
     case "UPDATE_USER":
       return state ? { ...state, ...action.payload } : null;

@@ -1,10 +1,4 @@
-import React, {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
+import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { fetchCreateGarbage, fetchGetGarbage } from "../api/garbage";
 import { Garbage } from "../types";
 import { useUserContext } from "./UserContext";
@@ -46,6 +40,7 @@ type GarbageContextType = {
     longitude: number
   ) => Promise<void>;
   getGarbage: () => Promise<Garbage[]>;
+  calculateTotalPoints: () => number;
 };
 
 const initialState: Garbage[] = [];
@@ -118,9 +113,26 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
     return [];
   };
 
+  function calculateTotalPoints() {
+    // const { user } = useUserContext();
+    const totalPoints = garbage.reduce((totalPoints, garbageItem) => {
+      return totalPoints + garbageItem.points;
+    }, 0);
+    // if (user) {
+    //   user.points = totalPoints;
+    // }
+    return totalPoints;
+  }
+
   return (
     <GarbageContext.Provider
-      value={{ garbage, dispatch, addGarbage, getGarbage }}
+      value={{
+        garbage,
+        dispatch,
+        addGarbage,
+        getGarbage,
+        calculateTotalPoints,
+      }}
     >
       {children}
     </GarbageContext.Provider>

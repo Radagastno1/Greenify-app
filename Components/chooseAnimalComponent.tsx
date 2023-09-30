@@ -22,7 +22,7 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
   visible,
   onClose,
 }) => {
-  const { dispatch } = useUserContext();
+  const { dispatch, updateUser, user } = useUserContext();
   const allAnimalPictures = animalImages;
 
   const [selectedImage, setSelectedImage] = useState<string | undefined>("");
@@ -33,10 +33,18 @@ export const ChooseAnimalComponent: React.FC<ChooseAnimalProps> = ({
     setIsPressed(true);
   };
 
+  const handleUpdateUser = async () => {
+    if (user && selectedImage) {
+      user.animalImageUrl = selectedImage;
+      await updateUser();
+    }
+  };
+
   const closeModal = () => {
     if (selectedImage) {
       dispatch({ type: "ADD_IMAGE_URL", payload: selectedImage });
     }
+    handleUpdateUser();
 
     onClose();
   };

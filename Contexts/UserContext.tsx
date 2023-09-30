@@ -84,7 +84,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
       } catch (error) {
         console.error("Fel vid uppdatering av användaren:", error);
-        // Hantera fel här om det behövs
       }
     }
   };

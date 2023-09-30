@@ -9,19 +9,16 @@
 //   longitude: number;
 // };
 
-export class Garbage {
-  constructor(
-    public id: number,
-    public userId: number,
-    public url: string,
-    public material: string,
-    public latitude: number,
-    public longitude: number,
-    public date: string,
-    public points: number
-  ) {}
-}
-
+export type Garbage = {
+  id: number;
+  userId: number;
+  url: string;
+  material: string;
+  latitude: number;
+  longitude: number;
+  date: string;
+  points: number;
+};
 
 export type User = {
   id: number;
@@ -33,5 +30,5 @@ export type User = {
   // trashList: Garbage[];
   animalImageUrl: string;
   isNightMode: boolean;
-  level:number;
+  level: number;
 };

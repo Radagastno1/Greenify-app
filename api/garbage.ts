@@ -31,45 +31,6 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
   }
 }
 
-// export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
-//   const apiUrl = `http://192.168.50.201:5072/garbage/${id}`;
-//   const headers = {
-//     "Content-Type": "application/json",
-//   };
-
-//   try {
-//     const response = await fetch(apiUrl, {
-//       method: "GET",
-//       headers,
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-
-//     const result = (await response.json()) as Garbage[] | [];
-
-//     const garbageObjects = result.map((jsonItem) => {
-//       console.log("ETTT JSON ITEMS MATERIAL:", jsonItem.material);
-//       return new Garbage(
-//         jsonItem.id,
-//         jsonItem.userId,
-//         jsonItem.url,
-//         jsonItem.material,
-//         jsonItem.latitude,
-//         jsonItem.longitude,
-//         jsonItem.date,
-//         jsonItem.points
-//       );
-//     });
-//     console.log("garbageobjects: ", garbageObjects);
-//     return garbageObjects;
-//   } catch (error) {
-//     console.error("error getting garbage:", error);
-//     throw error;
-//   }
-// }
-
 export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
   const apiUrl = `http://192.168.50.201:5072/garbage/${id}`;
   const schoolApiUrl = `http://10.23.14.178:5072/garbage/${id}`;

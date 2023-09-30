@@ -33,4 +33,5 @@ export type User = {
   // trashList: Garbage[];
   animalImageUrl: string;
   isNightMode: boolean;
+  level:number;
 };

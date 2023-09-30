@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useUserContext } from "../Contexts/UserContext";
-import ProfileNavigationComponent from "./ProfileNavigationComponent";
 
 export default function PointBarComponent() {
   const [barWidth, setBarWidth] = useState(0);
   const { user } = useUserContext();
+  const level = user?.level || 0;
+
+  function getMaxPointsForLevel(level: number) {
+    return level * 1000;
+  }
 
   useEffect(() => {
-    if (user?.points) {
-      const percent = (user.points / 50000) * 100;
-      const clampedPercent = Math.min(100, Math.max(0, percent));
-      const clampedWidth = (clampedPercent / 100) * 100;
-      setBarWidth(clampedWidth);
-    }
-  }, [user?.points]);
+    const maxPointsForLevel = getMaxPointsForLevel(level);
+    const percent = (user?.points ?? 0 / maxPointsForLevel) * 100;
+    const clampedPercent = Math.min(100, Math.max(0, percent));
+    const clampedWidth = (clampedPercent / 100) * 100;
+    setBarWidth(clampedWidth);
+    console.log("maxpoints:", maxPointsForLevel);
+
+    console.log("barwidth:", barWidth);
+    console.log("level:", level);
+  }, []);
 
   return (
     <View

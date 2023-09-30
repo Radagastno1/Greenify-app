@@ -1,5 +1,5 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useGarbageContext } from "../Contexts/GarbageContext";
 import { useUserContext } from "../Contexts/UserContext";
@@ -17,6 +17,7 @@ interface Props {
 export default function ProfileCard(props: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [maxPoints, setMaxPoints] = useState(0);
   const { user, dispatch } = useUserContext();
   const { garbage, calculateTotalPoints } = useGarbageContext();
   const backGroundColor = user?.isNightMode
@@ -25,9 +26,19 @@ export default function ProfileCard(props: Props) {
 
   const usernameColor = user?.isNightMode ? "white" : "rgba(79,44,84,255)";
   const textColor = user?.isNightMode ? "white" : "black";
-  const maxPoints = 100000;
   const userPoints = calculateTotalPoints();
   const pointsLeft = maxPoints - userPoints;
+
+  function getMaxPointsForLevel(level: number) {
+    return level * 1000;
+  }
+
+  useEffect(() => {
+    if (user?.level) {
+      const maxPointsForLevel = getMaxPointsForLevel(user?.level);
+      setMaxPoints(maxPointsForLevel);
+    }
+  }, []);
 
   const handleLogout = () => {
     dispatch({ type: "SIGN_OUT" });
@@ -163,6 +174,14 @@ export default function ProfileCard(props: Props) {
             {userPoints}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>POÄNG</Text>
+        </View>
+        <View
+          style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
+        >
+          <Text style={{ color: textColor, ...styles.statusText }}>
+            {user?.level}
+          </Text>
+          <Text style={{ color: textColor, ...styles.statusText }}>LEVEL</Text>
         </View>
       </View>
 

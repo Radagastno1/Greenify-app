@@ -29,6 +29,7 @@ const initialState: User | null = {
   isLoggedIn: false,
   animalImageUrl: animalImages[0].imageURL,
   isNightMode: false,
+  level:0
 };
 
 
@@ -85,6 +86,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       isLoggedIn: false,
       animalImageUrl: "https://i.imgur.com/Xafd1eE.jpg",
       isNightMode: false,
+      level:0
     };
     const result = await createAccountAsync(newUser);
     console.log("result from create:", result);

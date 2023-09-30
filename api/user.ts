@@ -62,12 +62,42 @@ function fetchLogInUser(username: string, password: string) {
     });
 }
 
+export function fetchGetUser(id: number) {
+  const apiUrl = "http://192.168.50.201:5072/users/login";
+  const schoolApiUrl = "http://10.23.14.178:5072/users/login";
+  const libraryApiUrl = "http://10.27.213.130:5072/users/login";
+  const notHomeApiUrl = "http://192.168.1.211:5072/users/login";
+  const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
+
+  return fetch(denthuApiUrl, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      console.log("response:", response);
+      if (!response.ok) {
+        throw new Error(`Nätverksfel - ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((user) => {
+      console.log(user);
+      return user as User;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+}
+
 function fetchCreateUserReal(user: User) {
   const apiUrl = "http://192.168.50.201:5072/users/create";
   const schoolApiUrl = "http://10.23.14.178:5072/users";
   const libraryApiUrl = "http://10.27.213.130:5072/users";
   const notHomeApiUrl = "http://192.168.1.211:5072/users";
-  const denthuApiUrl = "http://192.168.1.213:5072/users";
+  const denthuApiUrl = "http://192.168.1.213:5072/users/create";
   const requestBody = {
     user,
   };

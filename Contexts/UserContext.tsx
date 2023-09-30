@@ -1,11 +1,16 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
-import { createAccountAsync, fetchEditUser, signInAsync } from "../api/user";
-import { Garbage, User } from "../types";
-import { useGarbageContext } from "./GarbageContext";
+import {
+  createAccountAsync,
+  fetchEditUser,
+  fetchGetUser,
+  signInAsync,
+} from "../api/user";
+import { User } from "../types";
 
 export type ActionType =
   | { type: "SET_USER"; payload: User | null }
+  // | { type: "GET_USER"; payload: User | null }
   | { type: "UPDATE_USER"; payload: User }
   | { type: "CREATE_USER"; payload: User | null }
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
@@ -18,6 +23,7 @@ type UserContextType = {
   handleSignIn: (username: string, password: string) => void;
   updateUser: () => void;
   createUser: (username: string, password: string) => Promise<User | null>;
+  getUser: () => Promise<void>;
 };
 
 const initialState: User | null = {
@@ -41,6 +47,8 @@ function userReducer(state: User | null, action: ActionType): User | null {
             isLoggedIn: true,
           }
         : initialState;
+    //   case "GET_USER":
+    //  return state ? { ...state, ...action.payload } : null;
     case "UPDATE_USER":
       return state ? { ...state, ...action.payload } : null;
     case "CREATE_USER":
@@ -103,9 +111,17 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return result;
   };
 
+  const getUser = async () => {
+    if (user?.id) {
+      console.log("userns id i getuseer:", user.id);
+      const result = await fetchGetUser(user.id);
+      dispatch({ type: "SET_USER", payload: result });
+    }
+  };
+
   return (
     <UserContext.Provider
-      value={{ user, dispatch, handleSignIn, updateUser, createUser }}
+      value={{ user, dispatch, handleSignIn, updateUser, createUser, getUser }}
     >
       {children}
     </UserContext.Provider>

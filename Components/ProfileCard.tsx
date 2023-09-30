@@ -26,7 +26,7 @@ export default function ProfileCard(props: Props) {
 
   const usernameColor = user?.isNightMode ? "white" : "rgba(79,44,84,255)";
   const textColor = user?.isNightMode ? "white" : "black";
-  const userPoints = calculateTotalPoints();
+  const userPoints = user?.points ?? 0;
   const pointsLeft = maxPoints - userPoints;
 
   function getMaxPointsForLevel(level: number) {
@@ -34,8 +34,8 @@ export default function ProfileCard(props: Props) {
   }
 
   useEffect(() => {
-    if (user?.level) {
-      const maxPointsForLevel = getMaxPointsForLevel(user?.level);
+    if (user) {
+      const maxPointsForLevel = getMaxPointsForLevel(user.level);
       setMaxPoints(maxPointsForLevel);
     }
   }, []);

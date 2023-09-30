@@ -3,7 +3,7 @@ import { Garbage } from "../types";
 export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
   const notHomeApiUrl = "http://192.168.1.211:5072/garbage/create";
   const apiUrl = `http://192.168.50.201:5072/garbage/create`;
-  const denthuApiUrl = `http://192.168.1.213:5072/garabage/create`;
+  const denthuApiUrl = `http://192.168.1.213:5072/garbage/create`;
   const headers = {
     "Content-Type": "application/json",
   };

@@ -92,7 +92,6 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
         };
 
         await fetchCreateGarbage(newGarbage);
-        // dispatch({ type: "ADD_GARBAGE", payload: result });
       }
     } catch (error) {
       console.error("Det uppstod ett fel när du lade till skräp:", error);
@@ -114,13 +113,10 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
   };
 
   function calculateTotalPoints() {
-    // const { user } = useUserContext();
     const totalPoints = garbage.reduce((totalPoints, garbageItem) => {
       return totalPoints + garbageItem.points;
     }, 0);
-    // if (user) {
-    //   user.points = totalPoints;
-    // }
+
     return totalPoints;
   }
 

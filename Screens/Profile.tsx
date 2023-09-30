@@ -12,7 +12,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 export default function ProfileScreen({ navigation }: Props) {
   const { garbage, getGarbage } = useGarbageContext();
-  const { user } = useUserContext();
+  const { user, getUser } = useUserContext();
   const [pointSum, setPointSum] = useState<number>(0);
 
   const videoUrl = user?.isNightMode
@@ -23,6 +23,10 @@ export default function ProfileScreen({ navigation }: Props) {
     try {
       const list = await getGarbage();
       console.log("list:", list);
+
+      getUser().then((result) => {
+        console.log("Senaste egenskaper:", result);
+      });
     } catch (error) {
       console.error("Ett fel inträffade:", error);
     }

@@ -78,7 +78,7 @@ export default function History({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "rgb(212, 238, 210)",
     //VET INTE HUR DETTA BLIR NÄR LISTAN ÄR DÄR
     alignItems: "center",
     justifyContent: "center",
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 2,
     borderColor: "#ccc",
-    backgroundColor: "rgba(53,182,96, 0.4)",
+    backgroundColor: "rgba(255,255,255,0.7)",
     borderRadius: 20,
   },
   backgroundImage: {
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
   },
   image: {
     marginHorizontal: 10,
-    height: 100,
-    width: 100,
+    height: 70,
+    width: 70,
     borderRadius: 10,
     borderColor: "white",
     borderWidth: 5,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   material: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
     color: "rgba(40, 24, 2, 0.87)",
   },
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
   },
   point: {
     borderRadius: 50,
-    height: 85,
-    width: 85,
+    height: 75,
+    width: 75,
     borderColor: "rgba(255, 173, 2, 0.61)",
     borderWidth: 10,
     textAlign: "center",

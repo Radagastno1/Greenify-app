@@ -1,29 +1,50 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { useState } from "react";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useGarbageContext } from "../Contexts/GarbageContext";
 import { RootStackParamList } from "../Navigator";
+import { fetchDataByMaterial } from "../api/material";
 
 type Props = RouteProp<RootStackParamList, "TreasureInfo">;
+type NavigationProps = NativeStackScreenProps<
+  RootStackParamList,
+  "TreasureInfo"
+>;
 
-export default function TreasureInfo() {
-  const { garbage } = useGarbageContext();
+export default function TreasureInfo({ navigation }: NavigationProps) {
+  const { garbage, getMaterialInfo } = useGarbageContext();
   const route = useRoute<Props>();
   const { id } = route.params;
   const specificGarbage = garbage.find((g) => g.id === id);
   const [description, setDescription] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   if (specificTrash) {
-  //     fetchDataByMaterial(specificTrash.material)
-  //       .then((data) => {
-  //         setDescription(data.description);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Fel vid hämtning av data från API:et:", error.message);
-  //       });
-  //   }
-  // }, [specificTrash]);
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true,
+    });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (specificGarbage) {
+        try {
+          const data = await getMaterialInfo(specificGarbage.material);
+          if (data) {
+            setDescription(data.description);
+          }
+        } catch (error) {
+          console.error(
+            "Det uppstod ett fel när du hämtade info om material:",
+            error
+          );
+        }
+      }
+    };
+
+    fetchData();
+  }, [specificGarbage]);
 
   return (
     <View style={styles.container}>

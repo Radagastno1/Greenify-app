@@ -1,7 +1,8 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { fetchCreateGarbage, fetchGetGarbage } from "../api/garbage";
-import { Garbage } from "../types";
+import { Garbage, MaterialInfo } from "../types";
 import { useUserContext } from "./UserContext";
+import { fetchDataByMaterial } from "../api/material";
 
 const getPoint = (material: string) => {
   if (
@@ -28,7 +29,8 @@ const getPoint = (material: string) => {
 export type ActionType =
   | { type: "SET_GARBAGE"; payload: Garbage[] }
   | { type: "ADD_GARBAGE"; payload: Garbage }
-  | { type: "GET_GARBAGE"; payload: Garbage[] };
+  | { type: "GET_GARBAGE"; payload: Garbage[] }
+  | { type: "GET_MATERIALINFO"; payload: MaterialInfo };
 
 type GarbageContextType = {
   garbage: Garbage[];
@@ -41,6 +43,7 @@ type GarbageContextType = {
   ) => Promise<void>;
   getGarbage: () => Promise<Garbage[]>;
   calculateTotalPoints: () => number;
+  getMaterialInfo: (material: string) => Promise<MaterialInfo | undefined>;
 };
 
 const initialState: Garbage[] = [];
@@ -112,6 +115,25 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
     return [];
   };
 
+  const getMaterialInfo = async (
+    material: string
+  ): Promise<MaterialInfo | undefined> => {
+    if (user) {
+      try {
+        const result = await fetchDataByMaterial(material);
+        dispatch({ type: "GET_MATERIALINFO", payload: result });
+        return result;
+      } catch (error) {
+        console.error(
+          "Det uppstod ett fel när du hämtade info om material:",
+          error
+        );
+        throw error;
+      }
+    }
+    return undefined;
+  };
+
   function calculateTotalPoints() {
     const totalPoints = garbage.reduce((totalPoints, garbageItem) => {
       return totalPoints + garbageItem.points;
@@ -128,6 +150,7 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
         addGarbage,
         getGarbage,
         calculateTotalPoints,
+        getMaterialInfo,
       }}
     >
       {children}

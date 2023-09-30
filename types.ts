@@ -1,14 +1,3 @@
-// export type Garbage = {
-//   Id: number;
-//   UserId: number;
-//   Url: string;
-//   Material: string;
-//   Date: string;
-//   Points: number;
-//   latitude: number;
-//   longitude: number;
-// };
-
 export type Garbage = {
   id: number;
   userId: number;
@@ -27,8 +16,15 @@ export type User = {
   points: number;
   memberSince: string;
   isLoggedIn: boolean;
-  // trashList: Garbage[];
   animalImageUrl: string;
   isNightMode: boolean;
   level: number;
+};
+
+export type MaterialInfo = {
+  id: number;
+  material: string;
+  description: string;
+  source: string;
+  yearsInNature: string;
 };

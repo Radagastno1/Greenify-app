@@ -9,19 +9,18 @@ export default function PointBarComponent() {
   const level = user?.level || 0;
   const textColor = user?.isNightMode ? "white" : "black";
 
-  const pointsLeftForNextLevel = maxPoints - (user?.points ?? 0);
+  const pointsToNextLevel = 1000 - ((user?.points ?? 1) % 1000 || 1000);
 
   function getMaxPointsForLevel(level: number) {
     return level * 1000;
   }
 
   useEffect(() => {
-    const maxPointsForLevel = getMaxPointsForLevel(level);
-    setMaxPoints(maxPointsForLevel);
-    console.log("maxpoints: ", maxPointsForLevel);
+    const percent = ((1000 - pointsToNextLevel) / 1000) * 100;
+
     console.log("userns poäng:", user?.points);
     // const percent = (user?.points ?? 0 / maxPointsForLevel) * 100;
-    const percent = ((user?.points ?? 0) / maxPointsForLevel) * 100;
+    // const percent = ((user?.points ?? 0) / 1000) * 100;
 
     const clampedPercent = Math.min(100, Math.max(0, percent));
     setBarWidth(clampedPercent);
@@ -41,7 +40,7 @@ export default function PointBarComponent() {
     >
       <View style={{ paddingVertical: 20, alignItems: "center" }}>
         <Text style={{ color: textColor, ...styles.statusText }}>
-          {pointsLeftForNextLevel} poäng till nästa level
+          {pointsToNextLevel} poäng till nästa level
         </Text>
       </View>
 

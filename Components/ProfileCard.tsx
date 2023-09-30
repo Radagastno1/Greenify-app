@@ -27,7 +27,6 @@ export default function ProfileCard(props: Props) {
   const usernameColor = user?.isNightMode ? "white" : "rgba(79,44,84,255)";
   const textColor = user?.isNightMode ? "white" : "black";
   const userPoints = user?.points ?? 0;
-  const pointsLeft = maxPoints - userPoints;
 
   function getMaxPointsForLevel(level: number) {
     return level * 1000;
@@ -201,12 +200,7 @@ export default function ProfileCard(props: Props) {
         </Text>
       </View> */}
 
-      <View style={{ paddingVertical: 50, alignItems: "center" }}>
-        <Text style={{ color: textColor, ...styles.statusText }}>
-          {pointsLeft} poäng till nästa level
-        </Text>
-        <PointBarComponent />
-      </View>
+      <PointBarComponent />
 
       <View
         style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}

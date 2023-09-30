@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useUserContext } from "../Contexts/UserContext";
 
 export default function PointBarComponent() {
   const [barWidth, setBarWidth] = useState(0);
+  const [maxPoints, setMaxPoints] = useState(0);
   const { user } = useUserContext();
   const level = user?.level || 0;
+  const textColor = user?.isNightMode ? "white" : "black";
+
+  const pointsLeftForNextLevel = maxPoints - (user?.points ?? 0);
 
   function getMaxPointsForLevel(level: number) {
     return level * 1000;
@@ -13,26 +17,34 @@ export default function PointBarComponent() {
 
   useEffect(() => {
     const maxPointsForLevel = getMaxPointsForLevel(level);
-    const percent = (user?.points ?? 0 / maxPointsForLevel) * 100;
-    const clampedPercent = Math.min(100, Math.max(0, percent));
-    const clampedWidth = (clampedPercent / 100) * 100;
-    setBarWidth(clampedWidth);
-    console.log("maxpoints:", maxPointsForLevel);
+    setMaxPoints(maxPointsForLevel);
+    console.log("maxpoints: ", maxPointsForLevel);
+    console.log("userns poäng:", user?.points);
+    // const percent = (user?.points ?? 0 / maxPointsForLevel) * 100;
+    const percent = ((user?.points ?? 0) / maxPointsForLevel) * 100;
 
-    console.log("barwidth:", barWidth);
+    const clampedPercent = Math.min(100, Math.max(0, percent));
+    setBarWidth(clampedPercent);
+    console.log("clampedpercent:", clampedPercent);
     console.log("level:", level);
-  }, []);
+  }, [user?.points, level]); // Lägg till user?.points och level som beroenden
 
   return (
     <View
       style={{
-        flex: 1,
+        // flex: 1,
         flexDirection: "column",
         width: "100%",
         alignItems: "center",
-        marginTop: 20,
+        marginVertical: 30,
       }}
     >
+      <View style={{ paddingVertical: 20, alignItems: "center" }}>
+        <Text style={{ color: textColor, ...styles.statusText }}>
+          {pointsLeftForNextLevel} poäng till nästa level
+        </Text>
+      </View>
+
       <View style={styles.progressBar}>
         {/* <Text style={styles.label}>{user?.points} poäng</Text> */}
         <View
@@ -67,5 +79,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "rgb(104, 191, 140)",
     position: "absolute",
+  },
+  statusText: {
+    fontSize: 15,
   },
 });

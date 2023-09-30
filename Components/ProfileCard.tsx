@@ -48,7 +48,6 @@ export default function ProfileCard(props: Props) {
     const uniqueLocations = new Set<string>();
 
     garbage?.forEach((garbage) => {
-      // console.log("locations:", garbage.points);
       if (garbage.latitude && garbage.longitude) {
         const locationKey = `${garbage.latitude},${garbage.longitude}`;
         uniqueLocations.add(locationKey);

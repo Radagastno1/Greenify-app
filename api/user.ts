@@ -32,12 +32,13 @@ function fetchLogInUser(username: string, password: string) {
   const schoolApiUrl = "http://10.23.14.178:5072/users/login";
   const libraryApiUrl = "http://10.27.213.130:5072/users/login";
   const notHomeApiUrl = "http://192.168.1.211:5072/users/login";
+  const denthuApiUrl = "http://192.168.1.213:5072/users/login";
   const requestBody = {
     username,
     password,
   };
 
-  return fetch(notHomeApiUrl, {
+  return fetch(denthuApiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -66,6 +67,7 @@ function fetchCreateUserReal(user: User) {
   const schoolApiUrl = "http://10.23.14.178:5072/users";
   const libraryApiUrl = "http://10.27.213.130:5072/users";
   const notHomeApiUrl = "http://192.168.1.211:5072/users";
+  const denthuApiUrl = "http://192.168.1.213:5072/users";
   const requestBody = {
     user,
   };
@@ -74,7 +76,7 @@ function fetchCreateUserReal(user: User) {
     "Content-Type": "application/json",
   };
 
-  return fetch(apiUrl, {
+  return fetch(denthuApiUrl, {
     method: "POST",
     headers,
     body: JSON.stringify(user),
@@ -90,5 +92,36 @@ function fetchCreateUserReal(user: User) {
     })
     .catch((error) => {
       console.error("error creating user:", error);
+    });
+}
+
+export function fetchEditUser(user: User, id: number) {
+  const notHomeApiUrl = `http://192.168.1.211:5072/users/${id}`;
+  const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
+
+  const requestBody = { ...user, id };
+
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  return fetch(denthuApiUrl, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(requestBody),
+  })
+    .then((response) => {
+      console.log("requestbody: ", requestBody);
+      console.log("response when updating:", response);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json() as Promise<User>;
+    })
+    .then((userUpdated) => {
+      return userUpdated as User;
+    })
+    .catch((error) => {
+      console.error("error updating user:", error);
     });
 }

@@ -1,40 +1,9 @@
 import { Garbage } from "../types";
 
-// export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
-//   const apiUrl = "http://192.168.50.201:5072/garbage/create";
-//   const schoolApiUrl = "http://10.23.14.178:5072/garbage/create";
-//   const libraryApiUrl = "http://10.27.213.130:5072/garbage/create";
-//   const notHomeApiUrl = "http://192.168.1.211:5072/garbage/create";
-//   const requestBody = {
-//     garbage,
-//   };
-
-//   const headers = {
-//     "Content-Type": "application/json",
-//   };
-
-//   try {
-//     const response = await fetch(notHomeApiUrl, {
-//       method: "POST",
-//       headers,
-//       body: JSON.stringify(garbage),
-//     });
-//     console.log("response from create garbage fetch:", response);
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-
-//     const result = (await response.json()) as Garbage;
-//     return result;
-//   } catch (error) {
-//     console.error("error creating garbage:", error);
-//     throw error; // Kasta felet vidare
-//   }
-// }
-
 export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
   const notHomeApiUrl = "http://192.168.1.211:5072/garbage/create";
   const apiUrl = `http://192.168.50.201:5072/garbage/create`;
+  const denthuApiUrl = `http://192.168.1.213:5072/garabage/create`;
   const headers = {
     "Content-Type": "application/json",
   };
@@ -42,12 +11,12 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
   try {
     const requestInfo = {
       method: "POST",
-      url: apiUrl,
+      // url: denthuApiUrl,
       headers: headers,
       body: JSON.stringify(garbage),
     };
     console.log("Request:", requestInfo); // Logga hela anropet innan begäran
-    const response = await fetch(notHomeApiUrl, requestInfo);
+    const response = await fetch(denthuApiUrl, requestInfo);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -106,13 +75,14 @@ export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
   const schoolApiUrl = `http://10.23.14.178:5072/garbage/${id}`;
   const libraryApiUrl = `http://10.27.213.130:5072/garbage/${id}`;
   const notHomeApiUrl = `http://192.168.1.211:5072/garbage/${id}`;
+  const denthuApiUrl = `http://192.168.1.213:5072/garbage/${id}`;
 
   const headers = {
     "Content-Type": "application/json",
   };
 
   try {
-    const response = await fetch(notHomeApiUrl, {
+    const response = await fetch(denthuApiUrl, {
       method: "GET",
       headers,
     });

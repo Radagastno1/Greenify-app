@@ -24,6 +24,15 @@ export default function Settings({ navigation }: Props) {
 
   const { updateUser } = useUserContext();
 
+  const handleUpdateUser = async () => {
+    if (user) {
+      user.username = username ?? "";
+      user.password = password ?? "";
+      user.isNightMode = isNightmodeEnabled ?? false;
+      await updateUser();
+    }
+  };
+
   const renderPasswordStars = () => {
     if (user && user.password) {
       return Array(user.password.length).fill("*").join("");
@@ -117,11 +126,7 @@ export default function Settings({ navigation }: Props) {
       <View style={{ width: "100%", alignItems: "center" }}>
         <CustomButton
           onPress={() => {
-            updateUser({
-              password: password,
-              username: username,
-              isNightMode: isNightmodeEnabled,
-            });
+            handleUpdateUser();
           }}
           title="Save"
         ></CustomButton>

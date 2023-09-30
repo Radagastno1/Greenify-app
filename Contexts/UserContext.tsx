@@ -1,12 +1,12 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { animalImages } from "../animalImages";
-import { createAccountAsync, signInAsync } from "../api/user";
+import { createAccountAsync, fetchEditUser, signInAsync } from "../api/user";
 import { Garbage, User } from "../types";
 import { useGarbageContext } from "./GarbageContext";
 
 export type ActionType =
   | { type: "SET_USER"; payload: User | null }
-  | { type: "UPDATE_USER"; payload: Partial<User> }
+  | { type: "UPDATE_USER"; payload: User }
   | { type: "CREATE_USER"; payload: User | null }
   | { type: "SIGN_IN"; payload: { username: string; password: string } }
   | { type: "SIGN_OUT" }
@@ -16,7 +16,7 @@ type UserContextType = {
   user: User | null;
   dispatch: (action: ActionType) => void;
   handleSignIn: (username: string, password: string) => void;
-  updateUser: (partialUser: Partial<User>) => void;
+  updateUser: () => void;
   createUser: (username: string, password: string) => Promise<User | null>;
 };
 
@@ -29,10 +29,8 @@ const initialState: User | null = {
   isLoggedIn: false,
   animalImageUrl: animalImages[0].imageURL,
   isNightMode: false,
-  level:0
+  level: 0,
 };
-
-
 
 function userReducer(state: User | null, action: ActionType): User | null {
   switch (action.type) {
@@ -69,8 +67,18 @@ export function UserProvider({ children }: { children: ReactNode }) {
     console.log(user);
   };
 
-  const updateUser = (partialUser: Partial<User>) => {
-    dispatch({ type: "UPDATE_USER", payload: partialUser });
+  const updateUser = async () => {
+    if (user) {
+      try {
+        const result = await fetchEditUser(user, user.id);
+        if (result) {
+          dispatch({ type: "UPDATE_USER", payload: result });
+        }
+      } catch (error) {
+        console.error("Fel vid uppdatering av användaren:", error);
+        // Hantera fel här om det behövs
+      }
+    }
   };
 
   const createUser = async (
@@ -86,7 +94,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       isLoggedIn: false,
       animalImageUrl: "https://i.imgur.com/Xafd1eE.jpg",
       isNightMode: false,
-      level:0
+      level: 0,
     };
     const result = await createAccountAsync(newUser);
     console.log("result from create:", result);

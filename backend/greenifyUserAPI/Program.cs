@@ -20,7 +20,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// // Skapa en slumpmässig sekvens av bytes
+// //generar en secret key till consolen
 // var randomBytes = new byte[32];
 // using (var rng = new RNGCryptoServiceProvider())
 // {

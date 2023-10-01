@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 using webapi.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace webapi.Controllers;
 
@@ -23,31 +24,42 @@ public class UserController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-    {
-        try
-        {
-            var users = await _dataServices.GetUsersAsync();
-            return Ok(users);
-        }
-        catch (Exception)
-        {
-            return StatusCode(500);
-        }
-    }
+    // [HttpGet("all")]
+    // public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+    // {
+    //     try
+    //     {
+    //         var users = await _dataServices.GetUsersAsync();
+    //         return Ok(users);
+    //     }
+    //     catch (Exception)
+    //     {
+    //         return StatusCode(500);
+    //     }
+    // }
 
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<User>> GetUserById(int id)
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult<User>> GetUserById()
     {
         try
         {
-            var user = await _dataServices.GetUserByIdAsync(id);
-            if (user == null)
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
-                return NotFound();
+                var user = await _dataServices.GetUserByIdAsync(userId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                Console.WriteLine("user som returneras från auth get user:" + user.Username);
+                return Ok(user);
             }
-            return Ok(user);
+            else
+            {
+                return BadRequest("Ogiltig JWT-token");
+            }
         }
         catch (Exception)
         {
@@ -148,6 +160,7 @@ public class UserController : ControllerBase
     //     }
     // }
 
+    [Authorize]
     [HttpPut("{id:int}")]
     public async Task<ActionResult<User>> EditUser(int id, [FromBody] User user)
     {

@@ -1,9 +1,10 @@
-import { User } from "../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { User } from "../types";
 
 async function getJwtToken() {
   try {
     const token = await AsyncStorage.getItem("jwtToken");
+    console.log("token som hämtas från async storage:", token);
     return token;
   } catch (error) {
     console.error("Error getting JWT token:", error);
@@ -16,9 +17,18 @@ export async function signInAsync(
   password: string
 ): Promise<User | null> {
   try {
-    const user: User = await fetchLogInUser(username, password);
-    const signedInUser = { ...user, isLoggedIn: true };
-    return signedInUser;
+    const success = await fetchLogInUser(username, password);
+    if (!success) {
+      return null;
+    }
+    const user: User | null = await authenticatedFetch(
+      "http://192.168.50.201:5072/users",
+      "GET"
+    );
+    if (user) {
+      return user;
+    }
+    return null;
   } catch (error) {
     console.error("An error occurred during sign in:", error);
     return null;
@@ -60,8 +70,10 @@ function fetchLogInUser(username: string, password: string) {
       return response.json();
     })
     .then((data) => {
-      AsyncStorage.setItem("jwtToken", data.Token);
-      return data;
+      const token = data?.token || "";
+      AsyncStorage.setItem("jwtToken", token);
+      console.log("jwt token satt i async storage , ", token);
+      return true;
     })
     .catch((error) => {
       console.error(error);
@@ -73,6 +85,10 @@ function fetchLogInUser(username: string, password: string) {
 //så dennna ska jag använda med allt som har med useer att göra så att jwt tokenen följer med
 async function authenticatedFetch(url: string, method: string, data = null) {
   const token = await getJwtToken();
+  if (!token) {
+    console.log("token saknas vid authentiacted fetch");
+    return null;
+  }
 
   const headers = {
     "Content-Type": "application/json",
@@ -85,44 +101,17 @@ async function authenticatedFetch(url: string, method: string, data = null) {
     body: data ? JSON.stringify(data) : null,
   };
 
-  return fetch(url, requestOptions);
+  const response = await fetch(url, requestOptions);
+
+  if (!response.ok) {
+    throw new Error(`Nätverksfel - ${response.status}`);
+  }
+
+  const user: User | null = await response.json();
+  return user;
 }
 
-// function fetchLogInUser(username: string, password: string) {
-//   const apiUrl = "http://192.168.50.201:5072/users/login";
-//   const schoolApiUrl = "http://10.23.14.178:5072/users/login";
-//   const libraryApiUrl = "http://10.27.213.130:5072/users/login";
-//   const notHomeApiUrl = "http://192.168.1.211:5072/users/login";
-//   const denthuApiUrl = "http://192.168.1.213:5072/users/login";
-//   const requestBody = {
-//     username,
-//     password,
-//   };
-
-//   return fetch(apiUrl, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(requestBody),
-//   })
-//     .then((response) => {
-//       console.log("response:", response);
-//       if (!response.ok) {
-//         throw new Error(`Nätverksfel - ${response.status}`);
-//       }
-//       return response.json();
-//     })
-//     .then((user) => {
-//       console.log(user);
-//       return user as User;
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       throw error;
-//     });
-// }
-
+//MÅSTE GÖRA DENNA MED AUTHENTICATE FETCH ISTÄLLET
 export function fetchGetUser(id: number) {
   const apiUrl = `http://192.168.50.201:5072/users/${id}`;
   const schoolApiUrl = "http://10.23.14.178:5072/users";

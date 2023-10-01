@@ -12,8 +12,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 export default function ProfileScreen({ navigation }: Props) {
   const { garbage, getGarbage } = useGarbageContext();
-  const { user, getUser } = useUserContext();
-  const [pointSum, setPointSum] = useState<number>(0);
+  const { user } = useUserContext();
 
   const videoUrl = user?.isNightMode
     ? "https://i.imgur.com/FWN9Gox.mp4"
@@ -23,26 +22,22 @@ export default function ProfileScreen({ navigation }: Props) {
     try {
       const list = await getGarbage();
       console.log("list:", list);
-
-      getUser().then((result) => {
-        console.log("Senaste egenskaper:", result);
-      });
     } catch (error) {
       console.error("Ett fel inträffade:", error);
     }
   }
 
-  useFocusEffect(
-    React.useCallback(() => {
-      if (garbage) {
-        const newPointSum = garbage.reduce((accumulator, trash) => {
-          return accumulator + (trash?.points || 0);
-        }, 0);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     if (garbage) {
+  //       const newPointSum = garbage.reduce((accumulator, trash) => {
+  //         return accumulator + (trash?.points || 0);
+  //       }, 0);
 
-        setPointSum(newPointSum);
-      }
-    }, [user])
-  );
+  //       setPointSum(newPointSum);
+  //     }
+  //   }, [user])
+  // );
 
   useFocusEffect(
     React.useCallback(() => {
@@ -51,7 +46,7 @@ export default function ProfileScreen({ navigation }: Props) {
   );
 
   useEffect(() => {
-    if (!user?.isLoggedIn) {
+    if (!user) {
       navigation.navigate("Login");
     }
 
@@ -62,7 +57,7 @@ export default function ProfileScreen({ navigation }: Props) {
         backgroundColor: "rgba(255, 255, 255, 0.5)",
       },
     });
-  }, [user?.isLoggedIn]);
+  }, [user]);
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>

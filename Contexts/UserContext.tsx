@@ -32,7 +32,6 @@ const initialState: User | null = {
   password: "",
   points: 0,
   memberSince: "",
-  isLoggedIn: false,
   animalImageUrl: animalImages[0].imageURL,
   isNightMode: false,
   level: 0,
@@ -44,7 +43,6 @@ function userReducer(state: User | null, action: ActionType): User | null {
       return action.payload
         ? {
             ...action.payload,
-            isLoggedIn: true,
           }
         : initialState;
     //   case "GET_USER":
@@ -54,7 +52,7 @@ function userReducer(state: User | null, action: ActionType): User | null {
     case "CREATE_USER":
       return state ? { ...state, ...action.payload } : null;
     case "SIGN_OUT":
-      return state ? { ...state, isLoggedIn: false } : null;
+      return null;
     case "ADD_IMAGE_URL":
       return state ? { ...state, animalImageUrl: action.payload } : null;
     default:
@@ -66,12 +64,13 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, dispatch] = useReducer(userReducer, initialState);
-
   const handleSignIn = async (username: string, password: string) => {
     console.log("handlesign in anropas");
     const result = await signInAsync(username, password);
     console.log("result from login:", result);
-    dispatch({ type: "SET_USER", payload: result });
+    if (result) {
+      dispatch({ type: "SET_USER", payload: result });
+    }
     console.log(user);
   };
 
@@ -98,7 +97,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
       password: password,
       points: 0,
       memberSince: new Date().toISOString(),
-      isLoggedIn: false,
       animalImageUrl: "https://i.imgur.com/Xafd1eE.jpg",
       isNightMode: false,
       level: 0,

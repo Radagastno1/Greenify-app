@@ -78,7 +78,6 @@ public class DataServices
                 password: user.Password,
                 points: user.Points,
                 membersince: user.MemberSince,
-                isLoggedIn: user.IsLoggedIn,
                 animalImageUrl: user.AnimalImageUrl,
                 isNightMode: user.IsNightMode,
                 level: GetLevel(user.Points)
@@ -107,7 +106,6 @@ public class DataServices
             existingUser.Password = user.Password;
             existingUser.Points = user.Points;
             existingUser.MemberSince = user.MemberSince;
-            existingUser.IsLoggedIn = user.IsLoggedIn;
             existingUser.AnimalImageUrl = user.AnimalImageUrl;
             existingUser.IsNightMode = user.IsNightMode;
             existingUser.Level = GetLevel(user.Points);

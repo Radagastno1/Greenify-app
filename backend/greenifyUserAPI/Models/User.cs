@@ -9,10 +9,9 @@ namespace Models
         public string Password { get; set; }
         public int Points { get; set; }
         public string MemberSince { get; set; }
-        public bool IsLoggedIn { get; set; }
         public string AnimalImageUrl { get; set; }
         public bool IsNightMode { get; set; }
-        public int Level {get;set;}
+        public int Level { get; set; }
 
         public User(
             int id,
@@ -20,7 +19,6 @@ namespace Models
             string password,
             int points,
             string membersince,
-            bool isLoggedIn,
             string animalImageUrl,
             bool isNightMode,
             int level
@@ -31,7 +29,6 @@ namespace Models
             this.Password = password;
             this.Points = points;
             this.MemberSince = membersince;
-            this.IsLoggedIn = isLoggedIn;
             this.AnimalImageUrl = animalImageUrl;
             this.IsNightMode = isNightMode;
             this.Level = level;
@@ -39,5 +36,4 @@ namespace Models
 
         public User() { }
     }
-
 }

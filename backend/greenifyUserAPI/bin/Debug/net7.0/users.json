@@ -1,1 +1,12 @@
-[{"Id":1,"Username":"Bella","Password":"123","Points":0,"MemberSince":"2023-09-30T12:56:23.688Z","IsLoggedIn":true,"AnimalImageUrl":"https://i.imgur.com/ApS5GNq.jpg","IsNightMode":true,"Level":1},{"Id":2,"Username":"Daniel","Password":"Svan","Points":1200,"MemberSince":"2023-09-30T19:43:49.994Z","IsLoggedIn":true,"AnimalImageUrl":"https://i.imgur.com/ApS5GNq.jpg","IsNightMode":false,"Level":2},{"Id":3,"Username":"Angie","Password":"123","Points":0,"MemberSince":"2023-10-01T11:42:22.881Z","IsLoggedIn":false,"AnimalImageUrl":"https://i.imgur.com/Xafd1eE.jpg","IsNightMode":false,"Level":1},{"Id":4,"Username":"Jajajsa","Password":"Ddd","Points":0,"MemberSince":"2023-10-01T11:44:04.187Z","IsLoggedIn":false,"AnimalImageUrl":"https://i.imgur.com/Xafd1eE.jpg","IsNightMode":false,"Level":1}]
+[
+    {
+        "Id": 1,
+        "Username": "Angie",
+        "Password": "123",
+        "Points": 0,
+        "MemberSince": "2023-09-30T12:56:23.688Z",
+        "AnimalImageUrl": "https://i.imgur.com/ApS5GNq.jpg",
+        "IsNightMode": true,
+        "Level": 1
+    }
+]

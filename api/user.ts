@@ -77,7 +77,7 @@ function fetchLogInUser(username: string, password: string) {
     })
     .catch((error) => {
       console.error(error);
-      throw error;
+      return false;
     });
 }
 

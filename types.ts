@@ -15,7 +15,6 @@ export type User = {
   password: string;
   points: number;
   memberSince: string;
-  isLoggedIn: boolean;
   animalImageUrl: string;
   isNightMode: boolean;
   level: number;

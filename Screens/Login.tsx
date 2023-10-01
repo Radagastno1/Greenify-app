@@ -18,7 +18,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 export default function Login({ navigation }: Props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { handleSignIn } = useUserContext();
+  const { handleSignIn, user } = useUserContext();
 
   useEffect(() => {
     navigation.setOptions({
@@ -28,8 +28,10 @@ export default function Login({ navigation }: Props) {
   }, []);
 
   const handleLogIn = async () => {
-    handleSignIn(username, password);
-    navigation.navigate("Profile");
+    await handleSignIn(username, password);
+    if (user) {
+      navigation.navigate("Profile");
+    }
   };
 
   return (

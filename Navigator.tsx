@@ -30,9 +30,7 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <CameraProvider>
-        <Stack.Navigator
-          initialRouteName={user?.isLoggedIn ? "Profile" : "Login"}
-        >
+        <Stack.Navigator initialRouteName={user ? "Profile" : "Login"}>
           <Stack.Screen
             name="Gather"
             component={Gather}

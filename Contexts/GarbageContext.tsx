@@ -4,28 +4,6 @@ import { Garbage, MaterialInfo } from "../types";
 import { useUserContext } from "./UserContext";
 import { fetchDataByMaterial } from "../api/material";
 
-const getPoint = (material: string) => {
-  if (
-    material?.toLowerCase() == "plast" ||
-    material?.toLowerCase() == "plastic"
-  ) {
-    return 100;
-  } else if (material?.toLowerCase() == "glas") {
-    return 1000000;
-  } else if (material?.toLowerCase() === "fimp") {
-    return 100;
-  } else if (
-    material?.toLowerCase() == "pet" ||
-    material?.toLowerCase() == "pet-flaska" ||
-    material?.toLowerCase() == "plastflaska"
-  ) {
-    return 100;
-  } else if (material?.toLowerCase() == "aluminium") {
-    return 500;
-  }
-  return 0;
-};
-
 export type ActionType =
   | { type: "SET_GARBAGE"; payload: Garbage[] }
   | { type: "ADD_GARBAGE"; payload: Garbage }
@@ -91,7 +69,7 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
           latitude: latitude,
           longitude: longitude,
           date: formattedDate,
-          points: getPoint(material),
+          points: 0,
         };
 
         await fetchCreateGarbage(newGarbage);

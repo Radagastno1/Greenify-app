@@ -17,6 +17,7 @@ export default function TreasureInfo({ navigation }: NavigationProps) {
   const { id } = route.params;
   const specificGarbage = garbage.find((g) => g.id === id);
   const [description, setDescription] = useState<string | null>(null);
+  const [yearsInNature, setYearsInNature] = useState<string | null>("");
   const [backgroundImage, setBackgroundImage] = useState("");
 
   const getBackgroundImage = () => {
@@ -51,6 +52,7 @@ export default function TreasureInfo({ navigation }: NavigationProps) {
           const data = await getMaterialInfo(specificGarbage.material);
           if (data) {
             setDescription(data.description);
+            setYearsInNature(data.yearsInNature);
           }
         } catch (error) {
           console.error(
@@ -73,8 +75,7 @@ export default function TreasureInfo({ navigation }: NavigationProps) {
         <View style={styles.card}>
           <Text style={styles.materialText}>
             {specificGarbage?.date} tog du bort {specificGarbage?.material} från
-            naturen som annars skulle varit där i upp till{" "}
-            {specificGarbage?.points} år.
+            naturen som annars skulle varit där i upp till {yearsInNature} år.
           </Text>
           <View style={styles.didYouKnowContainer}>
             <Text style={styles.didYouKnowText}>Visste du?</Text>

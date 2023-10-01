@@ -80,7 +80,7 @@ export default function Login({ navigation }: Props) {
             color="rgb(164,116,156)"
           />
           <Link
-            to="/"
+            to=""
             style={{ color: "rgb(164,116,156)", textAlign: "center" }}
           >
             Glömt lösenord?

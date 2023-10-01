@@ -13,7 +13,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ visible, onClose }) => {
   const [shared, setShared] = useState(false);
   const { user } = useUserContext();
 
-  const initialMessage = `Jag har nu ${user?.points} poäng! Samla skräp och få skatter du med(länk).`;
+  const initialMessage = `Jag har nu ${user?.points} poäng! Samla skräp och få skatter med Greenify.`;
 
   const shareMessage = async () => {
     try {
@@ -30,7 +30,14 @@ const ShareModal: React.FC<ShareModalProps> = ({ visible, onClose }) => {
   };
   return (
     <Modal visible={visible} animationType="slide" transparent>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 20,
+        }}
+      >
         <View
           style={{
             backgroundColor: "white",
@@ -39,7 +46,7 @@ const ShareModal: React.FC<ShareModalProps> = ({ visible, onClose }) => {
             width: "80%",
           }}
         >
-          <Text style={{ fontSize: 20, padding: 10 }}>
+          <Text style={{ fontSize: 15, padding: 10 }}>
             {shared ? "Meddelandet delat!" : initialMessage}
           </Text>
           {shared ? null : (

@@ -2,12 +2,12 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect } from "react";
 import {
   FlatList,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { Image } from "react-native-elements";
 import { useGarbageContext } from "../Contexts/GarbageContext";
 import { RootStackParamList } from "../Navigator";
 import { Garbage } from "../types";
@@ -78,8 +78,7 @@ export default function History({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgb(212, 238, 210)",
-    //VET INTE HUR DETTA BLIR NÄR LISTAN ÄR DÄR
+    backgroundColor: "rgba(164,116,156, 0.5)",
     alignItems: "center",
     justifyContent: "center",
   },

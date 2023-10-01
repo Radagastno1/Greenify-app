@@ -97,8 +97,8 @@ export default function Settings({ navigation }: Props) {
         }}
       >
         <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isSoundEnabled ? "#f5dd4b" : "#f4f3f4"}
+          trackColor={{ false: "#767577", true: "rgb(164,116,156)" }}
+          thumbColor={isSoundEnabled ? "rgba(79,44,84,255)" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSoundSwitch}
           value={isSoundEnabled}
@@ -114,8 +114,8 @@ export default function Settings({ navigation }: Props) {
         }}
       >
         <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isNightmodeEnabled ? "#f5dd4b" : "#f4f3f4"}
+          trackColor={{ false: "#767577", true: "rgb(164,116,156)" }}
+          thumbColor={isNightmodeEnabled ? "rgba(79,44,84,255)" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleNightmodeSwitch}
           value={isNightmodeEnabled}
@@ -123,7 +123,12 @@ export default function Settings({ navigation }: Props) {
         <Text style={{ fontSize: 24, marginHorizontal: 20 }}>Nightmode on</Text>
       </View>
 
-      <View style={{ width: "100%", alignItems: "center" }}>
+      <View
+        style={{
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
         <CustomButton
           onPress={() => {
             handleUpdateUser();

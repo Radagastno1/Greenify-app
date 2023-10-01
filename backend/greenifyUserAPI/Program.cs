@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,11 +20,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// // Skapa en slumpmässig sekvens av bytes
+// var randomBytes = new byte[32];
+// using (var rng = new RNGCryptoServiceProvider())
+// {
+//     rng.GetBytes(randomBytes);
+// }
+
+// // Konvertera bytes till en sträng (hexadecimal representation)
+// var key = BitConverter.ToString(randomBytes).Replace("-", "").ToLower();
+
+// Console.WriteLine("Slumpmässig nyckel: " + key);
+
 app.UseCors(builder =>
 {
-    builder.WithOrigins("http://192.168.50.201:19000")
-           .AllowAnyHeader()
-           .AllowAnyMethod();
+    builder.WithOrigins("http://192.168.50.201:19000").AllowAnyHeader().AllowAnyMethod();
 });
 
 app.UseAuthorization();

@@ -70,3 +70,8 @@ C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\ob
 C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.pdb
 C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.genruntimeconfig.cache
 C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\ref\greenifyUserAPI.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

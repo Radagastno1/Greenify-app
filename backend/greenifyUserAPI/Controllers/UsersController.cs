@@ -1,4 +1,10 @@
+using System;
+using System.Security.Claims;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Models;
 using webapi.Services;
 
@@ -9,10 +15,12 @@ namespace webapi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly DataServices _dataServices;
+    private readonly IConfiguration _configuration;
 
-    public UserController(DataServices dataServices)
+    public UserController(DataServices dataServices, IConfiguration configuration)
     {
         _dataServices = dataServices;
+        _configuration = configuration;
     }
 
     [HttpGet]
@@ -71,11 +79,38 @@ public class UserController : ControllerBase
         {
             Console.WriteLine("login user anropas");
             var user = await _dataServices.LogInUser(model.Username, model.Password);
-            Console.WriteLine("user hämtas från json: " + user);
+            Console.WriteLine("user hittas från json: " + user.Username);
 
             if (user != null && !string.IsNullOrEmpty(user.Username))
             {
-                return Ok(user);
+                Console.WriteLine("kommmer in i if satsen i login user om inte useer är null");
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
+
+                Console.WriteLine("key: " + key);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(
+                        new Claim[]
+                        {
+                            new Claim(ClaimTypes.Name, user.Username),
+                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                        }
+                    ),
+                    Expires = DateTime.UtcNow.AddHours(1),
+                    SigningCredentials = new SigningCredentials(
+                        new SymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha256Signature
+                    )
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
+
+                Console.WriteLine("token som returneras: " + tokenString);
+
+                return Ok(new { Token = tokenString });
             }
             else
             {
@@ -84,9 +119,34 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message); // Hantera eventuella fel och returnera 500 Internal Server Error
+            Console.WriteLine("exception i login: " + ex.Message);
+            return StatusCode(500, ex.Message);
         }
     }
+
+    // [HttpPost("login")]
+    // public async Task<IActionResult> LogInUser([FromBody] LoginModel model)
+    // {
+    //     try
+    //     {
+    //         Console.WriteLine("login user anropas");
+    //         var user = await _dataServices.LogInUser(model.Username, model.Password);
+    //         Console.WriteLine("user hämtas från json: " + user);
+
+    //         if (user != null && !string.IsNullOrEmpty(user.Username))
+    //         {
+    //             return Ok(user);
+    //         }
+    //         else
+    //         {
+    //             return Unauthorized();
+    //         }
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         return StatusCode(500, ex.Message);
+    //     }
+    // }
 
     [HttpPut("{id:int}")]
     public async Task<ActionResult<User>> EditUser(int id, [FromBody] User user)
@@ -105,7 +165,6 @@ public class UserController : ControllerBase
 
         try
         {
-            // updatedUser.Id = id;
             var updatedUser = await _dataServices.EditUserAsync(id, user);
 
             if (updatedUser != null)

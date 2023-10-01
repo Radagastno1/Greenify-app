@@ -1,0 +1,14 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "056362435584.dkr.ecr.eu-north-1.amazonaws.com/greenify",
+        "Update": "true"
+    },
+    "Ports": [
+        {
+            "ContainerPort": "80"
+        }
+    ],
+    "Volumes": [],
+    "Logging": "/var/log/nginx"
+}

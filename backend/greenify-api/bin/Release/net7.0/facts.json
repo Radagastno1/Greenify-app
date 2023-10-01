@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "material": "plast",
+        "description": "Något om plast.",
+        "source": "factsbee.com"
+    },
+    {
+        "id": 1,
+        "material": "glas",
+        "description": "Något om glas.",
+        "source": "factsbee.com"
+    },
+    {
+        "id": 1,
+        "material": "tuggummi",
+        "description": "Något om glas.",
+        "source": "factsbee.com"
+    }
+]

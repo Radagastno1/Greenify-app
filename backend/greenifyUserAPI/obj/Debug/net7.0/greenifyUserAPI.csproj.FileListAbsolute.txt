@@ -1,0 +1,72 @@
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\appsettings.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\users.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\greenifyUserAPI.exe
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\greenifyUserAPI.deps.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\greenifyUserAPI.runtimeconfig.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\greenifyUserAPI.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\greenifyUserAPI.pdb
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.csproj.AssemblyReference.cache
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.AssemblyInfoInputs.cache
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.AssemblyInfo.cs
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.csproj.CoreCompileInputs.cache
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets\msbuild.greenifyUserAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets\msbuild.build.greenifyUserAPI.props
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.greenifyUserAPI.props
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.greenifyUserAPI.props
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\scopedcss\bundle\greenifyUserAPI.styles.css
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.csproj.CopyComplete
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\refint\greenifyUserAPI.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.pdb
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\greenifyUserAPI.genruntimeconfig.cache
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\obj\Debug\net7.0\ref\greenifyUserAPI.dll
+C:\Users\angel\Documents\Mina program\APIPROJECTS\greenifyUserAPI\bin\Debug\net7.0\garbage.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\appsettings.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\garbage.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\users.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\greenifyUserAPI.exe
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\greenifyUserAPI.deps.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\greenifyUserAPI.runtimeconfig.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\greenifyUserAPI.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\greenifyUserAPI.pdb
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.csproj.AssemblyReference.cache
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.AssemblyInfoInputs.cache
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.AssemblyInfo.cs
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.csproj.CoreCompileInputs.cache
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets\msbuild.greenifyUserAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets\msbuild.build.greenifyUserAPI.props
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.greenifyUserAPI.props
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.greenifyUserAPI.props
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\scopedcss\bundle\greenifyUserAPI.styles.css
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.csproj.CopyComplete
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\refint\greenifyUserAPI.dll
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.pdb
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\greenifyUserAPI.genruntimeconfig.cache
+C:\Users\angel\Documents\SUVNET22\APPUTV\Greenify-app\backend\greenifyuserapi\obj\Debug\net7.0\ref\greenifyUserAPI.dll

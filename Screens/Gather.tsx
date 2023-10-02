@@ -2,6 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -24,10 +25,71 @@ type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
 export default function Gather({ navigation }: Props) {
   const { camera } = useCameraContext();
   const [imageUri, setImageUri] = useState<string | null>(camera?.uri || null);
-  const [material, setMaterial] = useState<string>("");
+  const [material, setMaterial] = useState("");
   const { location } = useLocationContext();
   const { user } = useUserContext();
   const { addGarbage } = useGarbageContext();
+  const [inputText, setInputText] = useState("");
+  const [materialIsChecked, setMaterialIsChecked] = useState(false);
+
+  const validMaterials = [
+    "plast",
+    "tuggummi",
+    "papper",
+    "metall",
+    "glas",
+    "aluminium",
+    "snus",
+    "fimp",
+  ];
+
+  const checkMaterialInput = async () => {
+    const cleanedInput = inputText.toLowerCase().trim();
+    const isValidMaterial = validMaterials.find((m) => m == cleanedInput);
+    if (isValidMaterial) {
+      setMaterial(cleanedInput);
+      setMaterialIsChecked(true);
+      console.log("MATERIAL IS CHECKCED:::::::::::::.", materialIsChecked);
+      return;
+    }
+    for (const material of validMaterials) {
+      if (cleanedInput.includes(material)) {
+        const confirmation = await showMaterialConfirmationAlert(material);
+        if (confirmation) {
+          setMaterial(material);
+          setMaterialIsChecked(true);
+          return;
+        }
+      }
+    }
+    return;
+  };
+
+  const showMaterialConfirmationAlert = (material: string) => {
+    return new Promise((resolve) => {
+      Alert.alert("Bekräfta material", `Menade du "${material}"?`, [
+        {
+          text: "Ja",
+          onPress: () => {
+            resolve(true);
+          },
+        },
+        {
+          text: "Nej",
+          onPress: () => {
+            resolve(false);
+          },
+        },
+      ]);
+    });
+  };
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true,
+    });
+  }, []);
 
   useEffect(() => {
     if (camera?.uri) {
@@ -38,24 +100,25 @@ export default function Gather({ navigation }: Props) {
 
   const handleSaveTrash = async () => {
     if (user?.id && location && imageUri) {
-      await addGarbage(
-        imageUri,
-        material,
-        location.latitude,
-        location.longitude
-      );
-
-      navigation.navigate("Profile");
+      await checkMaterialInput();
     }
   };
 
   useEffect(() => {
-    navigation.setOptions({
-      title: "",
-      headerTransparent: true,
-    });
-  }, []);
+    if (imageUri && location && materialIsChecked) {
+      const saveGarbage = async () => {
+        await addGarbage(
+          imageUri,
+          material,
+          location.latitude,
+          location.longitude
+        );
+        navigation.navigate("Profile");
+      };
 
+      saveGarbage();
+    }
+  }, [materialIsChecked]);
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -87,8 +150,8 @@ export default function Gather({ navigation }: Props) {
               <TextInput
                 style={styles.input}
                 placeholder="Plast/Glas/Fimp..."
-                onChangeText={(text) => setMaterial(text)}
-                value={material || ""}
+                onChangeText={(text) => setInputText(text)}
+                value={inputText}
               />
             </View>
           ) : null}
@@ -122,7 +185,7 @@ const styles = StyleSheet.create({
   },
   cameraButton: {
     position: "absolute",
-    top: "50%",
+    top: "55%",
     alignSelf: "center",
     backgroundColor: "rgb(164,116,156)",
     borderRadius: 50,

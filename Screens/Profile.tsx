@@ -1,7 +1,7 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ResizeMode, Video } from "expo-av";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import ProfileCard from "../Components/ProfileCard";
 import { useGarbageContext } from "../Contexts/GarbageContext";
@@ -15,7 +15,7 @@ export default function ProfileScreen({ navigation }: Props) {
   const { user, getUser } = useUserContext();
 
   const videoUrl = user?.isNightMode
-    ? "https://i.imgur.com/FWN9Gox.mp4"
+    ? "https://i.imgur.com/0F8HFUU.mp4"
     : "https://i.imgur.com/RoVqYQ8.mp4";
 
   async function someFunction() {
@@ -42,9 +42,6 @@ export default function ProfileScreen({ navigation }: Props) {
     navigation.setOptions({
       headerTransparent: true,
       title: "",
-      headerStyle: {
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
-      },
     });
   }, [user]);
 

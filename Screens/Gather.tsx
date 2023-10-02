@@ -17,7 +17,6 @@ import { useGarbageContext } from "../Contexts/GarbageContext";
 import { useLocationContext } from "../Contexts/LocationContex";
 import { useUserContext } from "../Contexts/UserContext";
 import { RootStackParamList } from "../Navigator";
-import { Garbage } from "../types";
 import LocationScreen from "./Location";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Gather">;
@@ -38,9 +37,13 @@ export default function Gather({ navigation }: Props) {
   }, [camera?.uri]);
 
   const handleSaveTrash = async () => {
-
     if (user?.id && location && imageUri) {
-      await addGarbage(imageUri, material, location.latitude, location.longitude);
+      await addGarbage(
+        imageUri,
+        material,
+        location.latitude,
+        location.longitude
+      );
 
       navigation.navigate("Profile");
     }
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "rgb(164,116,156)",
     borderRadius: 50,
-    padding: 20,
+    padding: 15,
     borderWidth: 5,
     borderColor: "rgba(79,44,84,255)",
   },
@@ -140,14 +143,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     borderRadius: 50,
     borderColor: "rgba(79,44,84,255)",
     borderWidth: 2,
   },
   input: {
-    height: 80,
+    height: 60,
     borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 10,

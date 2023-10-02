@@ -29,11 +29,12 @@ public class DataServices
     {
         try
         {
+            Console.WriteLine("id som kommer in till getuser....:" + id);
             var users = await DeserializeUsers();
             var user = users.Find(u => u.Id == id);
             if (user == null)
             {
-                return new User();
+                return null;
             }
             user.Points = await GetPoints(id);
             return user;

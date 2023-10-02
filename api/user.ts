@@ -71,6 +71,7 @@ function fetchLogInUser(username: string, password: string) {
 export const emptyAsyncStorage = async () => {
   await AsyncStorage.setItem("userId", "");
 };
+
 export async function fetchGetUser() {
   const userId = await AsyncStorage.getItem("userId");
   if (userId) {
@@ -91,10 +92,10 @@ export async function fetchGetUser() {
     },
   })
     .then((response) => {
-      console.log("response:", JSON.stringify(response));
-      if (!response.ok) {
-        throw new Error(`Nätverksfel get user by id- ${response.status}`);
-      }
+      console.log("response from get user:", JSON.stringify(response));
+      // if (!response.ok) {
+      //   throw new Error();
+      // }
       return response.json();
     })
     .then((user) => {
@@ -103,6 +104,7 @@ export async function fetchGetUser() {
     })
     .catch((error) => {
       console.error(error);
+      emptyAsyncStorage();
       return null;
     });
 }

@@ -6,8 +6,7 @@ namespace webapi.Services;
 
 public class GarbageService
 {
-    static string path =
-        "garbage.json";
+    static string path = "garbage.json";
 
     public async Task<IEnumerable<Garbage>> GetGarbageByUserIdAsync(int userId)
     {
@@ -64,13 +63,13 @@ public class GarbageService
 
             garbageList.Add(newGarbage);
 
-            var userDataService = new DataServices(); // Skapa en instans av DataServices
+            var userDataService = new DataServices();
             var user = await userDataService.GetUserByIdAsync(garbage.UserId);
             if (user != null)
             {
                 user.Points += garbage.Points;
                 user.Level = userDataService.GetLevel(user.Points);
-                await userDataService.EditUserAsync(user.Id, user); // Uppdatera användaren
+                await userDataService.EditUserAsync(user.Id, user);
             }
 
             var serialisedGarbage = JsonConvert.SerializeObject(garbageList);

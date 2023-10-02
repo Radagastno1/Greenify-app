@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Models;
 using webapi.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace webapi.Controllers;
 

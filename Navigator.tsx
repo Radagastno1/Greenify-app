@@ -30,47 +30,54 @@ export default function Navigator() {
   return (
     <NavigationContainer>
       <CameraProvider>
-        <Stack.Navigator initialRouteName={user ? "Profile" : "Login"}>
-          <Stack.Screen
-            name="Gather"
-            component={Gather}
-            options={{ title: "Gather" }}
-          />
-          <Stack.Screen
-            name="CameraScreen"
-            component={CameraScreen}
-            options={{ title: "Camera" }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={ProfileScreen}
-            options={{ title: "Min profil" }}
-          />
-          <Stack.Screen
-            name="HistoryScreen"
-            component={History}
-            options={{ title: "Historik" }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ title: "Logga in" }}
-          />
-          <Stack.Screen
-            name="TreasureInfo"
-            component={TreasureInfo}
-            options={{ title: "Mer information" }}
-          />
-          <Stack.Screen
-            name="Settings"
-            component={Settings}
-            options={{ title: "Inställningar" }}
-          />
-          <Stack.Screen
-            name="CreateAccount"
-            component={CreateAccount}
-            options={{ title: "Skapa konto" }}
-          />
+        <Stack.Navigator initialRouteName="Profile">
+          {user ? (
+            <>
+              <Stack.Screen
+                name="Gather"
+                component={Gather}
+                options={{ title: "Gather" }}
+              />
+              <Stack.Screen
+                name="CameraScreen"
+                component={CameraScreen}
+                options={{ title: "Camera" }}
+              />
+              <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{ title: "Min profil" }}
+              />
+              <Stack.Screen
+                name="HistoryScreen"
+                component={History}
+                options={{ title: "Historik" }}
+              />
+              <Stack.Screen
+                name="TreasureInfo"
+                component={TreasureInfo}
+                options={{ title: "Mer information" }}
+              />
+              <Stack.Screen
+                name="Settings"
+                component={Settings}
+                options={{ title: "Inställningar" }}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ title: "Logga in" }}
+              />
+              <Stack.Screen
+                name="CreateAccount"
+                component={CreateAccount}
+                options={{ title: "Skapa konto" }}
+              />
+            </>
+          )}
         </Stack.Navigator>
       </CameraProvider>
     </NavigationContainer>

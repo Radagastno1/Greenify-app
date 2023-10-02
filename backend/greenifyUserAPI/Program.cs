@@ -1,15 +1,34 @@
 using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddSingleton<webapi.Services.DataServices>();
 builder.Services.AddSingleton<webapi.Services.GarbageService>();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// builder.Services
+//     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuer = true,
+//             ValidateAudience = true,
+//             ValidateLifetime = true,
+//             ValidateIssuerSigningKey = true,
+//             ValidIssuer = "greenifyUserApi",
+//             ValidAudience = "Greenify-app",
+//             IssuerSigningKey = new SymmetricSecurityKey(
+//                 Encoding.ASCII.GetBytes("JwtSettings:Secret")
+//             )
+//         };
+//     });
 
 var app = builder.Build();
 
@@ -36,6 +55,8 @@ app.UseCors(builder =>
 {
     builder.WithOrigins("http://192.168.50.201:19000").AllowAnyHeader().AllowAnyMethod();
 });
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

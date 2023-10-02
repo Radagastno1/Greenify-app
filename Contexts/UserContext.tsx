@@ -1,7 +1,13 @@
-import React, { ReactNode, createContext, useContext, useReducer } from "react";
-import { animalImages } from "../animalImages";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import {
   createAccountAsync,
+  emptyAsyncStorage,
   fetchEditUser,
   fetchGetUser,
   signInAsync,
@@ -26,16 +32,7 @@ type UserContextType = {
   getUser: () => Promise<void>;
 };
 
-const initialState: User | null = {
-  id: 0,
-  username: "",
-  password: "",
-  points: 0,
-  memberSince: "",
-  animalImageUrl: animalImages[0].imageURL,
-  isNightMode: false,
-  level: 0,
-};
+const initialState: User | null = null;
 
 function userReducer(state: User | null, action: ActionType): User | null {
   switch (action.type) {
@@ -52,6 +49,7 @@ function userReducer(state: User | null, action: ActionType): User | null {
     case "CREATE_USER":
       return state ? { ...state, ...action.payload } : null;
     case "SIGN_OUT":
+      emptyAsyncStorage();
       return null;
     case "ADD_IMAGE_URL":
       return state ? { ...state, animalImageUrl: action.payload } : null;
@@ -109,12 +107,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const getUser = async () => {
-    if (user?.id) {
-      console.log("userns id i getuseer:", user.id);
-      const result = await fetchGetUser(user.id);
-      dispatch({ type: "SET_USER", payload: result });
-    }
+    const result = await fetchGetUser();
+    dispatch({ type: "SET_USER", payload: result });
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <UserContext.Provider

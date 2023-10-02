@@ -35,6 +35,7 @@ public class DataServices
             {
                 return new User();
             }
+            user.Points = await GetPoints(id);
             return user;
         }
         catch (Exception)
@@ -53,6 +54,7 @@ public class DataServices
             {
                 return new User();
             }
+            user.Points = await GetPoints(user.Id);
             user.Level = GetLevel(user.Points);
             return user;
         }
@@ -104,7 +106,7 @@ public class DataServices
 
             existingUser.Username = user.Username;
             existingUser.Password = user.Password;
-            existingUser.Points = user.Points;
+            existingUser.Points = await GetPoints(id);
             existingUser.MemberSince = user.MemberSince;
             existingUser.AnimalImageUrl = user.AnimalImageUrl;
             existingUser.IsNightMode = user.IsNightMode;
@@ -120,6 +122,18 @@ public class DataServices
             Console.WriteLine($"Error while editing user: {ex.Message}");
             throw;
         }
+    }
+
+    public async Task<int> GetPoints(int userId)
+    {
+        GarbageService garbageService = new();
+        var garbageList = await garbageService.GetGarbageByUserIdAsync(userId);
+        if (garbageList.Count() > 0)
+        {
+            var points = garbageList.Sum(g => g.Points);
+            return points;
+        }
+        return 0;
     }
 
     public int GetLevel(int points)

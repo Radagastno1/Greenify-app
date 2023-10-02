@@ -12,7 +12,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 export default function ProfileScreen({ navigation }: Props) {
   const { garbage, getGarbage } = useGarbageContext();
-  const { user } = useUserContext();
+  const { user, getUser } = useUserContext();
 
   const videoUrl = user?.isNightMode
     ? "https://i.imgur.com/FWN9Gox.mp4"
@@ -27,21 +27,10 @@ export default function ProfileScreen({ navigation }: Props) {
     }
   }
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     if (garbage) {
-  //       const newPointSum = garbage.reduce((accumulator, trash) => {
-  //         return accumulator + (trash?.points || 0);
-  //       }, 0);
-
-  //       setPointSum(newPointSum);
-  //     }
-  //   }, [user])
-  // );
-
   useFocusEffect(
     React.useCallback(() => {
       someFunction();
+      getUser();
     }, [])
   );
 

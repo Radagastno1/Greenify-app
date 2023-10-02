@@ -1,14 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "MtOjCYdGrxJef2wqz8S4e+abt1pId2iJ3Zc3hEldNkM2t1TPce9iYBRn2bht6+donjxfLOo1uoEw+XrtMlItag==",
+  "dgSpecHash": "kzTRoFXq6EVNURid+7zWT6GQ0f+/uZnqeZbsZVHnjJ3oleePyUiCLjdhREQ4qsa3Te9sAgssmjCnMGoQelSDYQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\greenifyUserAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\angel\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.11\\microsoft.aspnetcore.authentication.jwtbearer.7.0.11.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.0\\microsoft.aspnetcore.openapi.7.0.0.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.2\\microsoft.identitymodel.abstractions.7.0.2.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.2\\microsoft.identitymodel.jsonwebtokens.7.0.2.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.2\\microsoft.identitymodel.logging.7.0.2.nupkg.sha512",
+    "C:\\Users\\angel\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.15.1\\microsoft.identitymodel.protocols.6.15.1.nupkg.sha512",
+    "C:\\Users\\angel\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.15.1\\microsoft.identitymodel.protocols.openidconnect.6.15.1.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.2\\microsoft.identitymodel.tokens.7.0.2.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",

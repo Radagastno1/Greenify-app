@@ -1,32 +1,22 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../types";
 
-async function getJwtToken() {
-  try {
-    const token = await AsyncStorage.getItem("jwtToken");
-    console.log("token som hämtas från async storage:", token);
-    return token;
-  } catch (error) {
-    console.error("Error getting JWT token:", error);
-    throw error;
-  }
-}
-
 export async function signInAsync(
   username: string,
   password: string
 ): Promise<User | null> {
   try {
-    const success = await fetchLogInUser(username, password);
-    if (!success) {
+    const user = await fetchLogInUser(username, password);
+    if (!user) {
       return null;
     }
-    const user: User | null = await authenticatedFetch(
-      "http://192.168.50.201:5072/users",
-      "GET"
-    );
     if (user) {
-      return user;
+      await AsyncStorage.setItem("userId", user.id.toString());
+      console.log("user från login:", user.username);
+      // const user = await fetchGetUser(id);
+      if (user) {
+        return user;
+      }
     }
     return null;
   } catch (error) {
@@ -50,6 +40,7 @@ export async function createAccountAsync(user: User): Promise<User | null> {
 
 function fetchLogInUser(username: string, password: string) {
   const apiUrl = "http://192.168.50.201:5072/users/login";
+  // const schoolApiUrl = "http://10.235.104.118/:5072/users/login";
   const requestBody = {
     username,
     password,
@@ -70,54 +61,29 @@ function fetchLogInUser(username: string, password: string) {
       return response.json();
     })
     .then((data) => {
-      const token = data?.token || "";
-      AsyncStorage.setItem("jwtToken", token);
-      console.log("jwt token satt i async storage , ", token);
-      return true;
+      return data as User;
     })
     .catch((error) => {
       console.error(error);
-      return false;
+      return null;
     });
 }
 
-// url: tex 129....:5072/...   och method: tex GET eller POST   data : tex user
-//så dennna ska jag använda med allt som har med useer att göra så att jwt tokenen följer med
-async function authenticatedFetch(url: string, method: string, data = null) {
-  const token = await getJwtToken();
-  if (!token) {
-    console.log("token saknas vid authentiacted fetch");
+export const emptyAsyncStorage = async () => {
+  await AsyncStorage.setItem("userId", "");
+};
+export async function fetchGetUser() {
+  const userId = await AsyncStorage.getItem("userId");
+  if (userId) {
+    const userIdAsNumber = parseInt(userId);
+  } else {
     return null;
   }
-
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-
-  const requestOptions = {
-    method,
-    headers,
-    body: data ? JSON.stringify(data) : null,
-  };
-
-  const response = await fetch(url, requestOptions);
-
-  if (!response.ok) {
-    throw new Error(`Nätverksfel - ${response.status}`);
-  }
-
-  const user: User | null = await response.json();
-  return user;
-}
-
-//MÅSTE GÖRA DENNA MED AUTHENTICATE FETCH ISTÄLLET
-export function fetchGetUser(id: number) {
-  const apiUrl = `http://192.168.50.201:5072/users/${id}`;
-  const schoolApiUrl = "http://10.23.14.178:5072/users";
-  const libraryApiUrl = "http://10.27.213.130:5072/users";
-  const notHomeApiUrl = "http://192.168.1.211:5072/users";
-  const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
+  const apiUrl = `http://192.168.50.201:5072/users/${userId}`;
+  // const schoolApiUrl = `http://10.235.104.118:5072/users/${id}`;
+  // const libraryApiUrl = "http://10.27.213.130:5072/users";
+  // const notHomeApiUrl = "http://192.168.1.211:5072/users";
+  // const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
 
   return fetch(apiUrl, {
     method: "GET",
@@ -138,16 +104,16 @@ export function fetchGetUser(id: number) {
     })
     .catch((error) => {
       console.error(error);
-      throw error;
+      return null;
     });
 }
 
 function fetchCreateUserReal(user: User) {
   const apiUrl = "http://192.168.50.201:5072/users/create";
-  const schoolApiUrl = "http://10.23.14.178:5072/users";
-  const libraryApiUrl = "http://10.27.213.130:5072/users";
-  const notHomeApiUrl = "http://192.168.1.211:5072/users";
-  const denthuApiUrl = "http://192.168.1.213:5072/users/create";
+  // const schoolApiUrl = "http://10.23.14.178:5072/users";
+  // const libraryApiUrl = "http://10.27.213.130:5072/users";
+  // const notHomeApiUrl = "http://192.168.1.211:5072/users";
+  // const denthuApiUrl = "http://192.168.1.213:5072/users/create";
   const requestBody = {
     user,
   };
@@ -176,8 +142,8 @@ function fetchCreateUserReal(user: User) {
 }
 
 export function fetchEditUser(user: User, id: number) {
-  const notHomeApiUrl = `http://192.168.1.211:5072/users/${id}`;
-  const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
+  // const notHomeApiUrl = `http://192.168.1.211:5072/users/${id}`;
+  // const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
   const apiUrl = `http://192.168.50.201:5072/users/${id}`;
 
   const requestBody = { ...user, id };

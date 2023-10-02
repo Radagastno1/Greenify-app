@@ -51,6 +51,6 @@ export async function fetchDataByMaterial(
     return result;
   } catch (error) {
     console.error("error getting materialinfo:", error);
-    throw error; // Kasta felet vidare
+    throw error;
   }
 }

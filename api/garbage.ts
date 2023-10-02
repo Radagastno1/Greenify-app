@@ -11,11 +11,10 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
   try {
     const requestInfo = {
       method: "POST",
-      // url: denthuApiUrl,
       headers: headers,
       body: JSON.stringify(garbage),
     };
-    console.log("Request:", requestInfo); // Logga hela anropet innan begäran
+    console.log("Request:", JSON.stringify(requestInfo));
     const response = await fetch(apiUrl, requestInfo);
 
     if (!response.ok) {
@@ -27,7 +26,7 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
     return garbageCreated;
   } catch (error) {
     console.error("error creating garbage:", error);
-    throw error; // Kasta felet vidare
+    throw error;
   }
 }
 

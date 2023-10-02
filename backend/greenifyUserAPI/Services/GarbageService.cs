@@ -86,7 +86,7 @@ public class GarbageService
 
     public int GeneratePointsByMaterial(string material)
     {
-        switch (material)
+        switch (material.ToLower())
         {
             case "plast":
                 return 800;

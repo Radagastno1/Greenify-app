@@ -13,7 +13,6 @@ export async function signInAsync(
     if (user) {
       await AsyncStorage.setItem("userId", user.id.toString());
       console.log("user från login:", user.username);
-      // const user = await fetchGetUser(id);
       if (user) {
         return user;
       }
@@ -54,7 +53,7 @@ function fetchLogInUser(username: string, password: string) {
     body: JSON.stringify(requestBody),
   })
     .then((response) => {
-      console.log("response:", response);
+      console.log("response:", JSON.stringify(response));
       if (!response.ok) {
         throw new Error(`Nätverksfel - ${response.status}`);
       }
@@ -92,7 +91,7 @@ export async function fetchGetUser() {
     },
   })
     .then((response) => {
-      console.log("response:", response);
+      console.log("response:", JSON.stringify(response));
       if (!response.ok) {
         throw new Error(`Nätverksfel get user by id- ${response.status}`);
       }

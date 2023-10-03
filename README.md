@@ -45,3 +45,18 @@ Du kommer behöva ha 2 terminaler körandes samtidigt.
 -Dimensions
 -Marker
 -Switch
+
+## EXTERN MODUL
+
+- Async Storage
+
+## KRAV UPPFYLLDA
+
+Git och Github CHECK
+4 react native komponenter CHECK
+4 expo komponenter CHECK
+React Navigation CHECK
+1 extern modul CHECK
+Kommunikation med 1 webapi CHECK
+Presentation
+Lansering

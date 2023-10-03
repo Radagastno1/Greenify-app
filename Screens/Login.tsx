@@ -29,7 +29,9 @@ export default function Login({ navigation }: Props) {
 
   const handleLogIn = async () => {
     await handleSignIn(username, password);
-    navigation.navigate("Profile");
+    if (user) {
+      navigation.navigate("Profile");
+    }
   };
 
   return (

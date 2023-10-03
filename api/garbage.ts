@@ -1,9 +1,13 @@
 import { Garbage } from "../types";
 
+const publicIpAdress = "http://35.173.198.228/garbage/";
+
 export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
-  const apiUrl = `http://192.168.50.201:5072/garbage/create`;
+  //const apiUrl = `http://192.168.50.201:5072/garbage/create`;
   // const notHomeApiUrl = "http://192.168.1.211:5072/garbage/create";
   // const denthuApiUrl = `http://192.168.1.213:5072/garbage/create`;
+  //const libraryUrl = `http://10.27.208.168:5072/garbage/create`;
+  const url = publicIpAdress + "create";
   const headers = {
     "Content-Type": "application/json",
   };
@@ -15,7 +19,7 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
       body: JSON.stringify(garbage),
     };
     console.log("Request:", JSON.stringify(requestInfo));
-    const response = await fetch(apiUrl, requestInfo);
+    const response = await fetch(url, requestInfo);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -31,18 +35,19 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
 }
 
 export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
-  const apiUrl = `http://192.168.50.201:5072/garbage/${id}`;
+  //const apiUrl = `http://192.168.50.201:5072/garbage/${id}`;
   // const schoolApiUrl = `http://10.23.14.178:5072/garbage/${id}`;
-  // const libraryApiUrl = `http://10.27.213.130:5072/garbage/${id}`;
+  //const libraryApiUrl = `http://10.27.208.168:5072/garbage/${id}`;
   // const notHomeApiUrl = `http://192.168.1.211:5072/garbage/${id}`;
   // const denthuApiUrl = `http://192.168.1.213:5072/garbage/${id}`;
+  const url = publicIpAdress + `${id}`;
 
   const headers = {
     "Content-Type": "application/json",
   };
 
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(url, {
       method: "GET",
       headers,
     });

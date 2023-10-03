@@ -1,43 +1,21 @@
 import { MaterialInfo } from "../types";
 
-// export function fetchDataByMaterial(material: string): Promise<MaterialInfo> {
-//   const apiUrl = `http://localhost:5241/api/facts/${material}`;
-//   console.log("urlen som anänds: ", apiUrl);
+const yourIpv4AdressHere = "";
 
-//   return fetch(apiUrl, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((response) => {
-//       console.log("response:", response);
-//       if (!response.ok) {
-//         throw new Error(`Nätverksfel get material - ${response.status}`);
-//       }
-//       return response.json();
-//     })
-//     .then((materialInfo) => {
-//       console.log("material: ", materialInfo);
-//       return materialInfo as MaterialInfo;
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       throw error;
-//     });
-// }
+const myIpv4AdressHere = "http://192.168.50.201:";
 
 export async function fetchDataByMaterial(
   material: string
 ): Promise<MaterialInfo> {
-  const apiUrl = `http://192.168.50.201:5241/api/facts/${material}`;
+  const url = myIpv4AdressHere + `5241/api/facts/${material}`;
+  //const libraryApi = `http://10.27.208.168:5241/api/facts/${material}`;
 
   const headers = {
     "Content-Type": "application/json",
   };
 
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(url, {
       method: "GET",
       headers,
     });

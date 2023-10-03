@@ -10,11 +10,16 @@ I historiken kan du klicka dig in på en av dina omgångar och läsa mer om just
 
 ## HUR KÖR MAN PROGRAMMET?
 
-Du kommer behöva ha 3 terminaler körandes samtidigt.
+- Gå in på cmd på din dator och kör 'ipconfig', kopiera Ipv4-adressen och klistra in i
+  api -> material.ts -> yourIpv4AdressHere-variabeln.
+- I fetchDataByMaterial behöver du ersätta 'myIpv4AdressHere' :
+  const url = myIpv4AdressHere + `:5241/api/facts/${material}`;
+  med 'yourIpv4AdressHere'
+
+Du kommer behöva ha 2 terminaler körandes samtidigt.
 
 - 1. första terminalen: gå in på Greenify-app (ska vara frontend sen då?) och kör npm start
 - 2. andra terminalen: cd backend cd greenify-api och kör dotnet run
-- 3. tredje terminalen: cd backend cd greenifyUserApi och kör dotnet run (dessa borde heta antingen camelcase eller snake)
 
 ### EXPO-KOMPONENTER
 

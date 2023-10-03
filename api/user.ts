@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../types";
 
+const publicIpAdress = "http://35.173.198.228/users/";
+
 export async function signInAsync(
   username: string,
   password: string
@@ -38,14 +40,16 @@ export async function createAccountAsync(user: User): Promise<User | null> {
 }
 
 function fetchLogInUser(username: string, password: string) {
-  const apiUrl = "http://192.168.50.201:5072/users/login";
+  //const apiUrl = "http://192.168.50.201:5072/users/login";
   // const schoolApiUrl = "http://10.235.104.118/:5072/users/login";
+  //const libraryApi = "http://10.27.208.168:5072/users/login";
+  const url = publicIpAdress + "login";
   const requestBody = {
     username,
     password,
   };
 
-  return fetch(apiUrl, {
+  return fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -79,13 +83,14 @@ export async function fetchGetUser() {
   } else {
     return null;
   }
-  const apiUrl = `http://192.168.50.201:5072/users/${userId}`;
+  //const apiUrl = `http://192.168.50.201:5072/users/${userId}`;
   // const schoolApiUrl = `http://10.235.104.118:5072/users/${id}`;
-  // const libraryApiUrl = "http://10.27.213.130:5072/users";
+  //const libraryApiUrl = `http://10.27.208.168:5072/users/${parseInt(userId)}`;
   // const notHomeApiUrl = "http://192.168.1.211:5072/users";
   // const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
+  const url = publicIpAdress + `${parseInt(userId)}`;
 
-  return fetch(apiUrl, {
+  return fetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -110,11 +115,12 @@ export async function fetchGetUser() {
 }
 
 function fetchCreateUserReal(user: User) {
-  const apiUrl = "http://192.168.50.201:5072/users/create";
-  // const schoolApiUrl = "http://10.23.14.178:5072/users";
-  // const libraryApiUrl = "http://10.27.213.130:5072/users";
-  // const notHomeApiUrl = "http://192.168.1.211:5072/users";
+  //const apiUrl = "http://192.168.50.201:5072/users/create";
+  // const schoolApiUrl = "http://10.23.14.178:5072/users/create";
+  //const libraryApiUrl = "http://10.27.208.168:5072/users/create";
+  // const notHomeApiUrl = "http://192.168.1.211:5072/users/create";
   // const denthuApiUrl = "http://192.168.1.213:5072/users/create";
+  const url = publicIpAdress + "create";
   const requestBody = {
     user,
   };
@@ -123,7 +129,7 @@ function fetchCreateUserReal(user: User) {
     "Content-Type": "application/json",
   };
 
-  return fetch(apiUrl, {
+  return fetch(url, {
     method: "POST",
     headers,
     body: JSON.stringify(user),
@@ -145,7 +151,9 @@ function fetchCreateUserReal(user: User) {
 export function fetchEditUser(user: User, id: number) {
   // const notHomeApiUrl = `http://192.168.1.211:5072/users/${id}`;
   // const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
-  const apiUrl = `http://192.168.50.201:5072/users/${id}`;
+  //const apiUrl = `http://192.168.50.201:5072/users/${id}`;
+  //const libraryUrl = `http://10.27.208.168:5072/users/${id}`;
+  const url = publicIpAdress + `${id}`;
 
   const requestBody = { ...user, id };
 
@@ -153,7 +161,7 @@ export function fetchEditUser(user: User, id: number) {
     "Content-Type": "application/json",
   };
 
-  return fetch(apiUrl, {
+  return fetch(url, {
     method: "PUT",
     headers,
     body: JSON.stringify(requestBody),

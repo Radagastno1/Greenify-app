@@ -2,19 +2,57 @@
     {
         "id": 1,
         "material": "plast",
-        "description": "Något om plast.",
-        "source": "factsbee.com"
+        "description": "Mer än en miljon fåglar och hundra tusen däggdjur dör varje år världen över efter att ha fastnat i eller ätit plast som de hittat i våra hav.",
+        "source": "https://www.naturvardsverket.se/amnesomraden/plast/om-plast/nedskrapning-av-plast/",
+        "yearsInNature": "100"
     },
     {
-        "id": 1,
+        "id": 2,
         "material": "glas",
-        "description": "Något om glas.",
-        "source": "factsbee.com"
+        "description": "En glasflaska eller glasburk som slängs i naturen riskerar att gå sönder och de vassa kanterna kan orsaka skärskador på både djur och människor.",
+        "source": "https://www.skogeniskolan.se/laromedel/allemansratten-tema-skrap/",
+        "yearsInNature": "1000000"
     },
     {
-        "id": 1,
+        "id": 3,
         "material": "tuggummi",
-        "description": "Något om glas.",
-        "source": "factsbee.com"
+        "description": " Tuggummi är tillverkat av syntetiskt gummi, latex eller vax samt elastomerer som ger materialet gummiegenskaper och gör det resistent. Därför en av de svåraste och mest kostsamma material att städa bort i naturen.",
+        "source": "https://hsr.se/artiklar/nedbrytningstider",
+        "yearsInNature": "25"
+    },
+    {
+        "id": 4,
+        "material": "papper",
+        "description": "Fibrerna i pappret går att återvinna upp till sju gånger innan de blir utslitna. Vi sparar både råvaran trä och energi när vi återvinner pappersförpackningar.",
+        "source": "https://goteborg.se/wps/portal?uri=gbglnk%3Agbg.page.3530edfd-6f85-4a16-99a5-221cace03b9e",
+        "yearsInNature": "0.083"
+    },
+    {
+        "id": 5,
+        "material": "metall",
+        "description": "Metaller kan inte brytas ned utan blir kvar. Fisk som lever högt upp i näringskedjan och livsmedel som odlats på förorenad mark kan ha höga halter av metaller.",
+        "source": "https://www.naturvardsverket.se/amnesomraden/miljofororeningar/metaller/",
+        "yearsInNature": "alla"
+    },
+    {
+        "id": 7,
+        "material": "snus",
+        "description": "Det många inte vet är att portionssnus innehåller plast och är därför varken organiskt eller nedbrytbart som många tror. Limmet som håller ihop portionssnusen är gjort av plast. Snus innehåller också den miljöfarliga tungmetallen kadmium som bland annat är giftigt för vattenlevande djur.",
+        "source": "https://hsr.se/skrap-i-naturen",
+        "yearsInNature": "100"
+    },
+    {
+        "id": 8,
+        "material": "plastpåse",
+        "description": "De djur som äter plastskräp kvävs eller får inre skador, och plastbitarna kan ge dem en falsk mättnadskänsla som gör att de svälter.",
+        "source": "https://www.naturskyddsforeningen.se/artiklar/plast-i-havet/",
+        "yearsInNature": "20"
+    },
+    {
+        "id": 9,
+        "material": "fimp",
+        "description": "När en cigarettfimp hamnar i naturen sönderdelas både fimp och filter till mikroplast. De försvinner ”för ögat” men efterlämnar små mikroplastpartiklar som stannar kvar i naturen och i havet i hundratals år.",
+        "source": "https://hsr.se/artiklar/fimpen-varsta-skrapet",
+        "yearsInNature": "100"
     }
 ]

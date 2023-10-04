@@ -80,6 +80,7 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
         };
 
         await fetchCreateGarbage(newGarbage);
+        await getGarbage();
       }
     } catch (error) {
       console.error("Det uppstod ett fel när du lade till skräp:", error);
@@ -87,7 +88,6 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
   };
 
   const getGarbage = async (): Promise<Garbage[]> => {
-    console.log("innan if user i getgarbage");
     if (user) {
       try {
         console.log("ska hämta garbage här nu");
@@ -130,10 +130,9 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
     return totalPoints;
   }
 
+  //fråga ska det ske här
   useEffect(() => {
     getGarbage();
-    const userId = AsyncStorage.getItem("userId");
-    console.log("userid i async storage:", userId);
     //VAD SKA JAG HA FÖR DEPENDENCY LIST HÄR
   }, []);
 

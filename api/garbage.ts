@@ -50,6 +50,8 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
 export async function fetchGetGarbage(userId: number): Promise<Garbage[]> {
   const getGarbageUri = uri + `/${userId}`;
 
+  console.log("in i fetch get garbage med uri: ", getGarbageUri);
+
   const headers = {
     "Content-Type": "application/json",
   };

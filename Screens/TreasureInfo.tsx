@@ -18,7 +18,9 @@ export default function TreasureInfo({ navigation }: NavigationProps) {
   const specificGarbage = garbage.find((g) => g.id === id);
   const [description, setDescription] = useState<string | null>(null);
   const [yearsInNature, setYearsInNature] = useState<string | null>("");
-  const [backgroundImage, setBackgroundImage] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState(
+    "https://pngimg.com/uploads/grass/grass_PNG397.png"
+  );
 
   const getBackgroundImage = () => {
     if (specificGarbage) {
@@ -35,8 +37,8 @@ export default function TreasureInfo({ navigation }: NavigationProps) {
         setBackgroundImage("https://i.imgur.com/JM0QuNu.jpg");
       } else if (specificGarbage.material.toLocaleLowerCase() == "fimp") {
         setBackgroundImage("https://i.imgur.com/o6mIn98.jpg");
-      } else {
-        setBackgroundImage("https://pngimg.com/uploads/grass/grass_PNG397.png");
+      } else if (specificGarbage.material.toLocaleLowerCase() == "papper") {
+        setBackgroundImage("https://i.imgur.com/wepxaPN.jpg");
       }
     }
   };
@@ -78,7 +80,7 @@ export default function TreasureInfo({ navigation }: NavigationProps) {
       <View style={styles.container}>
         <View style={styles.card}>
           <View style={styles.didYouKnowContainer}>
-            <Text style={styles.didYouKnowText}>Visste du?</Text>
+            <Text style={styles.didYouKnowText}>Du är fantastisk!</Text>
             {description ? (
               <Text style={styles.didYouKnowInfo}>{description}</Text>
             ) : (
@@ -116,10 +118,11 @@ const styles = StyleSheet.create({
     flex: 1 / 2,
   },
   thankYouText: {
-    fontSize: 16,
+    fontSize: 18,
     alignItems: "center",
     paddingVertical: 20,
     textAlign: "center",
+    fontWeight: "300",
   },
   infoText: {
     fontSize: 20,
@@ -128,19 +131,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flex: 1,
     alignItems: "center",
-    backgroundColor: "rgb(236, 193, 221)",
+    backgroundColor: "rgba(255, 255, 255, 0.86)",
     justifyContent: "center",
     borderRadius: 20,
     padding: 10,
   },
   didYouKnowText: {
     fontSize: 20,
-    fontStyle: "italic",
     paddingBottom: 20,
     fontWeight: "500",
+    marginBottom: 30,
   },
   didYouKnowInfo: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: "400",
   },
   backgroundImage: {
     flex: 1,

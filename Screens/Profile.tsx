@@ -27,13 +27,14 @@ export default function ProfileScreen({ navigation }: Props) {
     }
   }
 
+  // fråga ska jag ha denna?
   useFocusEffect(
     React.useCallback(() => {
       getGarbageAsync;
       console.log("garbage: ", garbage);
       getUser();
       console.log("user.", user);
-    }, [])
+    }, [garbage])
   );
 
   useEffect(() => {

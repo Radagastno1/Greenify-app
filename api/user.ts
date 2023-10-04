@@ -28,15 +28,16 @@ export async function signInAsync(
   password: string
 ): Promise<User | null> {
   try {
-    const user = await fetchLogInUser(username, password);
-    if (!user) {
+    const newUser = await fetchLogInUser(username, password);
+    if (!newUser) {
       return null;
     }
-    if (user) {
-      await AsyncStorage.setItem("userId", user.id.toString());
-      console.log("user från login:", user.username);
-      if (user) {
-        return user;
+    if (newUser) {
+      await emptyAsyncStorage();
+      await AsyncStorage.setItem("userId", newUser.id.toString());
+      console.log("user från login:", newUser.username);
+      if (newUser) {
+        return newUser;
       }
     }
     return null;

@@ -30,6 +30,7 @@ export default function Settings({ navigation }: Props) {
       user.password = password ?? "";
       user.isNightMode = isNightmodeEnabled ?? false;
       await updateUser();
+      navigation.navigate("Profile");
     }
   };
 

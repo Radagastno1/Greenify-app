@@ -1,5 +1,5 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useGarbageContext } from "../Contexts/GarbageContext";
 import { useUserContext } from "../Contexts/UserContext";
@@ -27,10 +27,6 @@ export default function ProfileCard(props: Props) {
   const usernameColor = user?.isNightMode ? "white" : "rgba(79,44,84,255)";
   const textColor = user?.isNightMode ? "white" : "black";
   const userPoints = user?.points ?? 0;
-
-  function getMaxPointsForLevel(level: number) {
-    return level * 1000;
-  }
 
   const handleLogout = () => {
     dispatch({ type: "SIGN_OUT" });
@@ -148,6 +144,9 @@ export default function ProfileCard(props: Props) {
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>SKRÄP</Text>
         </View>
+
+        <View style={{ backgroundColor: textColor, ...styles.separator }} />
+
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
@@ -155,9 +154,11 @@ export default function ProfileCard(props: Props) {
             {getUniqueLocations()}
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>
-            INCHECKNINGAR
+            PLATSER
           </Text>
         </View>
+
+        <View style={{ backgroundColor: textColor, ...styles.separator }} />
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
@@ -166,6 +167,9 @@ export default function ProfileCard(props: Props) {
           </Text>
           <Text style={{ color: textColor, ...styles.statusText }}>POÄNG</Text>
         </View>
+
+        <View style={{ backgroundColor: textColor, ...styles.separator }} />
+
         <View
           style={{ flexDirection: "column", alignItems: "center", padding: 10 }}
         >
@@ -214,5 +218,10 @@ const styles = StyleSheet.create({
   statusNumber: {
     fontSize: 15,
     fontWeight: "bold",
+  },
+  separator: {
+    width: 1,
+    height: 24,
+    marginHorizontal: 5,
   },
 });

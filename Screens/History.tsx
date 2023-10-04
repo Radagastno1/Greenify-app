@@ -78,7 +78,7 @@ export default function History({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(164,116,156, 0.5)",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 2,
     borderColor: "#ccc",
-    backgroundColor: "rgba(255,255,255,0.7)",
+    backgroundColor: "rgb(249, 243, 255) ",
     borderRadius: 20,
   },
   backgroundImage: {

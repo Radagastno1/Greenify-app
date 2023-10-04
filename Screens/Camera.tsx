@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Camera, CameraType } from "expo-camera";
 import * as FileSystem from "expo-file-system";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useCameraContext } from "../Contexts/CameraContext";
 import { RootStackParamList } from "../Navigator";
@@ -16,6 +16,13 @@ export default function CameraScreen({ navigation }: Props) {
   const cameraRef = useRef<Camera | null>(null);
 
   const [photoUri, setPhotoUri] = useState<string | null>(null);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "",
+      headerTransparent: true,
+    });
+  }, []);
 
   async function takePicture() {
     if (cameraRef.current) {
@@ -74,12 +81,10 @@ export default function CameraScreen({ navigation }: Props) {
           }
         }}
       >
-
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={takePicture}>
             <Text style={styles.text}>Take Picture</Text>
           </TouchableOpacity>
-
         </View>
       </Camera>
     </View>

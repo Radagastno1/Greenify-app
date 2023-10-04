@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     padding: 20,
-    fontSize: 20,
+    fontSize: 16,
     width: "100%",
   },
   textBelowIcons: {

@@ -135,7 +135,7 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
     const userId = AsyncStorage.getItem("userId");
     console.log("userid i async storage:", userId);
     //VAD SKA JAG HA FÖR DEPENDENCY LIST HÄR
-  }, [addGarbage]);
+  }, []);
 
   return (
     <GarbageContext.Provider

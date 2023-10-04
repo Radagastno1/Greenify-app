@@ -12,7 +12,8 @@ I historiken kan du klicka dig in på en av dina omgångar och läsa mer om just
 
 ## HUR KÖR MAN PROGRAMMET?
 
-npm start
+npm start all (då startar expo-appen och de två apierna)
+npm start (då startar endast expo-appen)
 
 ### EXPO-KOMPONENTER
 

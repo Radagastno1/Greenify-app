@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "concurrently \"expo start\" \"cd backend && cd greenify-api && dotnet run\" \"cd backend && cd greenifyUserApi && dotnet run\"",
+    "start": "npx expo start",
+    "start all": "concurrently \"expo start\" \"cd backend && cd greenify-api && dotnet run\" \"cd backend && cd greenifyUserApi && dotnet run\"",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"

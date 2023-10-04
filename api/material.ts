@@ -1,21 +1,32 @@
 import { MaterialInfo } from "../types";
-
-const yourIpv4AdressHere = "";
-
-const myIpv4AdressHere = "http://192.168.50.201:";
+import Constants from "expo-constants";
 
 export async function fetchDataByMaterial(
   material: string
 ): Promise<MaterialInfo> {
-  const url = myIpv4AdressHere + `5241/api/facts/${material}`;
-  //const libraryApi = `http://10.27.208.168:5241/api/facts/${material}`;
+  //Constants.expoConfig.releaseChannel sätt strängen till tex production och beroende så anslut till lokala eller lanserade api
+  const hostUri = Constants?.expoConfig?.hostUri;
+
+  let uri = "";
+
+  if (hostUri) {
+    const parts = hostUri.split(":");
+    if (parts.length >= 2) {
+      uri = `http://${parts[0]}:5241`;
+      console.log("uri är: " + uri);
+    } else {
+      console.warn("Invalid hostUri format. Using default URI.");
+    }
+  }
+
+  uri = `${uri}/api/facts/${material}`;
 
   const headers = {
     "Content-Type": "application/json",
   };
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(uri, {
       method: "GET",
       headers,
     });

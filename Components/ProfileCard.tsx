@@ -17,9 +17,9 @@ interface Props {
 export default function ProfileCard(props: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [maxPoints, setMaxPoints] = useState(0);
+  // const [maxPoints, setMaxPoints] = useState(0);
   const { user, dispatch } = useUserContext();
-  const { garbage, calculateTotalPoints } = useGarbageContext();
+  const { garbage } = useGarbageContext();
   const backGroundColor = user?.isNightMode
     ? "rgba(255, 255, 255, 0.0)"
     : "rgba(255, 255, 255, 0.8)";
@@ -31,13 +31,6 @@ export default function ProfileCard(props: Props) {
   function getMaxPointsForLevel(level: number) {
     return level * 1000;
   }
-
-  useEffect(() => {
-    if (user) {
-      const maxPointsForLevel = getMaxPointsForLevel(user.level);
-      setMaxPoints(maxPointsForLevel);
-    }
-  }, []);
 
   const handleLogout = () => {
     dispatch({ type: "SIGN_OUT" });
@@ -182,23 +175,6 @@ export default function ProfileCard(props: Props) {
           <Text style={{ color: textColor, ...styles.statusText }}>LEVEL</Text>
         </View>
       </View>
-
-      {/* <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-
-          borderRadius: 20,
-        }}
-      >
-        <Text style={{ fontSize: 22, paddingVertical: 20 }}>Tänk om</Text>
-        <Text style={{ fontSize: 15 }}>
-          Det känns förföriskt enkelt att handla på nätet. Men det är värt att
-          tänka två gånger, eftersom onödiga transporter och alla de returer vi
-          gör sliter på miljön.
-        </Text>
-      </View> */}
 
       <PointBarComponent />
 

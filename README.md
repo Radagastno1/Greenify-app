@@ -8,18 +8,11 @@ Där kan du samla poäng genom att registrera skräp du hittar. Ta kort, dela pl
 Du kan kolla din historik där du ser allt skräp du har plockat och hur många poäng det har genererat per gång.
 I historiken kan du klicka dig in på en av dina omgångar och läsa mer om just det materialet och vilken skillnad du har gjort för jorden!
 
+- Publika repo: https://github.com/Radagastno1/Greenify-app
+
 ## HUR KÖR MAN PROGRAMMET?
 
-- Gå in på cmd på din dator och kör 'ipconfig', kopiera Ipv4-adressen och klistra in i
-  api -> material.ts -> yourIpv4AdressHere-variabeln.
-- I fetchDataByMaterial behöver du ersätta 'myIpv4AdressHere' :
-  const url = myIpv4AdressHere + `:5241/api/facts/${material}`;
-  med 'yourIpv4AdressHere'
-
-Du kommer behöva ha 2 terminaler körandes samtidigt.
-
-- 1. första terminalen: gå in på Greenify-app (ska vara frontend sen då?) och kör npm start
-- 2. andra terminalen: cd backend cd greenify-api och kör dotnet run
+npm start
 
 ### EXPO-KOMPONENTER
 

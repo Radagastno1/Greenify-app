@@ -22,7 +22,6 @@ public class UserController : ControllerBase
     {
         try
         {
-
             if (id > 0)
             {
                 var user = await _dataServices.GetUserByIdAsync(id);
@@ -30,12 +29,12 @@ public class UserController : ControllerBase
                 {
                     return NotFound();
                 }
-                Console.WriteLine("user som returneras från auth get user:" + user.Username);
+                Console.WriteLine("user som returneras från get user:" + user.Username);
                 return Ok(user);
             }
             else
             {
-                return BadRequest("Ogiltig JWT-token");
+                return BadRequest("Ogiltig");
             }
         }
         catch (Exception)

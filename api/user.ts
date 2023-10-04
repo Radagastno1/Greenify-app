@@ -1,7 +1,27 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../types";
+import Constants from "expo-constants";
 
-const publicIpAdress = "http://35.173.198.228/users/";
+//vet ej om detta är korrekt sätt att se om produktion eller ej
+const isProduction = !__DEV__;
+let uri = "";
+
+if (isProduction) {
+  //då är det den offentliga ipadressen om det är produktion då
+  uri = "http://35.173.198.228/users/";
+} else {
+  //annars används ipadressen då för att prata med den lokala
+  const hostUri = Constants?.expoConfig?.hostUri;
+  if (hostUri) {
+    const parts = hostUri.split(":");
+    if (parts.length >= 2) {
+      uri = `http://${parts[0]}:80/users`;
+      console.log("uri är: " + uri);
+    } else {
+      console.warn("Invalid hostUri format. Using default URI.");
+    }
+  }
+}
 
 export async function signInAsync(
   username: string,
@@ -40,16 +60,13 @@ export async function createAccountAsync(user: User): Promise<User | null> {
 }
 
 function fetchLogInUser(username: string, password: string) {
-  //const apiUrl = "http://192.168.50.201:5072/users/login";
-  // const schoolApiUrl = "http://10.235.104.118/:5072/users/login";
-  //const libraryApi = "http://10.27.208.168:5072/users/login";
-  const url = publicIpAdress + "login";
+  const logInUserUri = uri + "/login";
   const requestBody = {
     username,
     password,
   };
 
-  return fetch(url, {
+  return fetch(logInUserUri, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -83,14 +100,9 @@ export async function fetchGetUser() {
   } else {
     return null;
   }
-  //const apiUrl = `http://192.168.50.201:5072/users/${userId}`;
-  // const schoolApiUrl = `http://10.235.104.118:5072/users/${id}`;
-  //const libraryApiUrl = `http://10.27.208.168:5072/users/${parseInt(userId)}`;
-  // const notHomeApiUrl = "http://192.168.1.211:5072/users";
-  // const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
-  const url = publicIpAdress + `${parseInt(userId)}`;
+  const getUserByIdUri = uri + `/${parseInt(userId)}`;
 
-  return fetch(url, {
+  return fetch(getUserByIdUri, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -115,12 +127,7 @@ export async function fetchGetUser() {
 }
 
 function fetchCreateUserReal(user: User) {
-  //const apiUrl = "http://192.168.50.201:5072/users/create";
-  // const schoolApiUrl = "http://10.23.14.178:5072/users/create";
-  //const libraryApiUrl = "http://10.27.208.168:5072/users/create";
-  // const notHomeApiUrl = "http://192.168.1.211:5072/users/create";
-  // const denthuApiUrl = "http://192.168.1.213:5072/users/create";
-  const url = publicIpAdress + "create";
+  const createUserUri = uri + "/create";
   const requestBody = {
     user,
   };
@@ -129,7 +136,7 @@ function fetchCreateUserReal(user: User) {
     "Content-Type": "application/json",
   };
 
-  return fetch(url, {
+  return fetch(createUserUri, {
     method: "POST",
     headers,
     body: JSON.stringify(user),
@@ -149,11 +156,7 @@ function fetchCreateUserReal(user: User) {
 }
 
 export function fetchEditUser(user: User, id: number) {
-  // const notHomeApiUrl = `http://192.168.1.211:5072/users/${id}`;
-  // const denthuApiUrl = `http://192.168.1.213:5072/users/${id}`;
-  //const apiUrl = `http://192.168.50.201:5072/users/${id}`;
-  //const libraryUrl = `http://10.27.208.168:5072/users/${id}`;
-  const url = publicIpAdress + `${id}`;
+  const editUserUri = uri + `/${id}`;
 
   const requestBody = { ...user, id };
 
@@ -161,7 +164,7 @@ export function fetchEditUser(user: User, id: number) {
     "Content-Type": "application/json",
   };
 
-  return fetch(url, {
+  return fetch(editUserUri, {
     method: "PUT",
     headers,
     body: JSON.stringify(requestBody),

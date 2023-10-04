@@ -49,7 +49,7 @@ export default function Gather({ navigation }: Props) {
     if (isValidMaterial) {
       setMaterial(cleanedInput);
       setMaterialIsChecked(true);
-      console.log("MATERIAL IS CHECKCED:::::::::::::.", materialIsChecked);
+      console.log("MATERIAL IS CHECKCED: ", materialIsChecked);
       return;
     }
     for (const material of validMaterials) {

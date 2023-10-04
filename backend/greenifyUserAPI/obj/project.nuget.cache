@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kzTRoFXq6EVNURid+7zWT6GQ0f+/uZnqeZbsZVHnjJ3oleePyUiCLjdhREQ4qsa3Te9sAgssmjCnMGoQelSDYQ==",
+  "dgSpecHash": "KUdEx8hmfsgN2qKvp2LNAFUoHvyQ44uC0XBcgf+TpLF0j08yX8DY5CJhZgS4KSGFX4cghTcvwjf+0e2KqXbIZg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\greenifyUserAPI.csproj",
+  "projectFilePath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyUserAPI\\greenifyUserAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.11\\microsoft.aspnetcore.authentication.jwtbearer.7.0.11.nupkg.sha512",
     "C:\\Users\\angel\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.0\\microsoft.aspnetcore.openapi.7.0.0.nupkg.sha512",

@@ -18,10 +18,10 @@ export default function ProfileScreen({ navigation }: Props) {
     ? "https://i.imgur.com/0F8HFUU.mp4"
     : "https://i.imgur.com/RoVqYQ8.mp4";
 
-  async function someFunction() {
+  async function getGarbageAsync() {
     try {
-      const list = await getGarbage();
-      console.log("list:", list);
+      await getGarbage();
+      console.log("garabge som usern har: ", garbage);
     } catch (error) {
       console.error("Ett fel inträffade:", error);
     }
@@ -29,8 +29,10 @@ export default function ProfileScreen({ navigation }: Props) {
 
   useFocusEffect(
     React.useCallback(() => {
-      someFunction();
+      getGarbageAsync;
+      console.log("garbage: ", garbage);
       getUser();
+      console.log("user.", user);
     }, [])
   );
 

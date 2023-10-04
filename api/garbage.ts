@@ -1,13 +1,26 @@
+import Constants from "expo-constants";
 import { Garbage } from "../types";
 
-const publicIpAdress = "http://35.173.198.228/garbage/";
+const isProduction = !__DEV__;
+let uri = "";
+
+if (isProduction) {
+  uri = "http://35.173.198.228/garbage";
+} else {
+  const hostUri = Constants?.expoConfig?.hostUri;
+  if (hostUri) {
+    const parts = hostUri.split(":");
+    if (parts.length >= 2) {
+      uri = `http://${parts[0]}:80/garbage`;
+      console.log("uri är: " + uri);
+    } else {
+      console.warn("Invalid hostUri format. Using default URI.");
+    }
+  }
+}
 
 export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
-  //const apiUrl = `http://192.168.50.201:5072/garbage/create`;
-  // const notHomeApiUrl = "http://192.168.1.211:5072/garbage/create";
-  // const denthuApiUrl = `http://192.168.1.213:5072/garbage/create`;
-  //const libraryUrl = `http://10.27.208.168:5072/garbage/create`;
-  const url = publicIpAdress + "create";
+  const createGarbageUri = uri + "/create";
   const headers = {
     "Content-Type": "application/json",
   };
@@ -18,8 +31,8 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
       headers: headers,
       body: JSON.stringify(garbage),
     };
-    console.log("Request:", JSON.stringify(requestInfo));
-    const response = await fetch(url, requestInfo);
+    console.log("Request fot creating garbage:", JSON.stringify(requestInfo));
+    const response = await fetch(createGarbageUri, requestInfo);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -34,20 +47,15 @@ export async function fetchCreateGarbage(garbage: Garbage): Promise<Garbage> {
   }
 }
 
-export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
-  //const apiUrl = `http://192.168.50.201:5072/garbage/${id}`;
-  // const schoolApiUrl = `http://10.23.14.178:5072/garbage/${id}`;
-  //const libraryApiUrl = `http://10.27.208.168:5072/garbage/${id}`;
-  // const notHomeApiUrl = `http://192.168.1.211:5072/garbage/${id}`;
-  // const denthuApiUrl = `http://192.168.1.213:5072/garbage/${id}`;
-  const url = publicIpAdress + `${id}`;
+export async function fetchGetGarbage(userId: number): Promise<Garbage[]> {
+  const getGarbageUri = uri + `/${userId}`;
 
   const headers = {
     "Content-Type": "application/json",
   };
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(getGarbageUri, {
       method: "GET",
       headers,
     });
@@ -55,9 +63,8 @@ export async function fetchGetGarbage(id: number): Promise<Garbage[]> {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-
     const result = (await response.json()) as Garbage[];
-    console.log(result);
+    console.log("garbage som hämtas: ", result);
     return result;
   } catch (error) {
     console.error("error getting garbage:", error);

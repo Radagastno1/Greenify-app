@@ -1,8 +1,15 @@
-import React, { ReactNode, createContext, useContext, useReducer } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { fetchCreateGarbage, fetchGetGarbage } from "../api/garbage";
+import { fetchDataByMaterial } from "../api/material";
 import { Garbage, MaterialInfo } from "../types";
 import { useUserContext } from "./UserContext";
-import { fetchDataByMaterial } from "../api/material";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type ActionType =
   | { type: "SET_GARBAGE"; payload: Garbage[] }
@@ -80,9 +87,12 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
   };
 
   const getGarbage = async (): Promise<Garbage[]> => {
+    console.log("innan if user i getgarbage");
     if (user) {
       try {
+        console.log("ska hämta garbage här nu");
         const result = await fetchGetGarbage(user?.id);
+        console.log("garbage som hämtas från api: ", result);
         dispatch({ type: "SET_GARBAGE", payload: result });
         return result;
       } catch (error) {
@@ -119,6 +129,13 @@ export function GarbageProvider({ children }: { children: ReactNode }) {
 
     return totalPoints;
   }
+
+  useEffect(() => {
+    getGarbage();
+    const userId = AsyncStorage.getItem("userId");
+    console.log("userid i async storage:", userId);
+    //VAD SKA JAG HA FÖR DEPENDENCY LIST HÄR
+  }, [addGarbage]);
 
   return (
     <GarbageContext.Provider

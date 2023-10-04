@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\greenifyUserAPI.csproj": {}
+    "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyUserAPI\\greenifyUserAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\greenifyUserAPI.csproj": {
+    "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyUserAPI\\greenifyUserAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\greenifyUserAPI.csproj",
+        "projectUniqueName": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyUserAPI\\greenifyUserAPI.csproj",
         "projectName": "greenifyUserAPI",
-        "projectPath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\greenifyUserAPI.csproj",
+        "projectPath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyUserAPI\\greenifyUserAPI.csproj",
         "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyuserapi\\obj\\",
+        "outputPath": "C:\\Users\\angel\\Documents\\SUVNET22\\APPUTV\\Greenify-app\\backend\\greenifyUserAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\angel\\AppData\\Roaming\\NuGet\\NuGet.Config",
